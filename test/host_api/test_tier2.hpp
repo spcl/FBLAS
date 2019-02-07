@@ -1,5 +1,9 @@
 /**
-  This file contains a set of utilities function and constant used for testing
+    FBLAS: BLAS implementation for Intel FPGA
+    Copyright (c) 2019 ETH-Zurich. All rights reserved.
+    See LICENSE for license information.
+
+    This file contains a set of utilities function and constant used for testing
 */
 #ifndef DATA_GENERATORS_HPP
 #define DATA_GENERATORS_HPP

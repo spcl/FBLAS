@@ -1,14 +1,18 @@
 /**
-  Tests for TRSM routine.
-  Tests ideas borrowed from BLAS testing
-  TRSM check routine is a modified version of the one included in GSL (Gnu Scientific Library) v2.5
+    FBLAS: BLAS implementation for Intel FPGA
+    Copyright (c) 2019 ETH-Zurich. All rights reserved.
+    See LICENSE for license information.
+
+    Tests for TRSM routine.
+    Tests ideas borrowed from BLAS testing
+    TRSM check routine is a modified version of the one included in GSL (Gnu Scientific Library) v2.5
 */
 #include <gtest/gtest.h>
 #include <string>
 #include <exception>
 #include <algorithm>
 #include <string.h>
-#include <cblas.h>
+
 #include "../../include/utils/ocl_utils.hpp"
 #include "../../include/fblas_environment.hpp"
 #include "test_tier2.hpp"
