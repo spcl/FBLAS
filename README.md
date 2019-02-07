@@ -15,7 +15,7 @@ The library relies on:
 * Intel FPGA SDK for OpenCL pro, version 18+ ([http://fpgasoftware.intel.com/opencl/](URL))
 * GCC (version 5+)
 * Rapidjson ([http://rapidjson.org/](URL))
-* Google Test (for testing only)
+* Google Test (only for unit tests)
 
 ### Installation
 
