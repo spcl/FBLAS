@@ -14,7 +14,7 @@ host_generator: $(HOST_GEN_SRC) $(TARGET_DIR)
 		$(CXX) -o bin/host_generator $(HOST_GEN_SRC)  -I$(INC) -DBASE_FOLDER="\"$(shell pwd)\""
 
 modules_generator: $(MODULE_GEN_SRC) $(TARGET_DIR)
-		$(CXX) -o bin/modules_generator $(HOST_GEN_SRC)  -I$(INC) -DBASE_FOLDER="\"$(shell pwd)\""
+		$(CXX) -o bin/modules_generator $(MODULE_GEN_SRC)  -I$(INC) -DBASE_FOLDER="\"$(shell pwd)\""
 
 all : host_generator modules_generator
 

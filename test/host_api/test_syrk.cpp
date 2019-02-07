@@ -1,14 +1,13 @@
 /**
-  Tests for GEMM routine.
+  Tests for SYRK routine.
   Tests ideas borrowed from BLAS testing
-  GEMM check routine is a modified version of the one included in GSL (Gnu Scientific Library) v2.5
+  SYRK check routine is a modified version of the one included in GSL (Gnu Scientific Library) v2.5
 */
 #include <gtest/gtest.h>
 #include <string>
 #include <exception>
 #include <algorithm>
 #include <string.h>
-#include <cblas.h>
 #include "../../include/utils/ocl_utils.hpp"
 #include "../../include/fblas_environment.hpp"
 #include "test_tier2.hpp"
