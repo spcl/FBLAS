@@ -21,7 +21,7 @@ host_generator:
 	fi;
 
 
-emulated: generator tutorial.json
+emulated: host_generator tutorial.json
 	$(GEN) tutorial.json /tmp/
 	$(AOCXX) $(AOCXXFLAGS) /tmp/sdot.cl /tmp/sscal.cl -I../blas/include
 
