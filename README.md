@@ -4,6 +4,7 @@
 
 **FBLAS** is a porting of the BLAS numerical library ([http://www.netlib.org/blas/](URL)) for Intel FPGA platform. 
 
+&nbsp;
 
 ## Code
 
@@ -28,7 +29,7 @@ After this,the included Makefile can be used to compile code and modules generat
 
 ## The FBLAS library
 
-<img align="right" width="256" height="224" src="/misc/fblas_design.png?raw=true">
+<img align="right" width="256" height="220" src="/misc/fblas_design.png?raw=true">
 
 FBLAS provides two layers of abtraction: 
 
