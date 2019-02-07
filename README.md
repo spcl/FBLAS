@@ -39,7 +39,7 @@ terface: data is received and produced using channels;
 * a high-level **Host API** conforming to the classical BLAS interface and allows the user to invoke routines directly from an host program. No prior knowledge on FPGA architecture and/or tools is needes. The user writes a standard OpenCL program: she is responsible to transferring data to and from
 the device, she can invoke the desired FBLAS routines working on the FPGA memory, and then she copies back the result from the device.
 
-For further information on how to use the library, please refer to: 
+For further information on how to use the library, please refer to the [wiki](https://github.com/spcl/FBLAS/wiki)
 
 
 
