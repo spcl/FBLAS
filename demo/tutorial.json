@@ -1,0 +1,17 @@
+{
+    "routine": [
+		{
+			"blas" : "dot",
+			"user_name" : "sdot",
+			"precision" : "single",
+			"width" : 16
+		},
+		{
+			"blas" : "scal",
+			"user_name" : "sscal",
+			"precision" : "single",
+			"incx" : 2
+		}
+    ],
+    "platform" : "stratix 10"
+}

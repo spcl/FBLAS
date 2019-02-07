@@ -1,0 +1,28 @@
+{
+    "routine": [{
+            "name": "dot",
+            "optional_parameters": ["width"],
+            "required_inputs": ["x", "y"],
+            "required_outputs": ["res"]
+        },
+        {
+            "name": "axpy",
+            "optional_parameters": ["width"],
+            "required_inputs": ["x", "y"],
+            "required_outputs": ["res"]
+        },
+        {
+            "name": "gemv",
+            "required_parameters": ["trans"],
+            "optional_parameters": ["width", "tile N size", "tile M size", "A tiles order", "A elements order"],
+            "required_inputs": ["x", "y","A"],
+            "required_outputs": ["res"]
+        },
+        {
+            "name": "ger",
+            "optional_parameters": ["width", "tile N size", "tile M size", "A tiles order", "A elements order"],
+            "required_inputs": ["x", "y","A"],
+            "required_outputs": ["res"]
+        }
+    ]
+}
