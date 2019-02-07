@@ -1,0 +1,59 @@
+{
+    "tier" : 2,
+    "routine": [
+        {
+            "blas" : "axpy",
+            "user_name" : "test_saxpy_0",
+            "precision" : "single",
+            "width" : 16
+        },
+        {
+            "blas" : "axpy",
+            "user_name" : "test_saxpy_1",
+            "precision" : "single",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas" : "axpy",
+            "user_name" : "test_saxpy_2",
+            "precision" : "single",
+            "incx" : -2,
+            "incy" : 1
+        },
+        {
+            "blas" : "axpy",
+            "user_name" : "test_saxpy_3",
+            "precision" : "single",
+            "incx" : -1,
+            "incy" : -2
+        },
+        {
+            "blas" : "axpy",
+            "user_name" : "test_daxpy_0",
+            "precision" : "double",
+            "width" : 16
+        },
+        {
+            "blas" : "axpy",
+            "user_name" : "test_daxpy_1",
+            "precision" : "double",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas" : "axpy",
+            "user_name" : "test_daxpy_2",
+            "precision" : "double",
+            "incx" : -2,
+            "incy" : 1
+        },
+        {
+            "blas" : "axpy",
+            "user_name" : "test_daxpy_3",
+            "precision" : "double",
+            "incx" : -1,
+            "incy" : -2
+        }
+    ]
+}

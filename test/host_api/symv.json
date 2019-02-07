@@ -1,0 +1,169 @@
+{
+    "routine": [
+        {
+            "blas" : "symv",
+            "user_name" : "test_ssymv_0",
+            "precision" : "single",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "L",
+            "tile N size" : 16
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_ssymv_1",
+            "precision" : "single",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "L",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_ssymv_2",
+            "precision" : "single",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "L",
+            "incx" : -2,
+            "incy" : 1,
+            "tile N size" : 32
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_ssymv_3",
+            "precision" : "single",
+            "width" : 8,
+            "order" : "RowMajor",
+            "uplo" : "L",
+            "incx" : -1,
+            "incy" : -2,
+            "tile N size" : 8
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_ssymv_4",
+            "precision" : "single",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "U",
+            "tile N size" : 16
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_ssymv_5",
+            "precision" : "single",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "U",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_ssymv_6",
+            "precision" : "single",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "U",
+            "incx" : -2,
+            "incy" : 1,
+            "tile N size" : 32
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_ssymv_7",
+            "precision" : "single",
+            "width" : 8,
+            "order" : "RowMajor",
+            "uplo" : "U",
+            "incx" : -1,
+            "incy" : -2,
+            "tile N size" : 8
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_dsymv_0",
+            "precision" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "L",
+            "tile N size" : 16
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_dsymv_1",
+            "precision" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "L",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_dsymv_2",
+            "precision" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "L",
+            "incx" : -2,
+            "incy" : 1,
+            "tile N size" : 32
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_dsymv_3",
+            "precision" : "double",
+            "width" : 8,
+            "order" : "RowMajor",
+            "uplo" : "L",
+            "incx" : -1,
+            "incy" : -2,
+            "tile N size" : 8
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_dsymv_4",
+            "precision" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "U",
+            "tile N size" : 16
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_dsymv_5",
+            "precision" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "U",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_dsymv_6",
+            "precision" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "U",
+            "incx" : -2,
+            "incy" : 1,
+            "tile N size" : 32
+        },
+        {
+            "blas" : "symv",
+            "user_name" : "test_dsymv_7",
+            "precision" : "double",
+            "width" : 8,
+            "order" : "RowMajor",
+            "uplo" : "U",
+            "incx" : -1,
+            "incy" : -2,
+            "tile N size" : 8
+        }
+
+    ]
+}

@@ -1,0 +1,180 @@
+{
+    "routine": [
+        {
+            "blas" : "trsm",
+            "precision" : "single",
+            "user_name" : "test_strsm_left_lower_notrans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "N",
+            "uplo" : "L",
+            "side" : "L"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "single",
+            "user_name" : "test_strsm_left_lower_trans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "T",
+            "uplo" : "L",
+            "side" : "L"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "single",
+            "user_name" : "test_strsm_left_upper_notrans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "N",
+            "uplo" : "U",
+            "side" : "L"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "single",
+            "user_name" : "test_strsm_left_upper_trans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "T",
+            "uplo" : "U",
+            "side" : "L"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "single",
+            "user_name" : "test_strsm_right_lower_notrans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "N",
+            "uplo" : "L",
+            "side" : "R"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "single",
+            "user_name" : "test_strsm_right_lower_trans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "T",
+            "uplo" : "L",
+            "side" : "R"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "single",
+            "user_name" : "test_strsm_right_upper_notrans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "N",
+            "uplo" : "U",
+            "side" : "R"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "single",
+            "user_name" : "test_strsm_right_upper_trans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "T",
+            "uplo" : "U",
+            "side" : "R"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "double",
+            "user_name" : "test_dtrsm_left_lower_notrans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "N",
+            "uplo" : "L",
+            "side" : "L"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "double",
+            "user_name" : "test_dtrsm_left_lower_trans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "T",
+            "uplo" : "L",
+            "side" : "L"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "double",
+            "user_name" : "test_dtrsm_left_upper_notrans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "N",
+            "uplo" : "U",
+            "side" : "L"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "double",
+            "user_name" : "test_dtrsm_left_upper_trans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "T",
+            "uplo" : "U",
+            "side" : "L"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "double",
+            "user_name" : "test_dtrsm_right_lower_notrans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "N",
+            "uplo" : "L",
+            "side" : "R"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "double",
+            "user_name" : "test_dtrsm_right_lower_trans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "T",
+            "uplo" : "L",
+            "side" : "R"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "double",
+            "user_name" : "test_dtrsm_right_upper_notrans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "N",
+            "uplo" : "U",
+            "side" : "R"
+        },
+        {
+            "blas" : "trsm",
+            "precision" : "double",
+            "user_name" : "test_dtrsm_right_upper_trans",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile M size" : 32,
+            "trans" : "T",
+            "uplo" : "U",
+            "side" : "R"
+        }
+    ]
+}

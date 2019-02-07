@@ -1,0 +1,72 @@
+{
+    "routine": [
+        {
+            "blas" : "ger",
+            "user_name" : "test_sger_0",
+            "precision" : "single",
+            "width" : 16,
+            "order" : "RowMajor"
+        },
+        {
+            "blas" : "ger",
+            "user_name" : "test_sger_1",
+            "precision" : "single",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas" : "ger",
+            "user_name" : "test_sger_2",
+            "precision" : "single",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -2,
+            "incy" : 1
+        },
+        {
+            "blas" : "ger",
+            "user_name" : "test_sger_3",
+            "precision" : "single",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -1,
+            "incy" : -2
+        },
+        {
+            "blas" : "ger",
+            "user_name" : "test_dger_0",
+            "precision" : "double",
+            "width" : 16,
+            "order" : "RowMajor"
+        },
+        {
+            "blas" : "ger",
+            "user_name" : "test_dger_1",
+            "precision" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas" : "ger",
+            "user_name" : "test_dger_2",
+            "precision" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -2,
+            "incy" : 1
+        },
+        {
+            "blas" : "ger",
+            "user_name" : "test_dger_3",
+            "precision" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -1,
+            "incy" : -2
+        }
+    ]
+}
