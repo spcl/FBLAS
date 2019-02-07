@@ -25,7 +25,12 @@ After cloning this repository, make sure you clone the [rapidjson](http://rapidj
 git submodule update --init
 ```
 
-After this,the included Makefile can be used to compile code and modules generator.
+After this, the included Makefile can be used to compile code and modules generator:
+
+
+```
+make all
+```
 
 ## The FBLAS library
 
