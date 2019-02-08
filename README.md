@@ -2,7 +2,7 @@
 
 # FBLAS
 
-**FBLAS** is a porting of the BLAS numerical library ([http://www.netlib.org/blas/](URL)) for Intel FPGA platform. 
+**FBLAS** is a porting of the BLAS numerical library ([http://www.netlib.org/blas/](http://www.netlib.org/blas/)) for Intel FPGA platform. 
 
 &nbsp;
 
@@ -12,9 +12,9 @@
 
 The library depends on:
 
-* Intel FPGA SDK for OpenCL pro, version 18+ ([http://fpgasoftware.intel.com/opencl/](URL))
+* Intel FPGA SDK for OpenCL pro, version 18+ ([http://fpgasoftware.intel.com/opencl/](http://fpgasoftware.intel.com/opencl/))
 * GCC (version 5+)
-* Rapidjson ([http://rapidjson.org/](URL))
+* Rapidjson ([http://rapidjson.org/](http://rapidjson.org/))
 * Google Test (only for unit tests)
 
 ### Installation
