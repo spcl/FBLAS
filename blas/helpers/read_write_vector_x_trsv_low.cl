@@ -23,7 +23,7 @@
 
 
 */
-__kernel void READ_VECTOR_X_TRSV(__global TYPE_T *restrict data, int N)
+__kernel void READ_VECTOR_X_TRSV(__global volatile TYPE_T *restrict data, int N)
 {
     const int BlocksN=1+(int)((N-1)/TILE_N);
     int outer_loop_limit=(int)(TILE_N/W);

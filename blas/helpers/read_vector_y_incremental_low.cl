@@ -18,7 +18,7 @@
 
 
 
-__kernel void READ_VECTOR_Y_TRANS(__global TYPE_T *restrict data, unsigned int N)
+__kernel void READ_VECTOR_Y_TRANS(__global volatile TYPE_T *restrict data, unsigned int N)
 {
     const int BlocksN=1+(int)((N-1)/TILE_N);
     int outer_loop_limit=(int)(TILE_N/W);

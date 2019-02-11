@@ -14,7 +14,7 @@
 
 */
 
-__kernel void WRITE_MATRIX(__global TYPE_T * restrict C, const TYPE_T beta,const unsigned int N, const unsigned int M, const unsigned int ldc)
+__kernel void WRITE_MATRIX(__global volatile TYPE_T * restrict C, const TYPE_T beta,const unsigned int N, const unsigned int M, const unsigned int ldc)
 {
     //this kernel will receive the data for C in order
     const int OuterBlocksN = 1 + (int)((N-1) / MTILE);

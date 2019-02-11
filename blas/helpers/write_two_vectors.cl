@@ -12,7 +12,7 @@
     This helper can be useed with ROT and ROTM routines
 
 */
-__kernel void WRITE_VECTORS(__global TYPE_T *restrict out_x, __global TYPE_T *restrict out_y,  unsigned int N,unsigned int pad_size)
+__kernel void WRITE_VECTORS(__global volatile TYPE_T *restrict out_x, __global TYPE_T *restrict out_y,  unsigned int N,unsigned int pad_size)
 {
 	const unsigned int ratio=pad_size/W;
 	const unsigned int padding_loop_limit=ceil(((float)N)/pad_size);

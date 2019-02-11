@@ -14,7 +14,7 @@
     Padding data (if present) is discarded.
 */
 
-__kernel void WRITE_VECTOR(__global TYPE_T *restrict out, unsigned int N,unsigned int pad_size)
+__kernel void WRITE_VECTOR(__global volatile TYPE_T *restrict out, unsigned int N,unsigned int pad_size)
 {
     const unsigned int ratio=pad_size/W;
     const unsigned int padding_loop_limit=ceil(((float)N)/pad_size);

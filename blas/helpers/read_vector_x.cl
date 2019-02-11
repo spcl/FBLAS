@@ -17,7 +17,7 @@
     The vector is sent 'repetitions' times
 */
 
-__kernel void READ_VECTOR_X(__global TYPE_T *restrict data, unsigned int N, unsigned int pad_size, unsigned int repetitions)
+__kernel void READ_VECTOR_X(__global volatile TYPE_T *restrict data, unsigned int N, unsigned int pad_size, unsigned int repetitions)
 {
     unsigned int ratio=pad_size/W;
 

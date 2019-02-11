@@ -21,7 +21,7 @@
 */
 
 
-__kernel void READ_MATRIX_B(__global TYPE_T * restrict B, const unsigned int N, const unsigned int K, const unsigned int ldb, unsigned int lower)
+__kernel void READ_MATRIX_B(__global volatile TYPE_T * restrict B, const unsigned int N, const unsigned int K, const unsigned int ldb, unsigned int lower)
 {
     //double level of tiling
     const int OuterBlocksN = 1 + (int)((N-1) / MTILE);

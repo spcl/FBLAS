@@ -22,7 +22,7 @@
 
 */
 
-__kernel void READ_MATRIX_B2(__global TYPE_T * restrict B, const unsigned int N, const unsigned int K, const unsigned int ldb, const unsigned int lower)
+__kernel void READ_MATRIX_B2(__global volatile TYPE_T * restrict B, const unsigned int N, const unsigned int K, const unsigned int ldb, const unsigned int lower)
 {
 
     const int OuterBlocksN = 1 + (int)((N-1) / MTILE);

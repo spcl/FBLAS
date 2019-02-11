@@ -17,7 +17,7 @@
     If needed, data is padded to tile sizes using zero elements.
 */
 
-__kernel void READ_MATRIX_A(__global TYPE_T *restrict data, int N,unsigned int lda)
+__kernel void READ_MATRIX_A(__global volatile TYPE_T *restrict data, int N,unsigned int lda)
 {
     const int BlocksN=1+(int)((N-1)/TILE_N);
 

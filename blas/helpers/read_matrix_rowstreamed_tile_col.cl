@@ -16,7 +16,7 @@
 
 */
 
-__kernel void READ_MATRIX_A(__global TYPE_T *restrict data, int N, int M, unsigned int lda)
+__kernel void READ_MATRIX_A(__global volatile TYPE_T *restrict data, int N, int M, unsigned int lda)
 {
     const int BlocksN=1+((int)((N-1)/TILE_N));
     const int BlocksM=1+((int)((M-1)/TILE_M));
