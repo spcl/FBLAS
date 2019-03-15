@@ -18,11 +18,15 @@ void ModuleGenerator::Level1Dot(const GeneratorRoutine &r, unsigned int id, std:
 
     std::ifstream fin(k_skeleton_folder_ + "/1/streaming_dot.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
 
     bool found_placeholder=ModuleGenerator::CopyHeader(fin,fout);
     if(!found_placeholder)
@@ -57,11 +61,15 @@ void ModuleGenerator::Level1Axpy(const GeneratorRoutine &r, unsigned int id, std
 
     std::ifstream fin(k_skeleton_folder_ + "/1/streaming_axpy.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
 
     bool found_placeholder=ModuleGenerator::CopyHeader(fin,fout);
     if(!found_placeholder)

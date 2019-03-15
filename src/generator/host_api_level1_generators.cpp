@@ -17,11 +17,15 @@ void FBlasGenerator::Level1Swap(const GeneratorRoutine &r, unsigned int id, std:
 {
     std::ifstream fin(k_skeleton_folder_ + "/1/streaming_swap.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_generated_file_header_<<std::endl;
 
     bool found_placeholder=FBlasGenerator::CopyHeader(fin,fout);
@@ -73,11 +77,15 @@ void FBlasGenerator::Level1Rot(const GeneratorRoutine &r, unsigned int id, std::
 {
     std::ifstream fin(k_skeleton_folder_ + "/1/streaming_rot.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_generated_file_header_<<std::endl;
 
     bool found_placeholder=FBlasGenerator::CopyHeader(fin,fout);
@@ -129,11 +137,15 @@ void FBlasGenerator::Level1Rotm(const GeneratorRoutine &r, unsigned int id, std:
 {
     std::ifstream fin(k_skeleton_folder_ + "/1/streaming_rotm.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_generated_file_header_<<std::endl;
 
     bool found_placeholder=FBlasGenerator::CopyHeader(fin,fout);
@@ -188,6 +200,10 @@ void FBlasGenerator::Level1Rotg(const GeneratorRoutine &r, unsigned int id, std:
     //Therefore the output of the generation will be just an empty file
     //This has been done for compatibility with respect to the rest of the library and to leave space for further modifications
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_generated_file_header_<<std::endl;
     fout << "__kernel void empty_"<<id<<"(){ /*empty kernel, used for rotg*/}"<<std::endl;
 
@@ -220,6 +236,10 @@ void FBlasGenerator::Level1Rotmg(const GeneratorRoutine &r, unsigned int id, std
     //Therefore the output of the generation will be just an empty file
     //This has been done for compatibility with respect to the rest of the library and to leave space for further modifications
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_generated_file_header_<<std::endl;
     fout << "__kernel void empty_"<<id<<"(){ /*empty kernel, used for rotmg*/}"<<std::endl;
     json_writer.StartObject();
@@ -249,11 +269,15 @@ void FBlasGenerator::Level1Axpy(const GeneratorRoutine &r, unsigned int id, std:
 {
     std::ifstream fin(k_skeleton_folder_ + "/1/streaming_axpy.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_generated_file_header_<<std::endl;
 
     bool found_placeholder=FBlasGenerator::CopyHeader(fin,fout);
@@ -307,11 +331,15 @@ void FBlasGenerator::Level1Dot(const GeneratorRoutine &r, unsigned int id, std::
 
     std::ifstream fin(k_skeleton_folder_ + "/1/streaming_dot.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_generated_file_header_<<std::endl;
 
     bool found_placeholder=FBlasGenerator::CopyHeader(fin,fout);
@@ -364,11 +392,15 @@ void FBlasGenerator::Level1Scal(const GeneratorRoutine &r, unsigned int id, std:
 
     std::ifstream fin(k_skeleton_folder_ + "/1/streaming_scal.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_generated_file_header_<<std::endl;
 
     bool found_placeholder=FBlasGenerator::CopyHeader(fin,fout);
@@ -418,11 +450,15 @@ void FBlasGenerator::Level1Asum(const GeneratorRoutine &r, unsigned int id, std:
 
     std::ifstream fin(k_skeleton_folder_ + "/1/streaming_asum.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_generated_file_header_<<std::endl;
 
     bool found_placeholder=FBlasGenerator::CopyHeader(fin,fout);
@@ -470,11 +506,15 @@ void FBlasGenerator::Level1Iamax(const GeneratorRoutine &r, unsigned int id, std
 
     std::ifstream fin(k_skeleton_folder_ + "/1/streaming_iamax.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_generated_file_header_<<std::endl;
 
     bool found_placeholder=FBlasGenerator::CopyHeader(fin,fout);
@@ -522,11 +562,15 @@ void FBlasGenerator::Level1Nrm2(const GeneratorRoutine &r, unsigned int id, std:
 
     std::ifstream fin(k_skeleton_folder_ + "/1/streaming_nrm2.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_generated_file_header_<<std::endl;
 
     bool found_placeholder=FBlasGenerator::CopyHeader(fin,fout);
@@ -576,6 +620,10 @@ void FBlasGenerator::Level1Copy(const GeneratorRoutine &r, unsigned int id, std:
     //Copy is created by using the vector reader and writer helpers
     //The generation is very peculiar
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_generated_file_header_<<std::endl;
     fout << "#pragma OPENCL EXTENSION cl_intel_channels : enable" <<std::endl;
 
