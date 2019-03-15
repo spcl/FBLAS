@@ -18,10 +18,14 @@ void ModuleGenerator::ReadVectorX(const GeneratorHelper &h, unsigned int id, std
 
     std::ifstream fin(k_skeleton_folder_ + "/helpers/read_vector_x.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< h.getType() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< h.getType() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
     std::ofstream fout(output_folder+h.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< h.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_channel_enable_define_<<std::endl;
     if(h.isDoublePrecision())
         fout << k_double_precision_define_ <<std::endl;
@@ -46,10 +50,14 @@ void ModuleGenerator::ReadVectorY(const GeneratorHelper &h, unsigned int id, std
 
     std::ifstream fin(k_skeleton_folder_ + "/helpers/read_vector_y.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< h.getType() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< h.getType() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
     std::ofstream fout(output_folder+h.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< h.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_channel_enable_define_<<std::endl;
     if(h.isDoublePrecision())
         fout << k_double_precision_define_ <<std::endl;
@@ -71,10 +79,14 @@ void ModuleGenerator::WriteScalar(const GeneratorHelper &h, unsigned int id, std
 
     std::ifstream fin(k_skeleton_folder_ + "/helpers/write_scalar.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< h.getType() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< h.getType() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
     std::ofstream fout(output_folder+h.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< h.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_channel_enable_define_<<std::endl;
     if(h.isDoublePrecision())
         fout << k_double_precision_define_ <<std::endl;
@@ -96,10 +108,14 @@ void ModuleGenerator::WriteVector(const GeneratorHelper &h, unsigned int id, std
 
     std::ifstream fin(k_skeleton_folder_ + "/helpers/write_vector.cl");
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< h.getType() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< h.getType() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
     std::ofstream fout(output_folder+h.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< h.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_channel_enable_define_<<std::endl;
     if(h.isDoublePrecision())
         fout << k_double_precision_define_ <<std::endl;
@@ -129,10 +145,14 @@ void ModuleGenerator::ReadMatrix(const GeneratorHelper &h, unsigned int id, std:
 
     std::ifstream fin(k_skeleton_folder_ +skeleton_name);
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< h.getType() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< h.getType() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
     std::ofstream fout(output_folder+h.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< h.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_channel_enable_define_<<std::endl;
     if(h.isDoublePrecision())
         fout << k_double_precision_define_ <<std::endl;
@@ -165,10 +185,14 @@ void ModuleGenerator::WriteMatrix(const GeneratorHelper &h, unsigned int id, std
 
     std::ifstream fin(k_skeleton_folder_ +skeleton_name);
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< h.getType() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< h.getType() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
     std::ofstream fout(output_folder+h.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< h.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
     fout << k_channel_enable_define_<<std::endl;
     if(h.isDoublePrecision())
         fout << k_double_precision_define_ <<std::endl;

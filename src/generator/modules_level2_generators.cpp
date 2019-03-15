@@ -30,11 +30,15 @@ void ModuleGenerator::Level2Gemv(const GeneratorRoutine &r, unsigned int id, std
 
     std::ifstream fin(k_skeleton_folder_ + skeleton_name);
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
 
     bool found_placeholder=ModuleGenerator::CopyHeader(fin,fout);
     if(!found_placeholder)
@@ -84,11 +88,15 @@ void ModuleGenerator::Level2Ger(const GeneratorRoutine &r, unsigned int id, std:
 
     std::ifstream fin(k_skeleton_folder_ + skeleton_name);
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
+    if(!fout.is_open()){
+        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
+        return;
+    }
 
     bool found_placeholder=ModuleGenerator::CopyHeader(fin,fout);
     if(!found_placeholder)

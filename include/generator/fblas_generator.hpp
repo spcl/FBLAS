@@ -62,6 +62,10 @@ public:
         json_writer.EndArray();
         json_writer.EndObject();
         std::ofstream fout(output_dir+"generated_routines.json");
+        if(!fout.is_open()){
+            std::cerr << "Error in opening output file generated_routines.json (file path: "<<output_dir<<")"<<std::endl;
+            return;
+        }
         fout << s.GetString();
         fout.close();
 
