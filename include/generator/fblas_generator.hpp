@@ -44,7 +44,6 @@ public:
         json_writer.Key("routine");
         json_writer.StartArray();
 
-        //dobbiamo avere un insieme di channel descriptors
         for(int i=0; i< routines.size();i++)
         {
             std::cout << "Generating: "<<routines[i].getUserName()<<std::endl;
