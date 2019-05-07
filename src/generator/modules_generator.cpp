@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 {
     if(argc < 2)
     {
-        std::cerr<< "Usage: " <<argv[0] << " <xml file> [output directory]"<<std::endl;
+        std::cerr<< "Usage: " <<argv[0] << " <json file> [output directory]"<<std::endl;
         return -1;
     }
 

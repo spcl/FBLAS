@@ -1,0 +1,56 @@
+{
+    "routine": [
+        {
+            "blas" : "axpy",
+            "precision" : "single",
+            "user_name" : "axpydot_streamed_saxpy",
+            "width" : 32,
+            "x" : "channel_v",
+            "y" : "channel_w",
+            "res":"channel_z",
+            "type" : "kernel"
+        },
+        {
+            "blas" : "dot",
+            "precision" : "single",
+            "user_name" : "axpydot_streamed_sdot",
+            "width" : 32,
+            "x" : "channel_u",
+            "y" : "channel_z",
+            "res":"channel_out",
+            "type" : "kernel"
+        }
+    ],
+    "helper":[
+        {
+            "type" : "read vector",
+            "user_name" : "axpydot_streamed_read_vector_v",
+            "channel_name" : "channel_v",
+            "precision" : "single",
+            "type" : "kernel"
+
+        },
+        {
+            "type" : "read vector",
+            "user_name" : "axpydot_streamed_read_vector_w",
+            "channel_name" : "channel_w",
+            "precision" : "single",
+            "type" : "kernel"
+
+        },
+        {
+            "type" : "read vector",
+            "user_name" : "axpydot_streamed_read_vector_u",
+            "channel_name" : "channel_u",
+            "precision" : "single",
+            "type" : "kernel"
+        },
+        {
+            "type" : "write scalar",
+            "user_name" : "axpydot_streamed_write_scalar",
+            "channel_name" : "channel_out",
+            "precision" : "single",
+            "type" : "kernel"
+        }
+    ]
+}

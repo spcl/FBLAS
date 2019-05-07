@@ -55,6 +55,7 @@ public:
 
         for(int i=0;i<helpers.size();i++)
         {
+            std::cout << "Generating: "<<helpers[i].getUserName()<<std::endl;
             if(generation_helpers_.find(helpers[i].getType())!=generation_helpers_.end())
                 generation_helpers_[helpers[i].getType()](helpers[i],i,output_dir);
             else
@@ -99,6 +100,7 @@ private:
 
         //helpers
         generation_helpers_["read vector x"]=ModuleGenerator::ReadVectorX;
+        generation_helpers_["read vector"]=ModuleGenerator::ReadVectorX;        //alias for simplicity
         generation_helpers_["read vector y"]=ModuleGenerator::ReadVectorY;
         generation_helpers_["write vector"]=ModuleGenerator::WriteVector;
         generation_helpers_["write scalar"]=ModuleGenerator::WriteScalar;
