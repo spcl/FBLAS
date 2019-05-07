@@ -947,7 +947,7 @@ private:
     //helpers vector
     std::vector<GeneratorHelper> helpers_;
     //set of valid helpers
-    std::set<std::string> valid_helpers_={"read vector x", "read vector y", "write scalar", "write vector", "read matrix" ,"write matrix"};
+    std::set<std::string> valid_helpers_={"read vector x", "read vector", "read vector y", "write scalar", "write vector", "read matrix" ,"write matrix"};
     //debug print flags
     bool verbose=false;
     bool very_verbose=true;
