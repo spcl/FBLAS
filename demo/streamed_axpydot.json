@@ -27,7 +27,8 @@
             "user_name" : "axpydot_streamed_read_vector_v",
             "channel_name" : "channel_v",
             "precision" : "single",
-            "type" : "kernel"
+            "type" : "kernel",
+            "width" : 32
 
         },
         {
@@ -35,7 +36,8 @@
             "user_name" : "axpydot_streamed_read_vector_w",
             "channel_name" : "channel_w",
             "precision" : "single",
-            "type" : "kernel"
+            "type" : "kernel",
+            "width" : 32
 
         },
         {
@@ -43,7 +45,8 @@
             "user_name" : "axpydot_streamed_read_vector_u",
             "channel_name" : "channel_u",
             "precision" : "single",
-            "type" : "kernel"
+            "type" : "kernel",
+            "width" : 32
         },
         {
             "type" : "write scalar",
