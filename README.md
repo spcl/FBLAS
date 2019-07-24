@@ -36,20 +36,20 @@ make all
 
 <img align="right" width="256" height="220" src="/misc/fblas_design.png?raw=true">
 
-FBLAS provides two layers of abtraction: 
+FBLAS provides two layers of abstraction: 
 
-* **HLS modules**, which can be integrated into existing hardware designs. They implement BLAS routines (`DOT`, `GEMV`, `GEMM`, etc.). Modules have been designed with compute performance in mind,   exploiting the spatial parallelism and fast on-chip memory on FPGAs and have a streaming interface: data is received and produced using channels. In this way, they can be composed and communicate using on-chip resources rather than off-chip device RAM;
+* **HLS modules**, which can be integrated into existing hardware designs. They implement BLAS routines (`DOT`, `GEMV`, `GEMM`, etc.). Modules have been designed with compute performance in mind, exploiting the spatial parallelism and fast on-chip memory on FPGAs and have a streaming interface: data is received and produced using channels. In this way, they can be composed and communicate using on-chip resources rather than off-chip device RAM;
 
-* a high-level **Host API** conforming to the classical BLAS interface that allows the user to invoke routines directly from an host program. No prior knowledge on FPGA architecture and/or tools is needed. The user writes a standard OpenCL program: she is responsible to transferring data to and from
+* a high-level **Host API** conforming to the classical BLAS interface that allows the user to invoke routines directly from a host program. No prior knowledge on FPGA architecture and/or tools is needed. The user writes a standard OpenCL program: she is responsible to transferring data to and from
 the device, she can invoke the desired FBLAS routines working on the FPGA memory, and then she copies back the result from the device.
 
-For further information on how to use the library, please refer to the [wiki](https://github.com/spcl/FBLAS/wiki)
+For further information on how to use the library, please refer to the [wiki](https://github.com/spcl/FBLAS/wiki).
 
 
 
 ## Contact
 
-FBLAS can be used to build numerical applications, and modified to include new features.
+FBLAS can be used to build numerical applications, and be modified to include new features.
 Contributions, comments, and issues are welcome!
 
 ## License
