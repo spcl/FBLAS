@@ -43,6 +43,7 @@ public:
     int incy;
 
     bool has2DComputationalTiling=false;
+    bool systolic=false;
 
     unsigned int lda;
     unsigned int ldb;

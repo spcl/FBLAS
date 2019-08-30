@@ -45,6 +45,8 @@ const char* const k_json_field_incx="incx";
 const char* const k_json_field_incy="incy";
 const char* const k_json_field_lda="lda";
 const char* const k_json_field_ldb="ldb";
+const char* const k_json_field_systolic="systolic";
+
 
 
 //Helper fields

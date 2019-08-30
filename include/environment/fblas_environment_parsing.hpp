@@ -115,6 +115,9 @@ void FBLASEnvironment::parseRoutine(rapidjson::Value &routine)
     if(routine.HasMember(k_json_field_ldb))
         r.ldb=routine[k_json_field_ldb].GetUint();
 
+    if(routine.HasMember(k_json_field_systolic))
+        r.systolic=routine[k_json_field_systolic].GetBool();
+
 
     //create the kernels and the command queues
     //kernels are created and inserted respecting a proper order which

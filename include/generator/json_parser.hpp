@@ -203,6 +203,7 @@ private:
         for(std::string opt_f:optional_parameters_[blas_name])
             ParseRoutineField(routine,r,opt_f,false);
 
+
         //check that (if defined) tile sizes are multiple of Width
         if(!r.has2DComputationalTile())
         {
@@ -604,11 +605,25 @@ private:
                     if(order=="column")
                         r.setElementsBRowStreamed(false);
                     else
+                    {
                         std::cerr << RED "Invalid routine specification (routine: "<<r.getUserName()<<"): property \"B elements order\" must be \"row\" or \"column\""<<RESET<<std::endl;
-
+                        return false;
+                    }
+                return true;
             }
         }
 
+        if(field_name=="systolic")
+        {
+            if(JSONUtils::checkFieldAndType(routine,field_name,"bool"))
+            {
+                r.setSystolic(routine["systolic"].GetBool());
+                return true;
+            }
+            else
+                return false;
+
+        }
         //not found
         return false;
     }

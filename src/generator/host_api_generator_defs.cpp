@@ -90,18 +90,23 @@ const std::map<std::string,std::string> FBlasGenerator::k_helper_files_= {{k_hel
 
 //level 3 helpers
 const std::string FBlasGenerator::k_helper_read_matrix_a_notrans_gemm_="/helpers/read_matrix_a_notrans_gemm.cl";
+const std::string FBlasGenerator::k_helper_read_matrix_a_notrans_gemm_systolic_="/helpers/read_matrix_a_notrans_gemm_systolic.cl";
 const std::string FBlasGenerator::k_helper_read_matrix_a_notrans_syrk_="/helpers/read_matrix_a_notrans_syrk.cl";
 const std::string FBlasGenerator::k_helper_read_matrix_a_trans_syrk_="/helpers/read_matrix_a_trans_syrk.cl";
 const std::string FBlasGenerator::k_helper_read_matrix_a2_trans_syrk_="/helpers/read_matrix_a2_trans_syrk.cl";
 const std::string FBlasGenerator::k_helper_read_matrix_a2_notrans_syrk_="/helpers/read_matrix_a2_notrans_syrk.cl";
 const std::string FBlasGenerator::k_helper_read_matrix_a_trans_gemm_="/helpers/read_matrix_a_trans_gemm.cl";
+const std::string FBlasGenerator::k_helper_read_matrix_a_trans_gemm_systolic_="/helpers/read_matrix_a_trans_gemm_systolic.cl";
 const std::string FBlasGenerator::k_helper_read_matrix_b_notrans_gemm_="/helpers/read_matrix_b_notrans_gemm.cl";
+const std::string FBlasGenerator::k_helper_read_matrix_b_notrans_gemm_systolic_="/helpers/read_matrix_b_notrans_gemm_systolic.cl";
 const std::string FBlasGenerator::k_helper_read_matrix_b_trans_gemm_="/helpers/read_matrix_b_trans_gemm.cl";
 const std::string FBlasGenerator::k_helper_read_matrix_b_trans_syr2k_="/helpers/read_matrix_b_trans_syr2k.cl";
+const std::string FBlasGenerator::k_helper_read_matrix_b_trans_gemm_systolic_="/helpers/read_matrix_b_trans_gemm_systolic.cl";
 const std::string FBlasGenerator::k_helper_read_matrix_b_notrans_syr2k_="/helpers/read_matrix_b_notrans_syr2k.cl";
 const std::string FBlasGenerator::k_helper_read_matrix_b2_notrans_syr2k_="/helpers/read_matrix_b2_notrans_syr2k.cl";
 const std::string FBlasGenerator::k_helper_read_matrix_b2_trans_syr2k_="/helpers/read_matrix_b2_trans_syr2k.cl";
 const std::string FBlasGenerator::k_helper_write_matrix_gemm_="/helpers/write_matrix_gemm.cl";
+const std::string FBlasGenerator::k_helper_write_matrix_gemm_systolic_="/helpers/write_matrix_gemm_systolic.cl";
 const std::string FBlasGenerator::k_helper_write_lower_matrix_syrk_="/helpers/write_lower_matrix_syrk.cl";
 const std::string FBlasGenerator::k_helper_write_upper_matrix_syrk_="/helpers/write_upper_matrix_syrk.cl";
 

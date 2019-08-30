@@ -23,19 +23,17 @@ void FBlasGenerator::Level3Gemm(const GeneratorRoutine &r, unsigned int id, std:
     FblasTranspose transa=r.getTransposeA();
     FblasTranspose transb=r.getTransposeB();
     std::ifstream fin;
-    if(ord==FBLAS_ROW_MAJOR )
+    if(ord==FBLAS_ROW_MAJOR && !r.isSystolic())
         fin.open(k_skeleton_folder_ + "/3/gemm.cl");
+    if(ord==FBLAS_ROW_MAJOR && r.isSystolic()) //Please note: for the moment being this has a limited support, systolic may have name clashes
+        fin.open(k_skeleton_folder_ + "/3/gemm_systolic.cl");
 
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
-    if(!fout.is_open()){
-        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
-        return;
-    }
 
     bool found_placeholder=FBlasGenerator::CopyHeader(fin,fout);
     if(!found_placeholder)
@@ -64,6 +62,8 @@ void FBlasGenerator::Level3Gemm(const GeneratorRoutine &r, unsigned int id, std:
     addDefineAndItemHelperReadMatrixB(id,json_writer,fout);
     addDefineAndItemHelperWriteMatrix(id,json_writer,fout);
 
+    //if is the case, indicate that this is a systolic implentation
+    addBoolItem(k_json_field_systolic,r.isSystolic(),json_writer);
 
 
     closeRoutineItem(json_writer);
@@ -77,17 +77,32 @@ void FBlasGenerator::Level3Gemm(const GeneratorRoutine &r, unsigned int id, std:
     FBlasGenerator::CopyTillEnd(fin,fout);
 
     //copy the helpers
-    if(transa==FBLAS_NO_TRANSPOSED)
-        FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_read_matrix_a_notrans_gemm_,fout);
-    else
-        FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_read_matrix_a_trans_gemm_,fout);
+    if(!r.isSystolic()){
+        if(transa==FBLAS_NO_TRANSPOSED)
+            FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_read_matrix_a_notrans_gemm_,fout);
+        else
+            FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_read_matrix_a_trans_gemm_,fout);
 
-    if(transb==FBLAS_NO_TRANSPOSED)
-        FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_read_matrix_b_notrans_gemm_,fout);
-    else
-        FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_read_matrix_b_trans_gemm_,fout);
+        if(transb==FBLAS_NO_TRANSPOSED)
+            FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_read_matrix_b_notrans_gemm_,fout);
+        else
+            FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_read_matrix_b_trans_gemm_,fout);
+        FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_write_matrix_gemm_,fout);
+    }
+    else{
+        if(transa==FBLAS_NO_TRANSPOSED)
+            FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_read_matrix_a_notrans_gemm_systolic_,fout);
+        else
+            FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_read_matrix_a_trans_gemm_systolic_,fout);
 
-    FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_write_matrix_gemm_,fout);
+        if(transb==FBLAS_NO_TRANSPOSED)
+            FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_read_matrix_b_notrans_gemm_systolic_,fout);
+        else
+            FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_read_matrix_b_trans_gemm_systolic_,fout);
+
+        FBlasGenerator::CopyHelper(k_skeleton_folder_ + k_helper_write_matrix_gemm_systolic_,fout);
+    }
+
     fout.close();
 }
 
@@ -103,15 +118,11 @@ void FBlasGenerator::Level3Syrk(const GeneratorRoutine &r, unsigned int id, std:
         fin.open(k_skeleton_folder_ + "/3/syrk.cl");
 
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
-    if(!fout.is_open()){
-        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
-        return;
-    }
 
     bool found_placeholder=FBlasGenerator::CopyHeader(fin,fout);
     if(!found_placeholder)
@@ -184,15 +195,11 @@ void FBlasGenerator::Level3Syr2k(const GeneratorRoutine &r, unsigned int id, std
         fin.open(k_skeleton_folder_ + "/3/syr2k.cl");
 
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
-    if(!fout.is_open()){
-        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
-        return;
-    }
 
     bool found_placeholder=FBlasGenerator::CopyHeader(fin,fout);
     if(!found_placeholder)
@@ -296,15 +303,11 @@ void FBlasGenerator::Level3Trsm(const GeneratorRoutine &r, unsigned int id, std:
 
 
     if(!fin.is_open()){
-        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << " (file path: "<<k_skeleton_folder_<<")"<<std::endl;
+        std::cerr << "Error in opening skeleton file for "<< r.getBlasName() << "(file path: "<<k_skeleton_folder_<<")"<<std::endl;
         return;
     }
 
     std::ofstream fout(output_folder+r.getUserName()+".cl");
-    if(!fout.is_open()){
-        std::cerr << "Error in opening output file for "<< r.getUserName() << " (file path: "<<output_folder<<")"<<std::endl;
-        return;
-    }
 
     bool found_placeholder=FBlasGenerator::CopyHeader(fin,fout);
     if(!found_placeholder)

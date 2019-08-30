@@ -44,6 +44,7 @@ public:
         json_writer.Key("routine");
         json_writer.StartArray();
 
+        //dobbiamo avere un insieme di channel descriptors
         for(int i=0; i< routines.size();i++)
         {
             std::cout << "Generating: "<<routines[i].getUserName()<<std::endl;
@@ -61,10 +62,6 @@ public:
         json_writer.EndArray();
         json_writer.EndObject();
         std::ofstream fout(output_dir+"generated_routines.json");
-        if(!fout.is_open()){
-            std::cerr << "Error in opening output file generated_routines.json (file path: "<<output_dir<<")"<<std::endl;
-            return;
-        }
         fout << s.GetString();
         fout.close();
 
@@ -359,6 +356,18 @@ private:
         fout << define_name<<value<<std::endl;
         json_writer.Key(field_name);
         json_writer.String(value.c_str());
+    }
+
+    /**
+     * @brief addItem add a given Item to the json file being constructed
+     * @param field_name
+     * @param value
+     * @param json_writer
+     */
+    static void addBoolItem(const char * field_name, bool value,rapidjson::PrettyWriter<rapidjson::StringBuffer> &json_writer)
+    {
+        json_writer.Key(field_name);
+        json_writer.Bool(value);
     }
 
     /**
@@ -685,7 +694,7 @@ private:
 
     /**
      * @brief CopyHelper copies the content of an helper into the file passed as argument
-     *      Skips the first comment block
+     *      Please note: this search for an initial comment block. and it skips it. Error is return if the block is not found.
      * @param file path to the helper
      * @param fout
      */
@@ -839,18 +848,23 @@ private:
 
     //level 3
     static const std::string k_helper_read_matrix_a_notrans_gemm_;
+    static const std::string k_helper_read_matrix_a_notrans_gemm_systolic_;
     static const std::string k_helper_read_matrix_a_notrans_syrk_;
     static const std::string k_helper_read_matrix_a_trans_syrk_;
     static const std::string k_helper_read_matrix_a2_trans_syrk_;
     static const std::string k_helper_read_matrix_a2_notrans_syrk_;
     static const std::string k_helper_read_matrix_a_trans_gemm_;
+    static const std::string k_helper_read_matrix_a_trans_gemm_systolic_;
     static const std::string k_helper_read_matrix_b_notrans_gemm_;
+    static const std::string k_helper_read_matrix_b_notrans_gemm_systolic_;
     static const std::string k_helper_read_matrix_b_trans_gemm_;
+    static const std::string k_helper_read_matrix_b_trans_gemm_systolic_;
     static const std::string k_helper_read_matrix_b_trans_syr2k_;
     static const std::string k_helper_read_matrix_b2_trans_syr2k_;
     static const std::string k_helper_read_matrix_b_notrans_syr2k_;
     static const std::string k_helper_read_matrix_b2_notrans_syr2k_;
     static const std::string k_helper_write_matrix_gemm_;
+    static const std::string k_helper_write_matrix_gemm_systolic_;
     static const std::string k_helper_write_lower_matrix_syrk_;
     static const std::string k_helper_write_upper_matrix_syrk_;
 

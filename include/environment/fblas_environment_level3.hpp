@@ -69,14 +69,28 @@ void FBLASEnvironment::gemm(std::string routine_name, FblasTranspose transA, Fbl
     //launch kernels: if the routine is non-blocking (i.e. the event parameter is not null)
     //we create the corresponding event
     for(int i=0;i<r.kernels.size()-1;i++)
-        r.queues[i].enqueueTask(r.kernels[i],events_wait_list);
+    {
+        if(i!=0 || (!r.systolic || !this->running_)) //do not start again computational systolic kernel
+            r.queues[i].enqueueTask(r.kernels[i],events_wait_list);
+        else
+            std::cout << "Non faccio partire il kernel "<<i<<std::endl;
+
+    }
+
+    if(r.systolic)
+        this->running_=true;
 
     //launch the last one
     r.queues[r.kernels.size()-1].enqueueTask(r.kernels[r.kernels.size()-1],events_wait_list,event);
 
+    //if this is systolic, we don't have to wait for the computational module
+    //TODO: handle this properly with asyncronous fblas call
     if(!event)
         for(int i=0;i<r.kernels.size();i++)
-            r.queues[i].finish();
+        {
+            if(!r.systolic || i!=0)
+             r.queues[i].finish();
+        }
 }
 
 

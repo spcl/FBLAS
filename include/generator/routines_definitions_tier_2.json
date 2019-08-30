@@ -88,7 +88,7 @@
         {
             "name": "gemm",
             "required_parameters": ["order", "transa", "transb"],
-            "optional_parameters": ["computational width x", "computational width y" , "tile size"]
+            "optional_parameters": ["computational width x", "computational width y" , "tile size", "systolic"]
         },
 		{
 			"name": "syrk",

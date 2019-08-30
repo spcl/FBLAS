@@ -18,6 +18,13 @@
 #include "environment/routine.hpp"
 #include "commons.hpp"
 
+//hack to solve problems with 191
+#define CL_CHANNEL_1_INTELFPGA               (1 << 16)
+#define CL_CHANNEL_2_INTELFPGA               (2 << 16)
+#define CL_CHANNEL_3_INTELFPGA               (3 << 16)
+#define CL_CHANNEL_4_INTELFPGA               (4 << 16)
+
+
 class FBLASEnvironment{
 
 public:
@@ -574,6 +581,9 @@ private:
     cl::Platform platform_;
     cl::Program program_;
     cl::Device device_;
+
+    //For systolic/autorun kernels we need to check wheter they are already in execution
+    bool running_=false;
 
     //routine representation
     std::unordered_map<std::string, Routine> routines_;

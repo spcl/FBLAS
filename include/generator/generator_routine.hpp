@@ -125,6 +125,7 @@ public:
         arch_=arch;
     }
 
+
     /*
      * Insert the channel. Return false if already defined
      */
@@ -164,6 +165,11 @@ public:
     void setElementsBRowStreamed(bool value)
     {
         elements_B_row_streamed_=value;
+    }
+
+    void setSystolic(bool value)
+    {
+        systolic_=value;
     }
 
     /*
@@ -307,6 +313,10 @@ public:
         return elements_B_row_streamed_;
     }
 
+    bool isSystolic() const
+    {
+        return systolic_;
+    }
 
     void print()
     {
@@ -380,6 +390,8 @@ private:
     //tiling
     unsigned int tile_n_size_=0;
     unsigned int tile_m_size_=0;
+
+    bool systolic_=false; //indicates wheter it is requested a systolic implementation of the routine
 
     //strides
     int incx_=1;
