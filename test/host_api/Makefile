@@ -6,7 +6,7 @@ BOARD 	= $(shell $(AOCXX) -list-boards | sed -n '2p' | tr -d " ")
 AOCXXFLAGS  = -march=emulator -board=$(BOARD) 
 AOCL_COMPILE_CONFIG := $(shell aocl compile-config) 
 AOCL_LINK_CONFIG := $(shell aocl link-config)
-RAPIDJSON_DIR = ../rapidjson/include 
+RAPIDJSON_DIR = ../../rapidjson/include 
 GEN = ../../bin/host_generator
 BIN_DIR=bin
 LEVEL_1 = test_iamax test_dot test_copy

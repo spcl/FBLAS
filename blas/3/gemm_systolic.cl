@@ -152,13 +152,13 @@ __kernel void KERNEL_NAME(const int N, const int M, const int K, const float alp
                         {
                             float res=PE(k,tti,ttj,i,j,a_reg,b_reg, accum[i][j]);
                             if(k==K-1) //data needs to be evacuated. Each PE writes always in the  same position
-                                draining[j][i*SHIFT_REG_SIZE]=res; //this is similar to their syst imp
+                                draining[j][i*SHIFT_REG_SIZE]=res;
                             fedB[j]=__fpga_reg(__fpga_reg(fedB[j])); //apparently, this help synthesis
 
                         }
                     }
 
-                    //build the drained result (like they do in their sys impl)
+                    //build the drained result
                     RES_TYPE_T drained;
 
                     #pragma unroll
