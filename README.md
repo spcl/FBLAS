@@ -46,6 +46,19 @@ the device, she can invoke the desired FBLAS routines working on the FPGA memory
 For further information on how to use the library, please refer to the [wiki](https://github.com/spcl/FBLAS/wiki).
 
 
+## Publication
+If you use FBLAS, please cite us:
+```
+@article{
+  author={Tiziano De Matteis and Johannes de Fine Licht and Torsten Hoefler},
+  title={{FBLAS: Streaming Linear Algebra on FPGA}},
+  journal={CoRR},
+  year={2019},
+  month={Jul.},
+  volume={abs/1907.07929},
+}
+```
+
 
 ## Contact
 
