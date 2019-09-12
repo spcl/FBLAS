@@ -4,7 +4,10 @@
 
 **FBLAS** is a porting of the BLAS numerical library ([http://www.netlib.org/blas/](http://www.netlib.org/blas/)) for Intel FPGA platform. 
 
+For more details, see our ([paper](https://arxiv.org/abs/1907.07929)).
+
 &nbsp;
+
 
 ## Code
 
