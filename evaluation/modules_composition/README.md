@@ -2,14 +2,12 @@ This directory contains the programs used to evaluate streaming composition of
 different modules.
 
 It is organized in two folders:
-- `non_streaming`, contains the version of the programs realized with standard host_api
-    So routines do not stream data each other and resort to DRAM to save data.
-- `streaming`, contains the version of the programs realized with streaming composition
-    They are usually implemented by FBLAS modules (codegenerated) and some helpers if needed
+- `non_streaming`, contains the version of the programs realized with standard Host API.
+    In this case, routines do not stream data each other and resort to DRAM to save data.
+- `streaming`, contains the version of the programs realized with streaming composition.
     
 For both cases, in the folders there are present Makefile for generating emulation bitstream,
-hardware and host_program
-
+hardware and host programs.
 
 Being `<test_name>` in `{saxpydot, daxpydot, sbicg, dbicg, sgemver, dver}`, the following 
 commands can be used:
@@ -23,3 +21,6 @@ To execute a program:
     version it will require the json file automatically generated and located under `<test_name>codegen_files/generated_routines.json`
  
 
+Every host program accepts, among the other, the number of runs to execute and produces the averaged execution time,
+as well as confidence intervals.
+The result is validated against openblas (CPU) version of the same computation.

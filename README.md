@@ -28,7 +28,7 @@ After cloning this repository, make sure you clone the [rapidjson](http://rapidj
 git submodule update --init
 pip install -r codegen/requirements.txt
 ```
-For Artifact Evaluation, you will find detailed information in subfolder `artifact_evaluation`.
+For Artifact Evaluation, you will find detailed information in subfolder `evaluation`.
 
 
 ## The FBLAS library
