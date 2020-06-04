@@ -2,28 +2,28 @@
     "tier" : 2,
     "routine": [
         {
-            "blas" : "iamax",
+            "blas_name" : "iamax",
             "user_name" : "test_isamax_0",
-            "precision" : "single",
+            "type" : "float",
             "width" : 4
         },
         {
-            "blas" : "iamax",
+            "blas_name" : "iamax",
             "user_name" : "test_isamax_1",
-            "precision" : "single",
+            "type" : "float",
             "width" : 4,
             "incx" : 2
         },
         {
-            "blas" : "iamax",
+            "blas_name" : "iamax",
             "user_name" : "test_idamax_0",
-            "precision" : "double",
+            "type" : "double",
             "width" : 4
         },
         {
-            "blas" : "iamax",
+            "blas_name" : "iamax",
             "user_name" : "test_idamax_1",
-            "precision" : "double",
+            "type" : "double",
             "width" : 4,
             "incx" : 2
         }

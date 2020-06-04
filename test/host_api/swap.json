@@ -1,55 +1,54 @@
 {
-    "tier" : 2,
     "routine": [
         {
-            "blas" : "swap",
+            "blas_name" : "swap",
             "user_name" : "test_sswap_0",
-            "precision" : "single"
+            "type" : "float"
         },
         {
-            "blas" : "swap",
+            "blas_name" : "swap",
             "user_name" : "test_sswap_1",
-            "precision" : "single",
+            "type" : "float",
             "incx" : 2,
             "incy" : -2
         },
         {
-            "blas" : "swap",
+            "blas_name" : "swap",
             "user_name" : "test_sswap_2",
-            "precision" : "single",
+            "type" : "float",
             "incx" : -2,
             "incy" : 1
         },
         {
-            "blas" : "swap",
+            "blas_name" : "swap",
             "user_name" : "test_sswap_3",
-            "precision" : "single",
+            "type" : "float",
             "incx" : -1,
             "incy" : -2
         },
         {
-            "blas" : "swap",
+            "blas_name" : "swap",
             "user_name" : "test_dswap_0",
-            "precision" : "double"
+            "type" : "double"
         },
         {
-            "blas" : "swap",
+            "blas_name" : "swap",
             "user_name" : "test_dswap_1",
-            "precision" : "double",
+            "type" : "double",
             "incx" : 2,
             "incy" : -2
         },
         {
-            "blas" : "swap",
+            "blas_name" : "swap",
             "user_name" : "test_dswap_2",
-            "precision" : "double",
+            "type" : "double",
             "incx" : -2,
             "incy" : 1
         },
         {
-            "blas" : "swap",
+            "blas_name" : "swap",
             "user_name" : "test_dswap_3",
-            "precision" : "double",
+            "type" : "double",
             "incx" : -1,
             "incy" : -2
         }

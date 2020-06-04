@@ -1,8 +1,4 @@
 /**
-    FBLAS: BLAS implementation for Intel FPGA
-    Copyright (c) 2019 ETH-Zurich. All rights reserved.
-    See LICENSE for license information.
-
   Tests for SYR routine.
   Tests ideas borrowed from BLAS testing and GSL (Gnu Scientific Library) v2.5
 */

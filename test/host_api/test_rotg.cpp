@@ -1,9 +1,6 @@
 /**
-    FBLAS: BLAS implementation for Intel FPGA
-    Copyright (c) 2019 ETH-Zurich. All rights reserved.
-    See LICENSE for license information.
-    Tests for rotg routine.
-    Tests ideas borrowed from Blas testing
+  Tests for rot routine.
+  Tests ideas borrowed from Blas testing
 */
 #include <gtest/gtest.h>
 #include <string>

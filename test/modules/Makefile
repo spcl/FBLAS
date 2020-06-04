@@ -7,9 +7,9 @@ AOCXXFLAGS  = -march=emulator -board=$(BOARD)
 AOCL_COMPILE_CONFIG := $(shell aocl compile-config)
 AOCL_LINK_CONFIG := $(shell aocl link-config)
 RAPIDJSON_DIR = /home/tdematt/lib/rapidjson/include
-GEN = ../../bin/modules_generator
+GEN = ../../codegen/modules_codegen.py
 BIN_DIR=bin
-
+LEVEL_1 = test_iamax test_dot test_copy
 .PHONY = clean generator
 
 # Points to the root of Google Test, relative to where this file is.
@@ -19,32 +19,34 @@ BIN_DIR=bin
 #CPPFLAGS += -isystem $(GTEST_DIR)/include
 
 generator:
-		@if [ ! -f $(GEN) ] ; \
-		then \
-			make -C ../../ modules_generator; \
-		fi;
+	@if [ ! -f $(GEN) ] ; \
+	then \
+		make -C ../../ modules_generator; \
+	fi;
 
 test_%: generator $(BIN_DIR)
-		@echo "Executing test_$*"
-		@echo "Compiling for emulation ..."
-		rm -f /tmp/test_*$**cl || true
-		rm -f test_*"$*"*aocx || true
-		$(GEN) $*.json /tmp/
-		$(AOCXX) $(AOCXXFLAGS) /tmp/test_*$**cl -I../../blas/include
-		$(CXX) $(CXXFLAGS) test_$*.cpp $(AOCL_LINK_CONFIG) $(AOCL_COMPILE_CONFIG) -I$(RAPIDJSON_DIR) -o $(BIN_DIR)/$@
-		$(eval binfile:=$(shell find . -iname test_*"$*"*aocx))
-		@echo "Executing tests..." $(binfile)
-		env CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 $(BIN_DIR)/$@ $(binfile)
-		$(unset binfile)
+	@echo "Executing test_$*"
+	@echo "Compiling for emulation ..."
+	rm -f /tmp/test_*$**cl || true
+	rm -f test_*"$*"*aocx || true
+	$(GEN) $*.json -output_dir=/tmp/
+	$(AOCXX) $(AOCXXFLAGS) /tmp/test_*$**cl -I../../blas/include
+	$(CXX) $(CXXFLAGS) test_$*.cpp $(AOCL_LINK_CONFIG) $(AOCL_COMPILE_CONFIG) -I$(RAPIDJSON_DIR) -o $(BIN_DIR)/$@ -lgtest
+	$(eval binfile = $(shell find . -iname test_*"$*"*aocx))
+	@echo "Executing tests..." $(binfile)
+	env CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 $(BIN_DIR)/$@ $(binfile)
+	$(unset binfile)
 
+
+test_level1: $(LEVEL_1);
 
 
 $(BIN_DIR):
-		mkdir $(BIN_DIR)
+	mkdir $(BIN_DIR)
 
 clean:
-		rm -f *.aoc* || true
-		rm -fr *.temp || true
-		rm -r test_*/ || true
-		rm -fr $(BIN_DIR) || true
+	rm -f *.aoc* || true
+	rm -fr *.temp || true
+	rm -r test_*/ || true
+	rm -fr $(BIN_DIR) || true
 

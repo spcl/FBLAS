@@ -1,18 +1,15 @@
 /**
-    FBLAS: BLAS implementation for Intel FPGA
-    Copyright (c) 2019 ETH-Zurich. All rights reserved.
-    See LICENSE for license information.
-    Tests for GEMV routine.
-    Tests ideas borrowed from Blas testing
-    GEMV check routine is a modified version of the one included in GSL (Gnu Scientific Library) v2.5
+  Tests for GEMV routine.
+  Tests ideas borrowed from Blas testing
+  GEMV check routine is a modified version of the one included in GSL (Gnu Scientific Library) v2.5
 */
 #include <gtest/gtest.h>
 #include <string>
 #include <exception>
 #include <algorithm>
 #include <string.h>
+#include <cmath>
 #include "../../include/utils/ocl_utils.hpp"
-#include "../../include/fblas_environment.hpp"
 #include "../host_api/test_tier2.hpp"
 
 const int nalf=3;               //number of different alpha values

@@ -2,56 +2,56 @@
     "tier" : 2,
     "routine": [
         {
-            "blas" : "dot",
+            "blas_name" : "dot",
             "user_name" : "test_sdot_0",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16
         },
         {
-            "blas" : "dot",
+            "blas_name" : "dot",
             "user_name" : "test_sdot_1",
-            "precision" : "single",
+            "type" : "float",
             "incx" : 2,
             "incy" : -2
         },
         {
-            "blas" : "dot",
+            "blas_name" : "dot",
             "user_name" : "test_sdot_2",
-            "precision" : "single",
+            "type" : "float",
             "incx" : -2,
             "incy" : 1
         },
         {
-            "blas" : "dot",
+            "blas_name" : "dot",
             "user_name" : "test_sdot_3",
-            "precision" : "single",
+            "type" : "float",
             "incx" : -1,
             "incy" : -2
         },
         {
-            "blas" : "dot",
+            "blas_name" : "dot",
             "user_name" : "test_ddot_0",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16
         },
         {
-            "blas" : "dot",
+            "blas_name" : "dot",
             "user_name" : "test_ddot_1",
-            "precision" : "double",
+            "type" : "double",
             "incx" : 2,
             "incy" : -2
         },
         {
-            "blas" : "dot",
+            "blas_name" : "dot",
             "user_name" : "test_ddot_2",
-            "precision" : "double",
+            "type" : "double",
             "incx" : -2,
             "incy" : 1
         },
         {
-            "blas" : "dot",
+            "blas_name" : "dot",
             "user_name" : "test_ddot_3",
-            "precision" : "double",
+            "type" : "double",
             "incx" : -1,
             "incy" : -2
         }

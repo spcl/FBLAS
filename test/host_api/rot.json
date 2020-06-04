@@ -2,54 +2,54 @@
     "tier" : 2,
     "routine": [
         {
-            "blas" : "rot",
+            "blas_name" : "rot",
             "user_name" : "test_srot_0",
-            "precision" : "single"
+            "type" : "float"
         },
         {
-            "blas" : "rot",
+            "blas_name" : "rot",
             "user_name" : "test_srot_1",
-            "precision" : "single",
+            "type" : "float",
             "incx" : 2,
             "incy" : -2
         },
         {
-            "blas" : "rot",
+            "blas_name" : "rot",
             "user_name" : "test_srot_2",
-            "precision" : "single",
+            "type" : "float",
             "incx" : -2,
             "incy" : 1
         },
         {
-            "blas" : "rot",
+            "blas_name" : "rot",
             "user_name" : "test_srot_3",
-            "precision" : "single",
+            "type" : "float",
             "incx" : -1,
             "incy" : -2
         },
         {
-            "blas" : "rot",
+            "blas_name" : "rot",
             "user_name" : "test_drot_0",
-            "precision" : "double"
+            "type" : "double"
         },
         {
-            "blas" : "rot",
+            "blas_name" : "rot",
             "user_name" : "test_drot_1",
-            "precision" : "double",
+            "type" : "double",
             "incx" : 2,
             "incy" : -2
         },
         {
-            "blas" : "rot",
+            "blas_name" : "rot",
             "user_name" : "test_drot_2",
-            "precision" : "double",
+            "type" : "double",
             "incx" : -2,
             "incy" : 1
         },
         {
-            "blas" : "rot",
+            "blas_name" : "rot",
             "user_name" : "test_drot_3",
-            "precision" : "double",
+            "type" : "double",
             "incx" : -1,
             "incy" : -2
         }

@@ -1,0 +1,73 @@
+{
+    "routine": [
+        {
+            "blas_name" : "gemv",
+            "type" : "float",
+            "user_name" : "sbicg_gemv",
+            "width" : 64,
+            "in_x" : "channel_p",
+            "in_y" : "channel_q",
+            "out_res":"channel_q_res",
+            "in_A" : "channel_matrix",
+            "trans" : "N",
+            "A tiles order" : "row",
+            "A elements order" : "row",
+            "tile N size" :2048,
+            "tile M size" :2048
+        },
+        {
+            "blas_name" : "gemv",
+            "type" : "float",
+            "user_name" : "sbicg_gemv_trans",
+            "width" : 64,
+            "in_x" : "channel_r",
+            "in_y" : "channel_s",
+            "out_res":"channel_s_res",
+            "out_y_updates": "channel_s_updates",
+            "in_A" : "channel_matrix2",
+            "trans" : "T",
+            "A tiles order" : "row",
+            "A elements order" : "row",
+            "tile N size" : 2048,
+            "tile M size" : 2048
+        }
+    ],
+    "helper":[
+        {
+            "helper_name" : "read_vector_x",
+            "user_name" : "sbicg_read_p",
+            "channel_name" : "channel_p",
+            "type" : "float",
+            "width" : 64
+        },
+        {
+            "helper_name" : "read_vector_y",
+            "user_name" : "sbicg_read_q",
+            "channel_name" : "channel_q",
+            "type" : "float",
+            "width" : 1
+        },
+        {
+            "helper_name" : "write_vector",
+            "user_name" : "sbicg_write_q",
+            "channel_name" : "channel_q_res",
+            "type" : "float",
+            "width" : 1
+        },
+        {
+            "helper_name" : "read_vector_x",
+            "user_name" : "sbicg_read_r",
+            "channel_name" : "channel_r",
+            "type" : "float",
+            "width" : 64
+        },
+        {
+            "helper_name" : "write_vector",
+            "user_name" : "sbicg_write_s",
+            "channel_name" : "channel_s_res",
+            "type" : "float",
+            "width" : 64
+        }
+
+    ]
+}

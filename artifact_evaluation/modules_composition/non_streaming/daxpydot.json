@@ -1,0 +1,22 @@
+{
+    "routine": [
+        {
+            "blas_name" : "copy",
+            "user_name" : "daxpydot_copy",
+            "type" : "double",
+            "width" : 32
+        },
+        {
+            "blas_name" : "dot",
+            "user_name" : "daxpydot_dot",
+            "type" : "double",
+            "width" : 32
+        },
+        {
+            "blas_name" : "axpy",
+            "user_name" : "daxpydot_axpy",
+            "type" : "double",
+            "width" : 32
+        }
+    ]
+}

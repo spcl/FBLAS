@@ -1,10 +1,9 @@
 {
-    "tier" : 2,
     "routine": [
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_sgemv_0",
-            "precision" : "single",
+            "type" : "float",
             "width" : 8,
             "order" : "RowMajor",
             "trans": "N",
@@ -12,9 +11,9 @@
             "tile M size": 32
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_sgemv_1",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -24,9 +23,9 @@
             "tile M size": 16
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_sgemv_2",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -36,9 +35,9 @@
             "tile M size": 32
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_sgemv_3",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -46,17 +45,17 @@
             "incy" : -2
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_sgemv_4",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T"
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_sgemv_5",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -66,9 +65,9 @@
             "tile M size": 32
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_sgemv_6",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -78,9 +77,9 @@
             "tile M size": 32
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_sgemv_7",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -88,9 +87,9 @@
             "incy" : -2
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_dgemv_0",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -98,9 +97,9 @@
             "tile M size": 32
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_dgemv_1",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -108,9 +107,9 @@
             "incy" : -2
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_dgemv_2",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -118,9 +117,9 @@
             "incy" : 1
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_dgemv_3",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -130,9 +129,9 @@
             "tile M size": 16
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_dgemv_4",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -140,9 +139,9 @@
             "tile M size": 32
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_dgemv_5",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -150,9 +149,9 @@
             "incy" : -2
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_dgemv_6",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -162,9 +161,9 @@
             "tile M size": 32
         },
         {
-            "blas" : "gemv",
+            "blas_name" : "gemv",
             "user_name" : "test_dgemv_7",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",

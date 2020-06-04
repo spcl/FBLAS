@@ -100,7 +100,7 @@ private:
 
         //helpers
         generation_helpers_["read vector x"]=ModuleGenerator::ReadVectorX;
-        generation_helpers_["read vector"]=ModuleGenerator::ReadVectorX;        //alias for simplicity
+        generation_helpers_["read vector"]=ModuleGenerator::ReadVectorX; //alias for readability
         generation_helpers_["read vector y"]=ModuleGenerator::ReadVectorY;
         generation_helpers_["write vector"]=ModuleGenerator::WriteVector;
         generation_helpers_["write scalar"]=ModuleGenerator::WriteScalar;
@@ -290,6 +290,7 @@ private:
              {
                  if(!isKernel)
                     line=std::regex_replace(line,std::regex("__kernel "),std::string(""));
+
                  line=std::regex_replace(line,std::regex(pattern),name);
              }
              fout << line<<std::endl;

@@ -1,36 +1,34 @@
 {
     "routine": [
         {
-            "blas" : "axpy",
-            "precision" : "single",
+            "blas_name" : "axpy",
+            "type" : "float",
             "user_name" : "test_axpy",
             "width" : 16,
-            "x" : "channel_x",
-            "y" : "channel_y",
-            "res":"channel_vect_out",
-            "type" : "kernel"
-
+            "in_x" : "channel_x",
+            "in_y" : "channel_y",
+            "out_res":"channel_vect_out"
         }
     ],
     "helper":[
         {
-            "type" : "read vector x",
+            "helper_name" : "read_vector_x",
             "user_name" : "test_axpy_read_x",
             "channel_name" : "channel_x",
-            "precision" : "single"
+            "type" : "float"
 
         },
         {
-            "type" : "read vector y",
+            "helper_name" : "read_vector_y",
             "user_name" : "test_axpy_read_y",
             "channel_name" : "channel_y",
-            "precision" : "single"
+            "type" : "float"
         },
         {
-            "type" : "write vector",
+            "helper_name" : "write_vector",
             "user_name" : "test_axpy_write_vector",
             "channel_name" : "channel_vect_out",
-            "precision" : "single"
+            "type" : "float"
         }
 
     ]

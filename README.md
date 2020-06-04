@@ -14,10 +14,11 @@ For more details, see our [paper](https://arxiv.org/abs/1907.07929).
 
 The library depends on:
 
-* Intel FPGA SDK for OpenCL pro, version 18+ ([http://fpgasoftware.intel.com/opencl/](http://fpgasoftware.intel.com/opencl/))
+* Intel FPGA SDK for OpenCL pro, version 19+ ([http://fpgasoftware.intel.com/opencl/](http://fpgasoftware.intel.com/opencl/))
 * GCC (version 5+)
 * Rapidjson ([http://rapidjson.org/](http://rapidjson.org/))
 * Google Test (only for unit tests)
+* Python 3.6+
 
 ### Installation
 
@@ -25,14 +26,10 @@ After cloning this repository, make sure you clone the [rapidjson](http://rapidj
 
 ```
 git submodule update --init
+pip install -r codegen/requirements.txt
 ```
+For Artifact Evaluation, you will find detailed information in subfolder `artifact_evaluation`.
 
-After this, the included Makefile can be used to compile code and modules generator:
-
-
-```
-make all
-```
 
 ## The FBLAS library
 

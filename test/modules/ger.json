@@ -1,16 +1,15 @@
 {
     "routine": [
         {
-            "blas" : "ger",
-            "precision" : "single",
+            "blas_name" : "ger",
+            "type" : "float",
             "user_name" : "test_sger",
             "width" : 16,
-            "x" : "channel_x",
-            "y" : "channel_y",
-            "res":"channel_matrix_out",
-            "A" : "channel_matrix",
+            "in_x" : "channel_x",
+            "in_y" : "channel_y",
+            "out_res":"channel_matrix_out",
+            "in_A" : "channel_matrix",
             "trans" : "N",
-            "type" : "kernel",
             "A tiles order" : "row",
             "A elements order" : "row",
             "tile N size" :128,
@@ -19,32 +18,35 @@
     ],
     "helper":[
         {
-            "type" : "read vector x",
+            "helper_name" : "read_vector_x",
             "user_name" : "test_sger_read_x",
             "channel_name" : "channel_x",
-            "precision" : "single"
+            "type" : "float"
 
         },
         {
-            "type" : "read vector y",
+            "helper_name" : "read_vector_y",
             "user_name" : "test_sger_read_y",
             "channel_name" : "channel_y",
-            "precision" : "single"
+            "type" : "float"
         },
         {
-            "type" : "write matrix",
+            "helper_name" : "write_matrix",
             "user_name" : "test_sger_write_matrix",
             "channel_name" : "channel_matrix_out",
-            "precision" : "single",
+            "type" : "float",
+            "tiles order" :"row",
+            "elements order": "row",
             "tile N size" :128,
             "tile M size" :128
         },
         {
-            "type" : "read matrix",
+            "helper_name" : "read_matrix",
             "user_name" : "test_sger_read_matrix",
             "channel_name" : "channel_matrix",
-            "precision" : "single",
+            "type" : "float",
             "tiles order" :"row",
+            "elements order": "row",
             "tile N size" :128,
             "tile M size" :128
         }

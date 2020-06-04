@@ -1,0 +1,21 @@
+{
+    "routine": [
+        {
+            "blas_name" : "dot",
+            "type" : "double",
+            "user_name" : "ddot",
+            "width" : 16,
+            "in_x" : "channel_x",
+            "in_y" : "channel_y",
+            "out_res":"channel_out"
+        }
+    ],
+    "helper":[
+        {
+            "helper_name" : "write_scalar",
+            "user_name" : "ddot_write_result",
+            "channel_name" : "channel_out",
+            "type" : "double"
+        }
+    ]
+}

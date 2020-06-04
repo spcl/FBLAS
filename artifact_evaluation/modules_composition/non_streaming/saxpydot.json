@@ -1,0 +1,22 @@
+{
+    "routine": [
+        {
+            "blas_name" : "copy",
+            "user_name" : "saxpydot_copy",
+            "type" : "float",
+            "width" : 32
+        },
+        {
+            "blas_name" : "dot",
+            "user_name" : "saxpydot_dot",
+            "type" : "float",
+            "width" : 32
+        },
+        {
+            "blas_name" : "axpy",
+            "user_name" : "saxpydot_axpy",
+            "type" : "float",
+            "width" : 32
+        }
+    ]
+}

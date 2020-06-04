@@ -1,0 +1,52 @@
+{
+    "routine": [
+        {
+            "blas_name" : "axpy",
+            "type" : "double",
+            "user_name" : "daxpydot_axpy",
+            "width" : 8,
+            "in_x" : "channel_v",
+            "in_y" : "channel_w",
+            "out_res":"channel_z"
+        },
+        {
+            "blas_name" : "dot",
+            "type" : "double",
+            "user_name" : "daxpydot_dot",
+            "width" : 8,
+            "in_x" : "channel_z",
+            "in_y" : "channel_u",
+            "out_res":"channel_out"
+        }
+    ],
+    "helper":[
+        {
+            "helper_name" : "read_vector_x",
+            "user_name" : "daxpydot_read_v",
+            "channel_name" : "channel_v",
+            "type" : "double",
+            "width" : 8
+        },
+        {
+            "helper_name" : "read_vector_x",
+            "user_name" : "daxpydot_read_w",
+            "channel_name" : "channel_w",
+            "type" : "double",
+            "width" : 8
+        },
+        {
+            "helper_name" : "read_vector_x",
+            "user_name" : "daxpydot_read_u",
+            "channel_name" : "channel_u",
+            "type" : "double",
+            "width" : 8
+        },
+        {
+            "helper_name" : "write_scalar",
+            "user_name" : "daxpydot_write_beta",
+            "channel_name" : "channel_out",
+            "type" : "double"
+        }
+
+    ]
+}

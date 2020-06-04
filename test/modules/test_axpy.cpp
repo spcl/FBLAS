@@ -1,21 +1,23 @@
 /**
-    FBLAS: BLAS implementation for Intel FPGA
-    Copyright (c) 2019 ETH-Zurich. All rights reserved.
-    See LICENSE for license information.
-    Tests for dot routine.
-    Tests ideas borrowed from Blas testing
+  Tests for dot routine.
+  Tests ideas borrowed from Blas testing
 */
 #include <gtest/gtest.h>
 #include <string>
 #include <exception>
 #include "../../include/utils/ocl_utils.hpp"
 
+#if !defined(CL_CHANNEL_1_INTELFPGA)
+// include this header if channel macros are not defined in cl.hpp (versions >=19.0)
+#include "CL/cl_ext_intelfpga.h"
+#endif
+
 static int ns[4] = { 0,1,2,4 };
 static const int N=7;
 static int incxs[4] = { 1,2,-2,-1 };
 static int incys[4] = { 1,-2,1,-2 };
 std::string program_path;
-//g++ test_dot.cpp -lgtest $( aocl compile-config ) -std=c++11 $(aocl link-config) -lpthread -I/home/tdematt/lib/rapidjson/include
+//g++ test_dot.cpp -lgtest $( aocl compile-config ) -std=c++11 $(aocl link-config) -lpthread
 TEST(TestAxpy,TestSaxpy)
 {
 

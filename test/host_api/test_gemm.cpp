@@ -1,17 +1,14 @@
 /**
-    FBLAS: BLAS implementation for Intel FPGA
-    Copyright (c) 2019 ETH-Zurich. All rights reserved.
-    See LICENSE for license information.
-
-    Tests for GEMM routine.
-    Tests ideas borrowed from BLAS testing
-    GEMM check routine is a modified version of the one included in GSL (Gnu Scientific Library) v2.5
+  Tests for GEMM routine.
+  Tests ideas borrowed from BLAS testing
+  GEMM check routine is a modified version of the one included in GSL (Gnu Scientific Library) v2.5
 */
 #include <gtest/gtest.h>
 #include <string>
 #include <exception>
 #include <algorithm>
 #include <string.h>
+#include <cblas.h>
 #include "../../include/utils/ocl_utils.hpp"
 #include "../../include/fblas_environment.hpp"
 #include "test_tier2.hpp"
@@ -89,6 +86,17 @@ TEST(TestSGemm,TestSgemm)
 
                         //copy to device
                         queue.enqueueWriteBuffer(input_B,CL_TRUE,0,nb*mb*sizeof(float),B);
+                        /*
+                        printf("N: %d, M: %d, K: %d",n,m,k);
+                        if(transposedA)
+                            printf(", A transposed");
+                        else
+                            printf(", A non transposed");
+                        if(transposedB)
+                            printf(", B transposed");
+                        else
+                            printf(", B non transposed");
+                        printf("\n");*/
 
 
                         for(int ia = 0; ia < nalf ; ia++) //loop over alphas
@@ -116,7 +124,6 @@ TEST(TestSGemm,TestSgemm)
         }
     }
 }
-
 
 TEST(TestDGemm,TestDgemm)
 {
@@ -308,7 +315,7 @@ void check_result (bool transA, bool transB, unsigned int N, unsigned int M, uns
 
 CHECK:
     //print_float_matrix(fpga_res,NN,MM);
-//    print_float_matrix(C,NN,MM);
+    //print_float_matrix(C,NN,MM);
 //    Measure error by considering nrm_inf
     T nrminf_diff=0, nrminf_orig=0;
     T error;
@@ -330,6 +337,7 @@ CHECK:
         error=0;
     else
         error=nrminf_diff/nrminf_orig;
+
     if (std::is_same<T, float>::value)
         ASSERT_LE(error,flteps);
     else

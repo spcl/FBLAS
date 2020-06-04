@@ -1,14 +1,14 @@
 {
     "routine": [
         {
-            "blas" : "rotg",
+            "blas_name" : "rotg",
             "user_name" : "test_srotg",
-            "precision" : "single"
+            "type" : "float"
         },
         {
-            "blas" : "rotg",
+            "blas_name" : "rotg",
             "user_name" : "test_drotg",
-            "precision" : "double"
+            "type" : "double"
         }
     ]
 }

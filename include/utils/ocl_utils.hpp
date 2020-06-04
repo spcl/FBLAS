@@ -1,12 +1,11 @@
 /**
-    FBLAS: BLAS implementation for Intel FPGA
-    Copyright (c) 2019 ETH-Zurich. All rights reserved.
-    See LICENSE for license information.
 
-    This file contains a set of basic utilities to interact with Intel FPGA OpenCL
-    ecosystem.
-    It has been derived from Intel FPGA coding examples.
 
+  This file contains a set of basic utilities to interact with Intel FPGA OpenCL
+  ecosystem.
+  It has been derived from Intel FPGA coding examples.
+
+  Author: Tiziano De Matteis
 */
 
 
@@ -18,6 +17,10 @@
 #include <unistd.h>
 
 #include "CL/cl.hpp"
+#if !defined(CL_CHANNEL_1_INTELFPGA)
+// include this header if channel macros are not defined in cl.hpp (versions >=19.0)
+#include "CL/cl_ext_intelfpga.h"
+#endif
 
 /**
  * @brief The IntelFPGAOCLUtils class contains a set of basic utilities for interacting
@@ -48,7 +51,9 @@ public:
 	device=devices[0];
 
 	// Create the context
-	context=cl::Context({device});
+        std::vector<cl::Device> devices2;
+        devices2.push_back(device);
+        context=cl::Context(devices2);
 	//create the program
 	createProgramFromBinary(context, program,program_path.c_str(),device);
 	return true;
@@ -124,7 +129,7 @@ public:
     static void createCommandQueue(cl::Context &context, cl::Device &device, cl::CommandQueue &queue)
     {
 	cl_int status;
-	queue = std::move(cl::CommandQueue(context,device,0,&status));
+        queue = std::move(cl::CommandQueue(context,device,CL_QUEUE_PROFILING_ENABLE,&status));
 	checkError(status,__FILE__,__LINE__, "Failed to create queue");
 
     }
@@ -137,7 +142,7 @@ public:
 	cl_int status;
 	for(int i=0;i<num_queue;i++)
 	{
-	    queues.push_back(std::move(cl::CommandQueue(context,device,0,&status)));
+            queues.push_back(std::move(cl::CommandQueue(context,device,CL_QUEUE_PROFILING_ENABLE,&status)));
 	    checkError(status,__FILE__,__LINE__, "Failed to create queue");
 	}
     }

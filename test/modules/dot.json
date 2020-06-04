@@ -1,37 +1,35 @@
 {
     "routine": [
         {
-            "blas" : "dot",
-            "precision" : "single",
+            "blas_name" : "dot",
+            "type" : "float",
             "user_name" : "test_sdot",
             "width" : 16,
-            "x" : "channel_x",
-            "y" : "channel_y",
-            "res":"channel_out",
-            "type" : "kernel"
-
+            "in_x" : "channel_x",
+            "in_y" : "channel_y",
+            "out_res":"channel_out"
         }
 
     ],
     "helper":[
         {
-            "type" : "read vector x",
+            "helper_name" : "read_vector_x",
             "user_name" : "test_sdot_read_x",
             "channel_name" : "channel_x",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16
         },
         {
-            "type" : "read vector y",
+            "helper_name" : "read_vector_y",
             "user_name" : "test_sdot_read_y",
             "channel_name" : "channel_y",
-            "precision" : "single"
+            "type" : "float"
         },
         {
-            "type" : "write scalar",
+            "helper_name" : "write_scalar",
             "user_name" : "test_sdot_sink",
             "channel_name" : "channel_out",
-            "precision" : "single"
+            "type" : "float"
         }
 
     ]

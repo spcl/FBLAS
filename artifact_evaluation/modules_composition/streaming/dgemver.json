@@ -1,0 +1,158 @@
+{
+  "routine": [
+    {
+      "blas_name" : "ger",
+      "type" : "double",
+      "user_name" : "dgemver_ger1",
+      "width" : 16,
+      "in_x" : "channel_u1",
+      "in_y" : "channel_v1",
+      "out_res":"channel_matrix_A2",
+      "in_A" : "channel_matrix_A",
+      "trans" : "N",
+      "A tiles order" : "column",
+      "A elements order" : "row",
+      "tile N size" :2048,
+      "tile M size" :2048
+    },
+    {
+      "blas_name" : "ger",
+      "type" : "double",
+      "user_name" : "dgemver_ger2",
+      "width" : 16,
+      "in_x" : "channel_u2",
+      "in_y" : "channel_v2",
+      "out_res":"channel_matrix_B",
+      "in_A" : "channel_matrix_A2",
+      "trans" : "N",
+      "A tiles order" : "column",
+      "A elements order" : "row",
+      "tile N size" :2048,
+      "tile M size" :2048
+    },
+    {
+      "blas_name" : "gemv",
+      "type" : "double",
+      "user_name" : "dgemver_gemv_trans",
+      "width" : 16,
+      "in_x" : "channel_y",
+      "in_y" : "channel_z",
+      "out_res":"channel_x_res",
+      "in_A" : "channel_matrix_B_trans",
+      "trans" : "T",
+      "A tiles order" : "column",
+      "A elements order" : "row",
+      "tile N size" : 2048,
+      "tile M size" : 2048
+    },
+    {
+      "blas_name" : "gemv",
+      "type" : "double",
+      "user_name" : "dgemver_gemv",
+      "width" : 16,
+      "in_x" : "channel_x",
+      "in_y" : "channel_w",
+      "out_res":"channel_w_res",
+      "in_A" : "channel_matrix_B2",
+      "trans" : "N",
+      "A tiles order" : "row",
+      "A elements order" : "row",
+      "tile N size" : 2048,
+      "tile M size" : 2048
+    }
+  ],
+  "helper":[
+        {
+            "helper_name" : "read_vector_x",
+            "user_name" : "dgemver_read_u1",
+            "channel_name" : "channel_u1",
+            "type" : "double",
+            "width" : 1
+        },
+        {
+            "helper_name" : "read_vector_x",
+            "user_name" : "dgemver_read_v1",
+            "channel_name" : "channel_v1",
+            "type" : "double",
+            "width" : 16
+        },
+        {
+            "helper_name" : "read_vector_x",
+            "user_name" : "dgemver_read_u2",
+            "channel_name" : "channel_u2",
+            "type" : "double",
+            "width" : 1
+        },
+        {
+            "helper_name" : "read_vector_x",
+            "user_name" : "dgemver_read_v2",
+            "channel_name" : "channel_v2",
+            "type" : "double",
+            "width" : 16
+        },
+        {
+            "helper_name" : "read_matrix",
+            "user_name" : "dgemver_read_matrix_A",
+            "channel_name" : "channel_matrix_A",
+            "type" : "double",
+            "tiles order" :"column",
+            "elements order": "row",
+            "width" : 16,
+            "tile N size" :2048,
+            "tile M size" :2048
+        },
+        {
+            "helper_name" : "read_vector_x",
+            "user_name" : "dgemver_read_y",
+            "channel_name" : "channel_y",
+            "type" : "double",
+            "width" : 1
+        },
+        {
+            "helper_name" : "read_vector_x",
+            "user_name" : "dgemver_read_z",
+            "channel_name" : "channel_z",
+            "type" : "double",
+            "width" : 16
+        },
+        {
+            "helper_name" : "write_vector",
+            "user_name" : "dgemver_write_x",
+            "channel_name" : "channel_x_res",
+            "type" : "double",
+            "width" : 1
+        },
+        {
+            "helper_name" : "read_vector_x",
+            "user_name" : "dgemver_read_x",
+            "channel_name" : "channel_x",
+            "type" : "double",
+            "width" : 16
+        },
+        {
+            "helper_name" : "read_vector_x",
+            "user_name" : "dgemver_read_w",
+            "channel_name" : "channel_w",
+            "type" : "double",
+            "width" : 1
+        },
+        {
+            "helper_name" : "read_matrix",
+            "user_name" : "dgemver_read_matrix_B",
+            "channel_name" : "channel_matrix_B2",
+            "type" : "double",
+            "tiles order" :"row",
+            "elements order": "row",
+            "width" : 16,
+            "tile N size" :2048,
+            "tile M size" :2048
+        },
+        {
+            "helper_name" : "write_vector",
+            "user_name" : "dgemver_write_w",
+            "channel_name" : "channel_w_res",
+            "type" : "double",
+            "width" : 1
+        }
+  ]
+}

@@ -88,7 +88,7 @@ void FBLASEnvironment::gemm(std::string routine_name, FblasTranspose transA, Fbl
     if(!event)
         for(int i=0;i<r.kernels.size();i++)
         {
-            if(!r.systolic || i!=0)
+            //if(!r.systolic || i!=0)
              r.queues[i].finish();
         }
 }
