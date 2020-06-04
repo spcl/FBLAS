@@ -19,9 +19,22 @@ commands can be used:
  
 To execute a program:
 - for emulating a design, set the environment variable ` CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1` as suggested by Intel
-- execute the host program locate under `bin/` by passing the suggested parameters. Note: for GEMM
+- execute the host program locate under `bin/` by passing the suggested parameters (execute the program without argument to obtain a list). Note: for GEMM
     it will require the json file automatically generated and located under `<s/d>gemm_codegen_files/generated_routines.json`
  
 Every host program accepts, among the other, the number of runs to execute and produces the averaged execution time,
 as well as confidence intervals.
 The result is validated against openblas (CPU) version of the same computation.
+
+
+For example, for compiling and executing matrix-vector product in single precision and emulation:
+
+```Bash
+# Create emulation bitstream (generates sdot.aocx)
+$ make sgemv_emulator
+# Compile host program
+$ make gemv_host
+#execute for emulation, 5 runs. The program takes in input sizes (n,m), alpha and beta multipliers (a,b) and tile sizes (k,j) as defined in the json description
+$ env CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1  bin/gemv_host -b sgemv.aocx -n 2048 -m 1024 -a 2 -c 1 -k 1024 -j 1024 -r 1 -p single  
+
+```

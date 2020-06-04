@@ -29,6 +29,14 @@ using namespace std;
 template <typename T>
 void evaluate(std::string program_path,size_t n, size_t m, T alpha, T beta, std::vector<double> &fblas_times, std::vector<double> &transfer_times, int runs){
 
+    //adjust this according to the parameter in the json description file
+
+    int width;
+    if (std::is_same<T, float>::value)
+        width = 64; //float
+    else
+        width = 32; //double
+
     cl::Platform  platform;
     cl::Device device;
     cl::Context context;
@@ -44,6 +52,16 @@ void evaluate(std::string program_path,size_t n, size_t m, T alpha, T beta, std:
         std::cout << "Executing DGEMV ...." <<std::endl;
         kernel_names = {"dgemv", "dgemv_read_x","dgemv_read_y", "dgemv_read_matrix","dgemv_write_vector"};
     }
+
+    //Here we are manually interleaving between modules (as this is not done automatically by Intel)
+    //Therefore N must be a multiple of the width
+    if(m%width != 0)
+    {
+        cerr << "M must be a multiple of the width ("<< width<<")" << endl;
+        exit(-1);
+    }
+
+
 
     IntelFPGAOCLUtils::initEnvironment(platform,device,context,program,program_path,kernel_names, kernels,queues);
     std::cout << "Board reprogrammed." <<std::endl;
@@ -75,11 +93,7 @@ void evaluate(std::string program_path,size_t n, size_t m, T alpha, T beta, std:
 
     //copy the matrix interleaving it into two modules
     size_t offset=0;
-    int width;
-    if (std::is_same<T, float>::value)
-        width = 64;
-    else
-        width = 32;
+    
     size_t increment=width/4;
     const int loop_it=((int)(m))/width;   //W must be a divisor of M
     for(int i=0;i<n;i++)
@@ -107,7 +121,7 @@ void evaluate(std::string program_path,size_t n, size_t m, T alpha, T beta, std:
     int tile_size=2048;  //attention, change this if necessary
 
 
-    std::cout << "Executing streamed version with width: "<<width << "and tile "<<tile_size<<endl;
+    std::cout << "Executing streamed version with width: "<<width << " and tile size: "<<tile_size<<endl;
     int x_repetitions=ceil((float)(n)/tile_size);
 
     //gemv

@@ -21,6 +21,22 @@ using namespace std;
 
 template <typename T>
 void evaluate(std::string program_path,int n,  std::vector<double> &fblas_times, std::vector<double> &transfer_times, int runs){
+
+    //adjust this according to the parameter in the json description file
+    int width;
+    if (std::is_same<T, float>::value)
+       width=32;    //float
+    else
+       width=16;    //double
+
+    //Here we are manually interleaving between modules (as this is not done automatically by Intel)
+    //Therefore N must be a multiple of the width
+    if(n%width != 0)
+    {
+        cerr << "N must be a multiple of the width ("<< width<<")" << endl;
+        exit(-1);
+    }
+
     cl::Platform  platform;
     cl::Device device;
     cl::Context context;
@@ -59,12 +75,8 @@ void evaluate(std::string program_path,int n,  std::vector<double> &fblas_times,
 
     //copy the matrix interleaving it into two modules
     size_t offset=0;
-    int width;
-    if (std::is_same<T, float>::value)
-       width=32;
-    else
-       width=16;
-    assert(n%width==0);
+    
+    
     int loop_it=((int)(n))/width; //n must be a multiple
 
     //prepare data
@@ -147,7 +159,7 @@ void evaluate(std::string program_path,int n,  std::vector<double> &fblas_times,
     if(!test_equals(*fpga_res,cblas_res,flteps))
         cout << "Error: " <<*fpga_res<<" != " <<cblas_res<<endl;
     else
-        cout << "Result Ok!"<<*fpga_res<<" != " <<cblas_res<<endl;;
+        cout << "Result Ok!"<<endl;
 
 }
 

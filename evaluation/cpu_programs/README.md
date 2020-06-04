@@ -4,7 +4,8 @@ For compiling them:
 ```
 $ make <name_program>_program
 ```
-where `<name_program>` can be: dot, gemv, gemm, axpydot, bicg, gemver, batched_gemm, batched_trsm
+where `<name_program>` can be: dot, gemv, gemm, axpydot, bicg, gemver, batched_gemm, batched_trsm.
+
 
 They:
  - use Intel MKL Library as BLAS implementation 
@@ -20,5 +21,20 @@ They:
 
 Every host program accepts, among the other, the number of runs to execute and produces the averaged execution time,
 as well as confidence intervals.
+
+
+Example, for compiling and evaluate GEMM (squared matrices):
+
+```Bash
+# Compile
+make gemm_program
+
+# Execute by indicating matrices sizes (n), alpha (a), beta(b) and precision.
+bin/gemm_program -n 4096 -a 2 -c 2 -r 10 -p single
+```
+
+The program will run for different number of threads (MAX_NUM_THREADS macro defined in the source code) and returns
+the lowest execution time and corresponding power consumption.
+
 
  
