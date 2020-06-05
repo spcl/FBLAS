@@ -27,7 +27,7 @@ using namespace std;
 void singlePrecision(std::string program_path, std::string json_path, int n, int k, int m, timestamp_t &fpga_time, float alpha, float beta){
 
     cout << "-------------------------------------------------------------------------"<<endl;
-    cout << "Executing single precision GEMM: "<<n<<endl;
+    cout << "Executing single precision GEMM: "<<n<< "x" << m <<endl;
     cout << "-------------------------------------------------------------------------"<<endl;
 
     FBLASEnvironment fb =FBLASEnvironment (program_path,json_path);
@@ -108,7 +108,7 @@ void singlePrecision(std::string program_path, std::string json_path, int n, int
 void doublePrecision(std::string program_path, std::string json_path, int n, int k, int m, timestamp_t &fpga_time, double alpha, double beta){
 
     cout << "-------------------------------------------------------------------------"<<endl;
-    cout << "Executing double precision GEMM: "<<n<<endl;
+    cout << "Executing double precision GEMM: "<<n<< "x" << m <<endl;
     cout << "-------------------------------------------------------------------------"<<endl;
 
     FBLASEnvironment fb =FBLASEnvironment (program_path,json_path);

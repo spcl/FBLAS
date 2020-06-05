@@ -19,8 +19,7 @@ commands can be used:
  
 To execute a program:
 - for emulating a design, set the environment variable ` CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1` as suggested by Intel
-- execute the host program locate under `bin/` by passing the suggested parameters (execute the program without argument to obtain a list). Note: for GEMM
-    it will require the json file automatically generated and located under `<s/d>gemm_codegen_files/generated_routines.json`
+- execute the host program locate under `bin/` by passing the suggested parameters (execute the program without argument to obtain a list). Note: for GEMM it will require the json file automatically generated and located under `<s/d>gemm_codegen_files/generated_routines.json`
  
 Every host program accepts, among the other, the number of runs to execute and produces the averaged execution time,
 as well as confidence intervals.
@@ -38,3 +37,5 @@ $ make gemv_host
 $ env CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1  bin/gemv_host -b sgemv.aocx -n 2048 -m 1024 -a 2 -c 1 -k 1024 -j 1024 -r 1 -p single  
 
 ```
+
+Note: for GEMM, changing the compilation seed (by adding the `-seed=<number>` at the end of compilation command) could result in higher/lower synthesis frequency.

@@ -5,8 +5,6 @@ BLASFLAGS = -lopenblas
 CXXFLAGS= -std=c++11 -O3 -pthread
 #Change if you need another board
 BOARD 	= p520_max_sg280l
-# Seed used for hardware compilation. Change it for different result
-SEED = 4
 AOCXXFLAGS  = -board=$(BOARD) -fp-relaxed -fpc -no-interleaving=default
 AOCL_COMPILE_CONFIG := $(shell aocl compile-config)
 AOCL_LINK_CONFIG := $(shell aocl link-config)
@@ -41,8 +39,9 @@ BIN_DIR=bin
 	rm -f $*gemm_codegen_files/*
 	mkdir -p $*gemm_codegen_files
 	$(HOST_GEN) $*gemm.json -output_dir=$*gemm_codegen_files
-	$(AOCXX) $(AOCXXFLAGS) $*gemm_codegen_files/*$*gemm*cl -report -seed=$(SEED)
-	mv *$*gemm*.aocx $*gemm_hardware.aocx || true
+	$(AOCXX) $(AOCXXFLAGS) $*gemm_codegen_files/*$*gemm*cl -report
+	mv *$*gemm.aocx $*gemm_hardware.aocx || true
+	mv *$*gemm $*gemm_hardware || true
 	@echo "Generated file $*gemm_hardware.aocx"
 
 %_emulator:
