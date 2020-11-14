@@ -6,7 +6,7 @@ BOARD 	= $(shell $(AOCXX) -list-boards | sed -n '2p' | tr -d " ")
 AOCXXFLAGS  = -march=emulator -board=$(BOARD) 
 AOCL_COMPILE_CONFIG := $(shell aocl compile-config) 
 AOCL_LINK_CONFIG := $(shell aocl link-config)
-RAPIDJSON_DIR = $(HOME)/fpga_blas/rapidjson/include 
+RAPIDJSON_DIR = ../../rapidjson/include 
 GEN = ../../codegen/host_codegen.py
 BIN_DIR=bin
 LEVEL_1 = test_iamax test_dot test_copy
@@ -28,13 +28,12 @@ test_%: host_generator $(BIN_DIR)
 	@echo "Executing test_$*"
 	@echo "Compiling for emulation ..."
 	rm -f /tmp/test_*$**cl || true
-	rm -f test_*"$*"*aocx || true
+	rm -f test_*"$*"*aoc* || true
 	$(GEN) $*.json -output_dir=/tmp/
 	$(AOCXX) $(AOCXXFLAGS) /tmp/test_*$**cl -I../../blas/include
 	$(CXX) $(CXXFLAGS) test_$*.cpp $(AOCL_LINK_CONFIG) $(AOCL_COMPILE_CONFIG) -I$(RAPIDJSON_DIR) -o $(BIN_DIR)/$@ -lgtest
-	$(eval binfile=$(shell find . -iname test_*"$*"*aocx))
+	$(eval binfile = $(shell find . -iname test_*"$*"*aocx))
 	@echo "Executing tests..." $(binfile)
-	sleep 1;
 	env CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 $(BIN_DIR)/$@ $(binfile) /tmp/generated_routines.json
 	$(unset binfile)
 
@@ -46,16 +45,10 @@ test_iamax: host_generator $(BIN_DIR)
 	$(GEN) iamax.json -output_dir=/tmp/
 	$(AOCXX) $(AOCXXFLAGS) /tmp/test_i*max*cl -I../../blas/include
 	$(CXX) $(CXXFLAGS) test_iamax.cpp $(AOCL_LINK_CONFIG) $(AOCL_COMPILE_CONFIG) -I$(RAPIDJSON_DIR) -o $(BIN_DIR)/$@ -lgtest
-	$(eval binfile = $(shell find . -iname test_i*max*aocx))
+	$(eval binfile=$(shell find . -iname test_i*max*aocx))
 	@echo "Executing tests..." $(binfile)
-	sleep 1;
 	env CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 $(BIN_DIR)/$@ $(binfile) /tmp/generated_routines.json
 	$(unset binfile)
-
-test_level1: $(LEVEL_1);
-
-
-
 
 
 $(BIN_DIR):
