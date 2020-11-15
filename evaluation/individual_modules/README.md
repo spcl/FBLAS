@@ -38,4 +38,6 @@ $ env CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1  bin/gemv_host -b sgemv.aocx -n 204
 
 ```
 
-Note: for GEMM, changing the compilation seed (by adding the `-seed=<number>` at the end of compilation command) could result in higher/lower synthesis frequency.
+Notes: 
+- for GEMM, single precision, the emulation could sometimes fails, however in hardware it works correctly. This depends on the used compiler and tile size: please try to reduce it. The same problem does not happens in double precision.
+- for GEMM, changing the compilation seed for synthesis(by adding the `-seed=<number>` at the end of compilation command) could result in higher/lower synthesis frequency.

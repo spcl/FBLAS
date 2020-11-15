@@ -74,4 +74,12 @@ TEMPLATE_READ_MATRIX_A_GEMM_NOTRANS_SYSTOLIC = "read_matrix_a_notrans_gemm_systo
 TEMPLATE_READ_MATRIX_A_GEMM_TRANS_SYSTOLIC = "read_matrix_a_trans_gemm_systolic.cl"
 TEMPLATE_READ_MATRIX_B_GEMM_TRANS_SYSTOLIC = "read_matrix_b_trans_gemm_systolic.cl"
 TEMPLATE_READ_MATRIX_B_GEMM_NOTRANS_SYSTOLIC = "read_matrix_b_notrans_gemm_systolic.cl"
+TEMPLATE_READ_MATRIX_A_SYRK_NOTRANS = "read_matrix_a_notrans_syrk.cl"
+TEMPLATE_READ_MATRIX_A_SYRK_TRANS = "read_matrix_a_trans_syrk.cl"
+TEMPLATE_READ_MATRIX_A2_SYRK_NOTRANS = "read_matrix_a2_notrans_syrk.cl"
+TEMPLATE_READ_MATRIX_A2_SYRK_TRANS = "read_matrix_a2_trans_syrk.cl"
+
 TEMPLATE_WRITE_MATRIX_GEMM_SYSTOLIC = "write_matrix_gemm_systolic.cl"
+TEMPLATE_WRITE_MATRIX_SYRK_LOWER = "write_lower_matrix_syrk.cl"
+TEMPLATE_WRITE_MATRIX_SYRK_UPPER = "write_upper_matrix_syrk.cl"
+

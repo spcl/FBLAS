@@ -72,9 +72,6 @@ void FBLASEnvironment::gemm(std::string routine_name, FblasTranspose transA, Fbl
     {
         if(i!=0 || (!r.systolic || !this->running_)) //do not start again computational systolic kernel
             r.queues[i].enqueueTask(r.kernels[i],events_wait_list);
-        else
-            std::cout << "Non faccio partire il kernel "<<i<<std::endl;
-
     }
 
     if(r.systolic)
