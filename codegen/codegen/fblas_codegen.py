@@ -14,7 +14,7 @@ from typing import List
 class FBLASCodegen:
     _output_path = ""
     _codegen = None  # Type of codegen
-    _is_host_codegen = False #True if this instance is for host codegen
+    _is_host_codegen = False  #True if this instance is for host codegen
 
     def __init__(self, output_path: str, codegen: fblas_types.FblasCodegen):
         self._output_path = output_path
@@ -41,7 +41,8 @@ class FBLASCodegen:
         if self._is_host_codegen:
             # Output json for generated routines
             json_content = {"routine": json_routines}
-            jw.write_to_file(self._output_path + "/generated_routines.json", json_content)
+            jw.write_to_file(self._output_path + "/generated_routines.json",
+                             json_content)
 
     def generateHelpers(self, helpers: List[fblas_helper.FBLASHelper]):
         """
@@ -70,7 +71,8 @@ class FBLASCodegen:
 
         logging.basicConfig()
         logger = logging.getLogger('logger')
-        logger = jinja2.make_logging_undefined(logger=logger, base=jinja2.Undefined)
+        logger = jinja2.make_logging_undefined(logger=logger,
+                                               base=jinja2.Undefined)
 
         env = jinja2.Environment(loader=loader, undefined=logger)
         env.lstrip_blocks = True
@@ -87,25 +89,36 @@ class FBLASCodegen:
         template = self._read_template_file("1/asum.cl")
         chan_in_x_name = gd.CHANNEL_IN_VECTOR_X_BASE_NAME + str(id)
         chan_out = gd.CHANNEL_OUT_SCALAR_BASE_NAME + str(id)
-        channels_routine = {"channel_in_vector_x": chan_in_x_name, "channel_out_scalar": chan_out}
+        channels_routine = {
+            "channel_in_vector_x": chan_in_x_name,
+            "channel_out_scalar": chan_out
+        }
         output_path = self._output_path + "/" + routine.user_name + ".cl"
-        self._write_file(output_path, template.render(routine=routine, channels=channels_routine))
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
 
         # add helpers
         # Read x
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_X)
         channels_helper = {"channel_out_vector": chan_in_x_name}
         helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
         self._write_file(output_path,
-                         template.render(helper_name=helper_name_read_x, helper=routine, channels=channels_helper),
+                         template.render(helper_name=helper_name_read_x,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # Write scalar
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_SCALAR)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_WRITE_SCALAR)
         channels_helper = {"channel_in_scalar": chan_out}
         helper_name_write_scalar = gd.HELPER_WRITE_SCALAR_BASE_NAME + str(id)
-        self._write_file(output_path, template.render(helper_name=helper_name_write_scalar, helper=routine,
-                                                      channels=channels_helper),
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_write_scalar,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # create the json entries
@@ -120,38 +133,59 @@ class FBLASCodegen:
     def _codegen_axpy(self, routine: fblas_routine.FBLASRoutine, id: int):
         template = self._read_template_file("1/axpy.cl")
 
-        chan_in_x_name = gd.CHANNEL_IN_VECTOR_X_BASE_NAME + str(id) if self._is_host_codegen else routine.input_channels["in_x"]
-        chan_in_y_name = gd.CHANNEL_IN_VECTOR_Y_BASE_NAME + str(id) if self._is_host_codegen else routine.input_channels["in_y"]
-        chan_out = gd.CHANNEL_OUT_VECTOR_BASE_NAME + str(id) if self._is_host_codegen else routine.output_channels["out_res"]
+        chan_in_x_name = gd.CHANNEL_IN_VECTOR_X_BASE_NAME + str(
+            id) if self._is_host_codegen else routine.input_channels["in_x"]
+        chan_in_y_name = gd.CHANNEL_IN_VECTOR_Y_BASE_NAME + str(
+            id) if self._is_host_codegen else routine.input_channels["in_y"]
+        chan_out = gd.CHANNEL_OUT_VECTOR_BASE_NAME + str(
+            id
+        ) if self._is_host_codegen else routine.output_channels["out_res"]
 
-        channels_routine = {"channel_in_vector_x": chan_in_x_name, "channel_in_vector_y": chan_in_y_name,
-                            "channel_out_vector": chan_out}
+        channels_routine = {
+            "channel_in_vector_x": chan_in_x_name,
+            "channel_in_vector_y": chan_in_y_name,
+            "channel_out_vector": chan_out
+        }
         output_path = self._output_path + "/" + routine.user_name + ".cl"
-        self._write_file(output_path, template.render(routine=routine, channels=channels_routine))
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
 
         if self._is_host_codegen:
             # add helpers
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X)
+            template = self._read_template_file("helpers/" +
+                                                gd.TEMPLATE_READ_VECTOR_X)
             channels_helper = {"channel_out_vector": chan_in_x_name}
             helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
             self._write_file(output_path,
-                             template.render(helper_name=helper_name_read_x, helper=routine, channels=channels_helper),
+                             template.render(helper_name=helper_name_read_x,
+                                             helper=routine,
+                                             channels=channels_helper),
                              append=True)
 
             # Read y
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_Y)
+            template = self._read_template_file("helpers/" +
+                                                gd.TEMPLATE_READ_VECTOR_Y)
             channels_helper = {"channel_out_vector": chan_in_y_name}
             helper_name_read_y = gd.HELPER_READ_VECTOR_Y_BASE_NAME + str(id)
             self._write_file(output_path,
-                             template.render(helper_name=helper_name_read_y, helper=routine, channels=channels_helper),
+                             template.render(helper_name=helper_name_read_y,
+                                             helper=routine,
+                                             channels=channels_helper),
                              append=True)
 
             # Write vector
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_VECTOR)
+            template = self._read_template_file("helpers/" +
+                                                gd.TEMPLATE_WRITE_VECTOR)
             channels_helper = {"channel_in_vector": chan_out}
-            helper_name_write_vector = gd.HELPER_WRITE_VECTOR_BASE_NAME + str(id)
-            self._write_file(output_path, template.render(helper_name=helper_name_write_vector, helper=routine,
-                                                          channels=channels_helper, incw=routine.incy),
+            helper_name_write_vector = gd.HELPER_WRITE_VECTOR_BASE_NAME + str(
+                id)
+            self._write_file(output_path,
+                             template.render(
+                                 helper_name=helper_name_write_vector,
+                                 helper=routine,
+                                 channels=channels_helper,
+                                 incw=routine.incy),
                              append=True)
 
             # create the json entries
@@ -161,7 +195,8 @@ class FBLASCodegen:
             jw.add_incy(json, routine)
             jw.add_item(json, jd.GENERATED_READ_VECTOR_X, helper_name_read_x)
             jw.add_item(json, jd.GENERATED_READ_VECTOR_Y, helper_name_read_y)
-            jw.add_item(json, jd.GENERATED_WRITE_VECTOR, helper_name_write_vector)
+            jw.add_item(json, jd.GENERATED_WRITE_VECTOR,
+                        helper_name_write_vector)
             return json
 
     def _codegen_copy(self, routine: fblas_routine.FBLASRoutine, id: int):
@@ -173,28 +208,39 @@ class FBLASCodegen:
         output_path = self._output_path + "/" + routine.user_name + ".cl"
 
         # we should add channel definitions
-        self._write_file(output_path, "#pragma OPENCL EXTENSION cl_intel_channels : enable")
+        self._write_file(
+            output_path, "#pragma OPENCL EXTENSION cl_intel_channels : enable")
         if routine.type is fblas_types.RoutineType.Double:
-            self._write_file(output_path, "#pragma OPENCL EXTENSION cl_khr_fp64 : enable", append=True)
+            self._write_file(output_path,
+                             "#pragma OPENCL EXTENSION cl_khr_fp64 : enable",
+                             append=True)
         self._write_file(output_path,
-                         "channel {} {} __attribute__((depth({})));".format(routine.type_str, chan_in_x_name,
-                                                                            routine.width), append=True)
+                         "channel {} {} __attribute__((depth({})));".format(
+                             routine.type_str, chan_in_x_name, routine.width),
+                         append=True)
 
         # add helpers
         # Read x
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_X)
         channels_helper = {"channel_out_vector": chan_in_x_name}
         helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
         self._write_file(output_path,
-                         template.render(helper_name=helper_name_read_x, helper=routine, channels=channels_helper),
+                         template.render(helper_name=helper_name_read_x,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # Write vector
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_VECTOR)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_WRITE_VECTOR)
         channels_helper = {"channel_in_vector": chan_in_x_name}
         helper_name_write_vector = gd.HELPER_WRITE_VECTOR_BASE_NAME + str(id)
-        self._write_file(output_path, template.render(helper_name=helper_name_write_vector, helper=routine,
-                                                      channels=channels_helper, incw=routine.incy),
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_write_vector,
+                                         helper=routine,
+                                         channels=channels_helper,
+                                         incw=routine.incy),
                          append=True)
 
         # create the json entries
@@ -211,37 +257,57 @@ class FBLASCodegen:
         # This is a special case: we have the optimized implementation that requires shift registers
         routine.uses_shift_registers = True
 
-        chan_in_x_name = gd.CHANNEL_IN_VECTOR_X_BASE_NAME + str(id) if self._is_host_codegen else routine.input_channels["in_x"]
-        chan_in_y_name = gd.CHANNEL_IN_VECTOR_Y_BASE_NAME + str(id) if self._is_host_codegen else routine.input_channels["in_y"]
-        chan_out = gd.CHANNEL_OUT_SCALAR_BASE_NAME + str(id) if self._is_host_codegen else routine.output_channels["out_res"]
-        channels_routine = {"channel_in_vector_x": chan_in_x_name, "channel_in_vector_y": chan_in_y_name,
-                            "channel_out_scalar": chan_out}
+        chan_in_x_name = gd.CHANNEL_IN_VECTOR_X_BASE_NAME + str(
+            id) if self._is_host_codegen else routine.input_channels["in_x"]
+        chan_in_y_name = gd.CHANNEL_IN_VECTOR_Y_BASE_NAME + str(
+            id) if self._is_host_codegen else routine.input_channels["in_y"]
+        chan_out = gd.CHANNEL_OUT_SCALAR_BASE_NAME + str(
+            id
+        ) if self._is_host_codegen else routine.output_channels["out_res"]
+        channels_routine = {
+            "channel_in_vector_x": chan_in_x_name,
+            "channel_in_vector_y": chan_in_y_name,
+            "channel_out_scalar": chan_out
+        }
         output_path = self._output_path + "/" + routine.user_name + ".cl"
-        self._write_file(output_path, template.render(routine=routine, channels=channels_routine))
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
 
         if self._is_host_codegen:
             # add helpers
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X)
+            template = self._read_template_file("helpers/" +
+                                                gd.TEMPLATE_READ_VECTOR_X)
             channels_helper = {"channel_out_vector": chan_in_x_name}
             helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
             self._write_file(output_path,
-                             template.render(helper_name=helper_name_read_x, helper=routine, channels=channels_helper),
+                             template.render(helper_name=helper_name_read_x,
+                                             helper=routine,
+                                             channels=channels_helper),
                              append=True)
 
             # Read y
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_Y)
+            template = self._read_template_file("helpers/" +
+                                                gd.TEMPLATE_READ_VECTOR_Y)
             channels_helper = {"channel_out_vector": chan_in_y_name}
             helper_name_read_y = gd.HELPER_READ_VECTOR_Y_BASE_NAME + str(id)
             self._write_file(output_path,
-                             template.render(helper_name=helper_name_read_y, helper=routine, channels=channels_helper),
+                             template.render(helper_name=helper_name_read_y,
+                                             helper=routine,
+                                             channels=channels_helper),
                              append=True)
 
             # Write scalar
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_SCALAR)
+            template = self._read_template_file("helpers/" +
+                                                gd.TEMPLATE_WRITE_SCALAR)
             channels_helper = {"channel_in_scalar": chan_out}
-            helper_name_write_scalar = gd.HELPER_WRITE_SCALAR_BASE_NAME + str(id)
-            self._write_file(output_path, template.render(helper_name=helper_name_write_scalar, helper=routine,
-                                                          channels=channels_helper),
+            helper_name_write_scalar = gd.HELPER_WRITE_SCALAR_BASE_NAME + str(
+                id)
+            self._write_file(output_path,
+                             template.render(
+                                 helper_name=helper_name_write_scalar,
+                                 helper=routine,
+                                 channels=channels_helper),
                              append=True)
 
             # create the json entries
@@ -251,37 +317,48 @@ class FBLASCodegen:
             jw.add_incy(json, routine)
             jw.add_item(json, jd.GENERATED_READ_VECTOR_X, helper_name_read_x)
             jw.add_item(json, jd.GENERATED_READ_VECTOR_Y, helper_name_read_y)
-            jw.add_item(json, jd.GENERATED_WRITE_SCALAR, helper_name_write_scalar)
+            jw.add_item(json, jd.GENERATED_WRITE_SCALAR,
+                        helper_name_write_scalar)
 
             return json
-
 
     def _codegen_iamax(self, routine: fblas_routine.FBLASRoutine, id: int):
         template = self._read_template_file("1/iamax.cl")
         chan_in_x_name = gd.CHANNEL_IN_VECTOR_X_BASE_NAME + str(id)
         chan_out = gd.CHANNEL_OUT_SCALAR_BASE_NAME + str(id)
-        channels_routine = {"channel_in_vector_x": chan_in_x_name, "channel_out_scalar": chan_out}
+        channels_routine = {
+            "channel_in_vector_x": chan_in_x_name,
+            "channel_out_scalar": chan_out
+        }
         output_path = self._output_path + "/" + routine.user_name + ".cl"
-        self._write_file(output_path, template.render(routine=routine, channels=channels_routine))
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
 
         # add helpers
         # Read x
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_X)
         channels_helper = {"channel_out_vector": chan_in_x_name}
         helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
         self._write_file(output_path,
-                         template.render(helper_name=helper_name_read_x, helper=routine, channels=channels_helper),
+                         template.render(helper_name=helper_name_read_x,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # Write scalar
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_SCALAR)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_WRITE_SCALAR)
         # workaround to write the integer
         helper = routine
         helper._type_str = "int"
         channels_helper = {"channel_in_scalar": chan_out}
         helper_name_write_scalar = gd.HELPER_WRITE_SCALAR_BASE_NAME + str(id)
-        self._write_file(output_path, template.render(helper_name=helper_name_write_scalar, helper=helper,
-                                                      channels=channels_helper),
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_write_scalar,
+                                         helper=helper,
+                                         channels=channels_helper),
                          append=True)
 
         # create the json entries
@@ -297,25 +374,36 @@ class FBLASCodegen:
         template = self._read_template_file("1/nrm2.cl")
         chan_in_x_name = gd.CHANNEL_IN_VECTOR_X_BASE_NAME + str(id)
         chan_out = gd.CHANNEL_OUT_SCALAR_BASE_NAME + str(id)
-        channels_routine = {"channel_in_vector_x": chan_in_x_name, "channel_out_scalar": chan_out}
+        channels_routine = {
+            "channel_in_vector_x": chan_in_x_name,
+            "channel_out_scalar": chan_out
+        }
         output_path = self._output_path + "/" + routine.user_name + ".cl"
-        self._write_file(output_path, template.render(routine=routine, channels=channels_routine))
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
 
         # add helpers
         # Read x
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_X)
         channels_helper = {"channel_out_vector": chan_in_x_name}
         helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
         self._write_file(output_path,
-                         template.render(helper_name=helper_name_read_x, helper=routine, channels=channels_helper),
+                         template.render(helper_name=helper_name_read_x,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # Write scalar
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_SCALAR)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_WRITE_SCALAR)
         channels_helper = {"channel_in_scalar": chan_out}
         helper_name_write_scalar = gd.HELPER_WRITE_SCALAR_BASE_NAME + str(id)
-        self._write_file(output_path, template.render(helper_name=helper_name_write_scalar, helper=routine,
-                                                      channels=channels_helper),
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_write_scalar,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # create the json entries
@@ -333,33 +421,52 @@ class FBLASCodegen:
         chan_in_y_name = gd.CHANNEL_IN_VECTOR_Y_BASE_NAME + str(id)
         chan_out_x_name = gd.CHANNEL_OUT_VECTOR_X_BASE_NAME + str(id)
         chan_out_y_name = gd.CHANNEL_OUT_VECTOR_Y_BASE_NAME + str(id)
-        channels_routine = {"channel_in_vector_x": chan_in_x_name, "channel_in_vector_y": chan_in_y_name,
-                            "channel_out_vector_x": chan_out_x_name, "channel_out_vector_y": chan_out_y_name}
+        channels_routine = {
+            "channel_in_vector_x": chan_in_x_name,
+            "channel_in_vector_y": chan_in_y_name,
+            "channel_out_vector_x": chan_out_x_name,
+            "channel_out_vector_y": chan_out_y_name
+        }
         output_path = self._output_path + "/" + routine.user_name + ".cl"
-        self._write_file(output_path, template.render(routine=routine, channels=channels_routine))
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
 
         # add helpers
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_X)
         channels_helper = {"channel_out_vector": chan_in_x_name}
         helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
         self._write_file(output_path,
-                         template.render(helper_name=helper_name_read_x, helper=routine, channels=channels_helper),
+                         template.render(helper_name=helper_name_read_x,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # Read y
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_Y)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_Y)
         channels_helper = {"channel_out_vector": chan_in_y_name}
         helper_name_read_y = gd.HELPER_READ_VECTOR_Y_BASE_NAME + str(id)
         self._write_file(output_path,
-                         template.render(helper_name=helper_name_read_y, helper=routine, channels=channels_helper),
+                         template.render(helper_name=helper_name_read_y,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # Write vector double
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_VECTOR_X_Y)
-        channels_helper = {"channel_in_vector_x": chan_out_x_name, "channel_in_vector_y": chan_out_y_name}
-        helper_name_write_vector = gd.HELPER_WRITE_VECTOR_X_Y_BASE_NAME + str(id)
-        self._write_file(output_path, template.render(helper_name=helper_name_write_vector, helper=routine,
-                                                      channels=channels_helper),
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_WRITE_VECTOR_X_Y)
+        channels_helper = {
+            "channel_in_vector_x": chan_out_x_name,
+            "channel_in_vector_y": chan_out_y_name
+        }
+        helper_name_write_vector = gd.HELPER_WRITE_VECTOR_X_Y_BASE_NAME + str(
+            id)
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_write_vector,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # create the json entries
@@ -378,33 +485,52 @@ class FBLASCodegen:
         chan_in_y_name = gd.CHANNEL_IN_VECTOR_Y_BASE_NAME + str(id)
         chan_out_x_name = gd.CHANNEL_OUT_VECTOR_X_BASE_NAME + str(id)
         chan_out_y_name = gd.CHANNEL_OUT_VECTOR_Y_BASE_NAME + str(id)
-        channels_routine = {"channel_in_vector_x": chan_in_x_name, "channel_in_vector_y": chan_in_y_name,
-                            "channel_out_vector_x": chan_out_x_name, "channel_out_vector_y": chan_out_y_name}
+        channels_routine = {
+            "channel_in_vector_x": chan_in_x_name,
+            "channel_in_vector_y": chan_in_y_name,
+            "channel_out_vector_x": chan_out_x_name,
+            "channel_out_vector_y": chan_out_y_name
+        }
         output_path = self._output_path + "/" + routine.user_name + ".cl"
-        self._write_file(output_path, template.render(routine=routine, channels=channels_routine))
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
 
         # add helpers
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_X)
         channels_helper = {"channel_out_vector": chan_in_x_name}
         helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
         self._write_file(output_path,
-                         template.render(helper_name=helper_name_read_x, helper=routine, channels=channels_helper),
+                         template.render(helper_name=helper_name_read_x,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # Read y
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_Y)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_Y)
         channels_helper = {"channel_out_vector": chan_in_y_name}
         helper_name_read_y = gd.HELPER_READ_VECTOR_Y_BASE_NAME + str(id)
         self._write_file(output_path,
-                         template.render(helper_name=helper_name_read_y, helper=routine, channels=channels_helper),
+                         template.render(helper_name=helper_name_read_y,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # Write vector double
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_VECTOR_X_Y)
-        channels_helper = {"channel_in_vector_x": chan_out_x_name, "channel_in_vector_y": chan_out_y_name}
-        helper_name_write_vector = gd.HELPER_WRITE_VECTOR_X_Y_BASE_NAME + str(id)
-        self._write_file(output_path, template.render(helper_name=helper_name_write_vector, helper=routine,
-                                                      channels=channels_helper),
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_WRITE_VECTOR_X_Y)
+        channels_helper = {
+            "channel_in_vector_x": chan_out_x_name,
+            "channel_in_vector_y": chan_out_y_name
+        }
+        helper_name_write_vector = gd.HELPER_WRITE_VECTOR_X_Y_BASE_NAME + str(
+            id)
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_write_vector,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # create the json entries
@@ -447,25 +573,37 @@ class FBLASCodegen:
         template = self._read_template_file("1/scal.cl")
         chan_in_x_name = gd.CHANNEL_IN_VECTOR_X_BASE_NAME + str(id)
         chan_out = gd.CHANNEL_OUT_VECTOR_BASE_NAME + str(id)
-        channels_routine = {"channel_in_vector_x": chan_in_x_name, "channel_out_vector": chan_out}
+        channels_routine = {
+            "channel_in_vector_x": chan_in_x_name,
+            "channel_out_vector": chan_out
+        }
         output_path = self._output_path + "/" + routine.user_name + ".cl"
-        self._write_file(output_path, template.render(routine=routine, channels=channels_routine))
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
 
         # Add helpers
         # Read x
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_X)
         channels_helper = {"channel_out_vector": chan_in_x_name}
         helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
         self._write_file(output_path,
-                         template.render(helper_name=helper_name_read_x, helper=routine, channels=channels_helper),
+                         template.render(helper_name=helper_name_read_x,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # Write vector
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_VECTOR)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_WRITE_VECTOR)
         channels_helper = {"channel_in_vector": chan_out}
         helper_name_write_vector = gd.HELPER_WRITE_VECTOR_BASE_NAME + str(id)
-        self._write_file(output_path, template.render(helper_name=helper_name_write_vector, helper=routine,
-                                                      channels=channels_helper, incw=routine.incx),
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_write_vector,
+                                         helper=routine,
+                                         channels=channels_helper,
+                                         incw=routine.incx),
                          append=True)
 
         # create the json entries
@@ -482,33 +620,52 @@ class FBLASCodegen:
         chan_in_y_name = gd.CHANNEL_IN_VECTOR_Y_BASE_NAME + str(id)
         chan_out_x_name = gd.CHANNEL_OUT_VECTOR_X_BASE_NAME + str(id)
         chan_out_y_name = gd.CHANNEL_OUT_VECTOR_Y_BASE_NAME + str(id)
-        channels_routine = {"channel_in_vector_x": chan_in_x_name, "channel_in_vector_y": chan_in_y_name,
-                            "channel_out_vector_x": chan_out_x_name, "channel_out_vector_y": chan_out_y_name}
+        channels_routine = {
+            "channel_in_vector_x": chan_in_x_name,
+            "channel_in_vector_y": chan_in_y_name,
+            "channel_out_vector_x": chan_out_x_name,
+            "channel_out_vector_y": chan_out_y_name
+        }
         output_path = self._output_path + "/" + routine.user_name + ".cl"
-        self._write_file(output_path, template.render(routine=routine, channels=channels_routine))
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
 
         # add helpers
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_X)
         channels_helper = {"channel_out_vector": chan_in_x_name}
         helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
         self._write_file(output_path,
-                         template.render(helper_name=helper_name_read_x, helper=routine, channels=channels_helper),
+                         template.render(helper_name=helper_name_read_x,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # Read y
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_Y)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_Y)
         channels_helper = {"channel_out_vector": chan_in_y_name}
         helper_name_read_y = gd.HELPER_READ_VECTOR_Y_BASE_NAME + str(id)
         self._write_file(output_path,
-                         template.render(helper_name=helper_name_read_y, helper=routine, channels=channels_helper),
+                         template.render(helper_name=helper_name_read_y,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # Write vector double
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_VECTOR_X_Y)
-        channels_helper = {"channel_in_vector_x": chan_out_x_name, "channel_in_vector_y": chan_out_y_name}
-        helper_name_write_vector = gd.HELPER_WRITE_VECTOR_X_Y_BASE_NAME + str(id)
-        self._write_file(output_path, template.render(helper_name=helper_name_write_vector, helper=routine,
-                                                      channels=channels_helper),
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_WRITE_VECTOR_X_Y)
+        channels_helper = {
+            "channel_in_vector_x": chan_out_x_name,
+            "channel_in_vector_y": chan_out_y_name
+        }
+        helper_name_write_vector = gd.HELPER_WRITE_VECTOR_X_Y_BASE_NAME + str(
+            id)
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_write_vector,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # create the json entries
@@ -539,7 +696,9 @@ class FBLASCodegen:
             elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.transposedA is fblas_types.FblasTranspose.FblasTrans:
                 template = self._read_template_file("2/gemv_v2.cl")
             else:
-                raise RuntimeError("Requirements for user routine {} are currently not supported".format(routine.user_name))
+                raise RuntimeError(
+                    "Requirements for user routine {} are currently not supported"
+                    .format(routine.user_name))
         else:
             if (routine.are_tiles_A_rowstreamed() and routine.are_elements_A_rowstreamed() and routine.transposedA is \
                 fblas_types.FblasTranspose.FblasNoTrans) or (not routine.are_tiles_A_rowstreamed() and not routine.are_elements_A_rowstreamed() \
@@ -567,55 +726,86 @@ class FBLASCodegen:
                 requires_additional_channel = True
             else:
                 raise RuntimeError(
-                    "Requirements for user routine {} are currently not supported".format(routine.user_name))
+                    "Requirements for user routine {} are currently not supported"
+                    .format(routine.user_name))
 
-        chan_in_x_name = gd.CHANNEL_IN_VECTOR_X_BASE_NAME + str(id) if self._is_host_codegen else routine.input_channels["in_x"]
-        chan_in_y_name = gd.CHANNEL_IN_VECTOR_Y_BASE_NAME + str(id) if self._is_host_codegen else routine.input_channels["in_y"]
-        chan_in_A_name = gd.CHANNEL_IN_MATRIX_A_BASE_NAME + str(id) if self._is_host_codegen else routine.input_channels["in_A"]
-        chan_out = gd.CHANNEL_OUT_VECTOR_BASE_NAME + str(id) if self._is_host_codegen else routine.output_channels["out_res"]
+        chan_in_x_name = gd.CHANNEL_IN_VECTOR_X_BASE_NAME + str(
+            id) if self._is_host_codegen else routine.input_channels["in_x"]
+        chan_in_y_name = gd.CHANNEL_IN_VECTOR_Y_BASE_NAME + str(
+            id) if self._is_host_codegen else routine.input_channels["in_y"]
+        chan_in_A_name = gd.CHANNEL_IN_MATRIX_A_BASE_NAME + str(
+            id) if self._is_host_codegen else routine.input_channels["in_A"]
+        chan_out = gd.CHANNEL_OUT_VECTOR_BASE_NAME + str(
+            id
+        ) if self._is_host_codegen else routine.output_channels["out_res"]
 
-        channels_routine = {"channel_in_vector_x": chan_in_x_name, "channel_in_vector_y": chan_in_y_name,
-                            "channel_in_matrix_A": chan_in_A_name, "channel_out_vector": chan_out}
-        if requires_additional_channel: # Special case
-            channels_routine.update({"channel_out_vector_y_updates" : routine.output_channels["out_y_updates"]})
+        channels_routine = {
+            "channel_in_vector_x": chan_in_x_name,
+            "channel_in_vector_y": chan_in_y_name,
+            "channel_in_matrix_A": chan_in_A_name,
+            "channel_out_vector": chan_out
+        }
+        if requires_additional_channel:  # Special case
+            channels_routine.update({
+                "channel_out_vector_y_updates":
+                routine.output_channels["out_y_updates"]
+            })
         output_path = self._output_path + "/" + routine.user_name + ".cl"
-        self._write_file(output_path, template.render(routine=routine, channels=channels_routine))
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
 
         if self._is_host_codegen:
             # Add helpers
             # Read x
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X)
+            template = self._read_template_file("helpers/" +
+                                                gd.TEMPLATE_READ_VECTOR_X)
             channels_helper = {"channel_out_vector": chan_in_x_name}
             helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
             self._write_file(output_path,
-                             template.render(helper_name=helper_name_read_x, helper=routine, channels=channels_helper),
+                             template.render(helper_name=helper_name_read_x,
+                                             helper=routine,
+                                             channels=channels_helper),
                              append=True)
 
             # Read Y
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_Y)
+            template = self._read_template_file("helpers/" +
+                                                gd.TEMPLATE_READ_VECTOR_Y)
             channels_helper = {"channel_out_vector": chan_in_y_name}
             helper_name_read_y = gd.HELPER_READ_VECTOR_Y_BASE_NAME + str(id)
             self._write_file(output_path,
-                             template.render(helper_name=helper_name_read_y, helper=routine, channels=channels_helper),
+                             template.render(helper_name=helper_name_read_y,
+                                             helper=routine,
+                                             channels=channels_helper),
                              append=True)
 
             # Read Matrix A
             if routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
-                template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_MATRIX_ROWSTREAMED_TILE_ROW)
+                template = self._read_template_file(
+                    "helpers/" + gd.TEMPLATE_READ_MATRIX_ROWSTREAMED_TILE_ROW)
             elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.transposedA is fblas_types.FblasTranspose.FblasTrans:
-                template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_MATRIX_ROWSTREAMED_TILE_COL)
+                template = self._read_template_file(
+                    "helpers/" + gd.TEMPLATE_READ_MATRIX_ROWSTREAMED_TILE_COL)
             channels_helper = {"channel_out_matrix": chan_in_A_name}
             helper_name_read_A = gd.HELPER_READ_MATRIX_A_BASE_NAME + str(id)
             self._write_file(output_path,
-                             template.render(helper_name=helper_name_read_A, helper=routine, channels=channels_helper),
+                             template.render(helper_name=helper_name_read_A,
+                                             helper=routine,
+                                             channels=channels_helper),
                              append=True)
 
             # Write vector
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_VECTOR)
+            template = self._read_template_file("helpers/" +
+                                                gd.TEMPLATE_WRITE_VECTOR)
             channels_helper = {"channel_in_vector": chan_out}
-            helper_name_write_vector = gd.HELPER_WRITE_VECTOR_BASE_NAME + str(id)
-            self._write_file(output_path, template.render(helper_name=helper_name_write_vector, helper=routine,
-                                                          channels=channels_helper, incw=routine.incy),
+            helper_name_write_vector = gd.HELPER_WRITE_VECTOR_BASE_NAME + str(
+                id)
+            self._write_file(output_path,
+                             template.render(
+                                 helper_name=helper_name_write_vector,
+                                 helper=routine,
+                                 channels=channels_helper,
+                                 incw=routine.incy),
                              append=True)
 
             # create the json entries
@@ -630,7 +820,8 @@ class FBLASCodegen:
             jw.add_item(json, jd.GENERATED_READ_VECTOR_X, helper_name_read_x)
             jw.add_item(json, jd.GENERATED_READ_VECTOR_Y, helper_name_read_y)
             jw.add_item(json, jd.GENERATED_READ_MATRIX_A, helper_name_read_A)
-            jw.add_item(json, jd.GENERATED_WRITE_VECTOR, helper_name_write_vector)
+            jw.add_item(json, jd.GENERATED_WRITE_VECTOR,
+                        helper_name_write_vector)
             return json
 
     def _codegen_ger(self, routine: fblas_routine.FBLASRoutine, id: int):
@@ -640,7 +831,9 @@ class FBLASCodegen:
             if routine.order is fblas_types.FblasOrder.FblasRowMajor:
                 template = self._read_template_file("2/ger_v1.cl")
             else:
-                raise RuntimeError("Requirements for user routine {} are currently not supported in Host API codegen".format(routine.user_name))
+                raise RuntimeError(
+                    "Requirements for user routine {} are currently not supported in Host API codegen"
+                    .format(routine.user_name))
         else:
             if routine.are_tiles_A_rowstreamed():
                 if routine.are_elements_A_rowstreamed():
@@ -651,7 +844,7 @@ class FBLASCodegen:
                 if routine.are_elements_A_rowstreamed():
                     template = self._read_template_file("2/ger_v3.cl")
                 else:
-                    emplate = self._read_template_file("2/ger_v2.cl")
+                    template = self._read_template_file("2/ger_v2.cl")
 
         chan_in_x_name = gd.CHANNEL_IN_VECTOR_X_BASE_NAME + str(id) if self._is_host_codegen else \
         routine.input_channels["in_x"]
@@ -659,47 +852,70 @@ class FBLASCodegen:
         routine.input_channels["in_y"]
         chan_in_A_name = gd.CHANNEL_IN_MATRIX_A_BASE_NAME + str(id) if self._is_host_codegen else \
         routine.input_channels["in_A"]
-        chan_out = gd.CHANNEL_OUT_MATRIX_BASE_NAME + str(id) if self._is_host_codegen else routine.output_channels[
-            "out_res"]
+        chan_out = gd.CHANNEL_OUT_MATRIX_BASE_NAME + str(
+            id
+        ) if self._is_host_codegen else routine.output_channels["out_res"]
 
-        channels_routine = {"channel_in_vector_x": chan_in_x_name, "channel_in_vector_y": chan_in_y_name,
-                            "channel_in_matrix_A": chan_in_A_name, "channel_out_matrix": chan_out}
+        channels_routine = {
+            "channel_in_vector_x": chan_in_x_name,
+            "channel_in_vector_y": chan_in_y_name,
+            "channel_in_matrix_A": chan_in_A_name,
+            "channel_out_matrix": chan_out
+        }
         output_path = self._output_path + "/" + routine.user_name + ".cl"
-        self._write_file(output_path, template.render(routine=routine, channels=channels_routine))
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
 
         if self._is_host_codegen:
             # Add helpers
             # Read x
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X)
+            template = self._read_template_file("helpers/" +
+                                                gd.TEMPLATE_READ_VECTOR_X)
             channels_helper = {"channel_out_vector": chan_in_x_name}
             helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
             self._write_file(output_path,
-                             template.render(helper_name=helper_name_read_x, helper=routine, channels=channels_helper),
+                             template.render(helper_name=helper_name_read_x,
+                                             helper=routine,
+                                             channels=channels_helper),
                              append=True)
 
             # Read Y
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_Y)
+            template = self._read_template_file("helpers/" +
+                                                gd.TEMPLATE_READ_VECTOR_Y)
             channels_helper = {"channel_out_vector": chan_in_y_name}
             helper_name_read_y = gd.HELPER_READ_VECTOR_Y_BASE_NAME + str(id)
             self._write_file(output_path,
-                             template.render(helper_name=helper_name_read_y, helper=routine, channels=channels_helper),
+                             template.render(helper_name=helper_name_read_y,
+                                             helper=routine,
+                                             channels=channels_helper),
                              append=True)
 
             # Read Matrix A
             if routine.order is fblas_types.FblasOrder.FblasRowMajor:
-                template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_MATRIX_ROWSTREAMED_TILE_ROW)
+                template = self._read_template_file(
+                    "helpers/" + gd.TEMPLATE_READ_MATRIX_ROWSTREAMED_TILE_ROW)
                 channels_helper = {"channel_out_matrix": chan_in_A_name}
-                helper_name_read_A = gd.HELPER_READ_MATRIX_A_BASE_NAME + str(id)
+                helper_name_read_A = gd.HELPER_READ_MATRIX_A_BASE_NAME + str(
+                    id)
                 self._write_file(output_path,
-                                 template.render(helper_name=helper_name_read_A, helper=routine, channels=channels_helper),
+                                 template.render(
+                                     helper_name=helper_name_read_A,
+                                     helper=routine,
+                                     channels=channels_helper),
                                  append=True)
             # Write Matrix A
             if routine.order is fblas_types.FblasOrder.FblasRowMajor:
-                template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_MATRIX_ROWSTREAMED_TILE_ROW)
+                template = self._read_template_file(
+                    "helpers/" + gd.TEMPLATE_WRITE_MATRIX_ROWSTREAMED_TILE_ROW)
                 channels_helper = {"channel_in_matrix": chan_out}
-                helper_name_write_A = gd.HELPER_WRITE_MATRIX_BASE_NAME + str(id)
+                helper_name_write_A = gd.HELPER_WRITE_MATRIX_BASE_NAME + str(
+                    id)
                 self._write_file(output_path,
-                                 template.render(helper_name=helper_name_write_A, helper=routine, channels=channels_helper),
+                                 template.render(
+                                     helper_name=helper_name_write_A,
+                                     helper=routine,
+                                     channels=channels_helper),
                                  append=True)
 
             # create the json entries
@@ -725,54 +941,220 @@ class FBLASCodegen:
         elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasUpper:
             template = self._read_template_file("2/syr_v2.cl")
         else:
-            raise RuntimeError("Requirements for user routine {} are currently not supported".format(routine.user_name))
+            raise RuntimeError(
+                "Requirements for user routine {} are currently not supported".
+                format(routine.user_name))
 
         chan_in_x_name = gd.CHANNEL_IN_VECTOR_X_BASE_NAME + str(id)
         chan_in_x_trans_name = gd.CHANNEL_IN_VECTOR_X_TRANS_BASE_NAME + str(id)
         chan_in_A_name = gd.CHANNEL_IN_MATRIX_A_BASE_NAME + str(id)
         chan_out = gd.CHANNEL_OUT_MATRIX_BASE_NAME + str(id)
-        channels_routine = {"channel_in_vector_x": chan_in_x_name, "channel_in_vector_x_trans": chan_in_x_trans_name,
-                            "channel_in_matrix_A": chan_in_A_name, "channel_out_matrix": chan_out}
+        channels_routine = {
+            "channel_in_vector_x": chan_in_x_name,
+            "channel_in_vector_x_trans": chan_in_x_trans_name,
+            "channel_in_matrix_A": chan_in_A_name,
+            "channel_out_matrix": chan_out
+        }
         output_path = self._output_path + "/" + routine.user_name + ".cl"
-        self._write_file(output_path, template.render(routine=routine, channels=channels_routine))
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
 
         # Add helpers
         # Read x
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_X)
         channels_helper = {"channel_out_vector": chan_in_x_name}
         helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
         self._write_file(output_path,
-                         template.render(helper_name=helper_name_read_x, helper=routine, channels=channels_helper),
+                         template.render(helper_name=helper_name_read_x,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # Read X trans
         if routine.uplo is fblas_types.FblasUpLo.FblasLower:
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X_TRANS_LOWER)
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_READ_VECTOR_X_TRANS_LOWER)
         else:
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X_TRANS_UPPER)
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_READ_VECTOR_X_TRANS_UPPER)
         channels_helper = {"channel_out_vector": chan_in_x_trans_name}
-        helper_name_read_x_trans = gd.HELPER_READ_VECTOR_X_TRANS_BASE_NAME + str(id)
+        helper_name_read_x_trans = gd.HELPER_READ_VECTOR_X_TRANS_BASE_NAME + str(
+            id)
         self._write_file(output_path,
-                         template.render(helper_name=helper_name_read_x_trans, helper=routine, channels=channels_helper),
+                         template.render(helper_name=helper_name_read_x_trans,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
-        # TODO: create templates for matrix/read write and adjust this
-        # Read Matrix A
-        if routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_MATRIX_ROWSTREAMED_TILE_ROW)
-        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.transposedA is fblas_types.FblasTranspose.FblasTrans:
-            template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_MATRIX_ROWSTREAMED_TILE_COL)
+
+        # Read Matrix
+        if routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasLower:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_READ_LOWER_MATRIX_ROWSTREAMED_TILE_ROW)
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasUpper:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_READ_UPPER_MATRIX_ROWSTREAMED_TILE_ROW)
         channels_helper = {"channel_out_matrix": chan_in_A_name}
         helper_name_read_A = gd.HELPER_READ_MATRIX_A_BASE_NAME + str(id)
         self._write_file(output_path,
-                         template.render(helper_name=helper_name_read_A, helper=routine, channels=channels_helper),
+                         template.render(helper_name=helper_name_read_A,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
-        # Write vector
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_VECTOR)
-        channels_helper = {"channel_in_vector": chan_out}
-        helper_name_write_vector = gd.HELPER_WRITE_VECTOR_BASE_NAME + str(id)
-        self._write_file(output_path, template.render(helper_name=helper_name_write_vector, helper=routine,
-                                                      channels=channels_helper, incw=routine.incy),
+        # Write Matrix
+        if routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasLower:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_WRITE_LOWER_MATRIX_ROWSTREAMED_TILE_ROW)
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasUpper:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_WRITE_UPPER_MATRIX_ROWSTREAMED_TILE_ROW)
+        channels_helper = {"channel_in_matrix": chan_out}
+        helper_name_write_A = gd.HELPER_WRITE_MATRIX_BASE_NAME + str(id)
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_write_A,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
+
+        # create the json entries
+        json = {}
+        jw.add_commons(json, routine)
+        jw.add_incx(json, routine)
+        jw.add_tile_n_size(json, routine)
+        jw.add_order(json, routine)
+        jw.add_uplo(json, routine)
+        jw.add_item(json, jd.GENERATED_READ_VECTOR_X, helper_name_read_x)
+        jw.add_item(json, jd.GENERATED_READ_VECTOR_X_TRANS,
+                    helper_name_read_x_trans)
+        jw.add_item(json, jd.GENERATED_READ_MATRIX_A, helper_name_read_A)
+        jw.add_item(json, jd.GENERATED_WRITE_MATRIX, helper_name_write_A)
+        return json
+
+    def _codegen_syr2(self, routine: fblas_routine.FBLASRoutine, id: int):
+
+        # Currently supported case
+
+        if routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasLower:
+            template = self._read_template_file("2/syr2_v1.cl")
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasUpper:
+            template = self._read_template_file("2/syr2_v2.cl")
+        else:
+            raise RuntimeError(
+                "Requirements for user routine {} are currently not supported".
+                format(routine.user_name))
+
+        chan_in_x_name = gd.CHANNEL_IN_VECTOR_X_BASE_NAME + str(id)
+        chan_in_y_name = gd.CHANNEL_IN_VECTOR_Y_BASE_NAME + str(id)
+        chan_in_x_trans_name = gd.CHANNEL_IN_VECTOR_X_TRANS_BASE_NAME + str(id)
+        chan_in_y_trans_name = gd.CHANNEL_IN_VECTOR_Y_TRANS_BASE_NAME + str(id)
+        chan_in_A_name = gd.CHANNEL_IN_MATRIX_A_BASE_NAME + str(id)
+        chan_out = gd.CHANNEL_OUT_MATRIX_BASE_NAME + str(id)
+        channels_routine = {
+            "channel_in_vector_x": chan_in_x_name,
+            "channel_in_vector_x_trans": chan_in_x_trans_name,
+            "channel_in_vector_y": chan_in_y_name,
+            "channel_in_vector_y_trans": chan_in_y_trans_name,
+            "channel_in_matrix_A": chan_in_A_name,
+            "channel_out_matrix": chan_out
+        }
+        output_path = self._output_path + "/" + routine.user_name + ".cl"
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
+
+        # Add helpers
+        # Read x
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_X)
+        channels_helper = {"channel_out_vector": chan_in_x_name}
+        helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_read_x,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
+
+        # Read X trans
+        if routine.uplo is fblas_types.FblasUpLo.FblasLower:
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_READ_VECTOR_X_TRANS_LOWER)
+        else:
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_READ_VECTOR_X_TRANS_UPPER)
+        channels_helper = {"channel_out_vector": chan_in_x_trans_name}
+        helper_name_read_x_trans = gd.HELPER_READ_VECTOR_X_TRANS_BASE_NAME + str(
+            id)
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_read_x_trans,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
+
+        # Read Y
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_Y)
+        channels_helper = {"channel_out_vector": chan_in_y_name}
+        helper_name_read_y = gd.HELPER_READ_VECTOR_Y_BASE_NAME + str(id)
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_read_y,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
+
+        # Read Y trans
+        if routine.uplo is fblas_types.FblasUpLo.FblasLower:
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_READ_VECTOR_Y_TRANS_LOWER)
+        else:
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_READ_VECTOR_Y_TRANS_UPPER)
+        channels_helper = {"channel_out_vector": chan_in_y_trans_name}
+        helper_name_read_y_trans = gd.HELPER_READ_VECTOR_Y_TRANS_BASE_NAME + str(
+            id)
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_read_y_trans,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
+
+        # Read Matrix
+        if routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasLower:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_READ_LOWER_MATRIX_ROWSTREAMED_TILE_ROW)
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasUpper:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_READ_UPPER_MATRIX_ROWSTREAMED_TILE_ROW)
+        channels_helper = {"channel_out_matrix": chan_in_A_name}
+        helper_name_read_A = gd.HELPER_READ_MATRIX_A_BASE_NAME + str(id)
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_read_A,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
+
+        # Write Matrix
+        if routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasLower:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_WRITE_LOWER_MATRIX_ROWSTREAMED_TILE_ROW)
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasUpper:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_WRITE_UPPER_MATRIX_ROWSTREAMED_TILE_ROW)
+        channels_helper = {"channel_in_matrix": chan_out}
+        helper_name_write_A = gd.HELPER_WRITE_MATRIX_BASE_NAME + str(id)
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_write_A,
+                                         helper=routine,
+                                         channels=channels_helper),
                          append=True)
 
         # create the json entries
@@ -781,13 +1163,111 @@ class FBLASCodegen:
         jw.add_incx(json, routine)
         jw.add_incy(json, routine)
         jw.add_tile_n_size(json, routine)
-        jw.add_tile_m_size(json, routine)
+        jw.add_order(json, routine)
+        jw.add_uplo(json, routine)
+        jw.add_item(json, jd.GENERATED_READ_VECTOR_X, helper_name_read_x)
+        jw.add_item(json, jd.GENERATED_READ_VECTOR_X_TRANS,
+                    helper_name_read_x_trans)
+        jw.add_item(json, jd.GENERATED_READ_VECTOR_Y, helper_name_read_y)
+        jw.add_item(json, jd.GENERATED_READ_VECTOR_Y_TRANS,
+                    helper_name_read_y_trans)
+        jw.add_item(json, jd.GENERATED_READ_MATRIX_A, helper_name_read_A)
+        jw.add_item(json, jd.GENERATED_WRITE_MATRIX, helper_name_write_A)
+        return json
+
+    def _codegen_trsv(self, routine: fblas_routine.FBLASRoutine, id: int):
+
+        # Currently supported case
+
+        if routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasLower and routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
+            template = self._read_template_file("2/trsv_v1.cl")
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasUpper and routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
+            template = self._read_template_file("2/trsv_v2.cl")
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasUpper and routine.transposedA is fblas_types.FblasTranspose.FblasTrans:
+            template = self._read_template_file("2/trsv_v3.cl")
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasLower and routine.transposedA is fblas_types.FblasTranspose.FblasTrans:
+            template = self._read_template_file("2/trsv_v4.cl")
+        else:
+            raise RuntimeError(
+                "Requirements for user routine {} are currently not supported".
+                format(routine.user_name))
+
+        chan_in_x_name = gd.CHANNEL_IN_VECTOR_X_BASE_NAME + str(id)
+        chan_in_A_name = gd.CHANNEL_IN_MATRIX_A_BASE_NAME + str(id)
+        chan_out_name = gd.CHANNEL_OUT_VECTOR_BASE_NAME + str(id)
+
+        channels_routine = {
+            "channel_in_vector_x": chan_in_x_name,
+            "channel_in_matrix_A": chan_in_A_name,
+            "channel_out_vector": chan_out_name
+        }
+        output_path = self._output_path + "/" + routine.user_name + ".cl"
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
+
+        # Add helpers
+        # Read x
+
+        if (routine.order is fblas_types.FblasOrder.FblasRowMajor
+                and routine.uplo is fblas_types.FblasUpLo.FblasLower and
+                routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans
+            ) or (routine.order is fblas_types.FblasOrder.FblasRowMajor
+                  and routine.uplo is fblas_types.FblasUpLo.FblasUpper
+                  and routine.transposedA is
+                  fblas_types.FblasTranspose.FblasTrans):
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_READ_WRITE_VECTOR_X_TRSV_LOWER)
+        else:
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_READ_WRITE_VECTOR_X_TRSV_UPPER)
+
+        channels_helper = {
+            "channel_out_vector": chan_in_x_name,
+            "channel_in_vector": chan_out_name
+        }
+        helper_name_read_x = gd.HELPER_READ_VECTOR_X_BASE_NAME + str(id)
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_read_x,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
+
+        # Read Matrix A
+        if routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasLower and routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_READ_LOWER_MATRIX_ROWSTREAMED_TILE_ROW)
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasUpper and routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_READ_REVERSE_UPPER_MATRIX_ROWSTREAMED_TILE_ROW)
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.uplo is fblas_types.FblasUpLo.FblasUpper and routine.transposedA is fblas_types.FblasTranspose.FblasTrans:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_READ_UPPER_MATRIX_ROWSTREAMED_TILE_COL)
+        else:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_READ_REVERSE_LOWER_MATRIX_ROWSTREAMED_TILE_COL)
+
+        channels_helper = {"channel_out_matrix": chan_in_A_name}
+        helper_name_read_A = gd.HELPER_READ_MATRIX_A_BASE_NAME + str(id)
+        self._write_file(output_path,
+                         template.render(helper_name=helper_name_read_A,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
+
+        # create the json entries
+        json = {}
+        jw.add_commons(json, routine)
+        jw.add_incx(json, routine)
+        jw.add_tile_n_size(json, routine)
         jw.add_transposed(json, routine)
         jw.add_order(json, routine)
-        jw.add_item(json, jd.GENERATED_READ_VECTOR_X, helper_name_read_x)
-        jw.add_item(json, jd.GENERATED_READ_VECTOR_Y, helper_name_read_y)
+        jw.add_item(json, jd.GENERATED_READ_VECTOR_X_TRSV, helper_name_read_x)
         jw.add_item(json, jd.GENERATED_READ_MATRIX_A, helper_name_read_A)
-        jw.add_item(json, jd.GENERATED_WRITE_VECTOR, helper_name_write_vector)
         return json
 
     ##############################################################################################
@@ -806,14 +1286,18 @@ class FBLASCodegen:
                 template = self._read_template_file("3/gemm.cl")
         else:
             raise RuntimeError(
-                "Requirements for user routine {} are currently not supported in Host API codegen".format(
-                    routine.user_name))
+                "Requirements for user routine {} are currently not supported in Host API codegen"
+                .format(routine.user_name))
 
         chan_in_A_name = gd.CHANNEL_IN_MATRIX_A_BASE_NAME + str(id)
         chan_in_B_name = gd.CHANNEL_IN_MATRIX_B_BASE_NAME + str(id)
         chan_out_name = gd.CHANNEL_OUT_MATRIX_BASE_NAME + str(id)
 
-        channels_routine = {"channel_in_matrix_A": chan_in_A_name, "channel_in_matrix_B": chan_in_B_name, "channel_out_matrix": chan_out_name}
+        channels_routine = {
+            "channel_in_matrix_A": chan_in_A_name,
+            "channel_in_matrix_B": chan_in_B_name,
+            "channel_out_matrix": chan_out_name
+        }
         output_path = self._output_path + "/" + routine.user_name + ".cl"
 
         #adjust parameters for systolic
@@ -821,12 +1305,13 @@ class FBLASCodegen:
             #the width_x must be adjusted considering the vector size. If it is not a multiple, raise error
             if routine.width_x % routine.vect_size != 0:
                 raise RuntimeError(
-                    "User routine {}: width x must be a multiple of vector size".format(
-                        routine.user_name))
-            routine.width_x = int(routine.width_x/routine.vect_size)
+                    "User routine {}: width x must be a multiple of vector size"
+                    .format(routine.user_name))
+            routine.width_x = int(routine.width_x / routine.vect_size)
 
-
-        self._write_file(output_path, template.render(routine=routine, channels=channels_routine))
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
 
         if self._is_host_codegen:
             # Add helpers
@@ -834,65 +1319,79 @@ class FBLASCodegen:
 
             if routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
                 if routine.systolic:
-                    template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_MATRIX_A_GEMM_NOTRANS_SYSTOLIC)
+                    template = self._read_template_file(
+                        "helpers/" +
+                        gd.TEMPLATE_READ_MATRIX_A_GEMM_NOTRANS_SYSTOLIC)
                 else:
-                    template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_MATRIX_A_GEMM_NOTRANS)
+                    template = self._read_template_file(
+                        "helpers/" + gd.TEMPLATE_READ_MATRIX_A_GEMM_NOTRANS)
             else:
                 if routine.systolic:
                     raise RuntimeError(
-                        "User routine {}: this combination is not currently supported in systolic. Contact us!".format(
-                            routine.user_name))
+                        "User routine {}: this combination is not currently supported in systolic. Contact us!"
+                        .format(routine.user_name))
                 else:
-                    template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_MATRIX_A_GEMM_TRANS)
+                    template = self._read_template_file(
+                        "helpers/" + gd.TEMPLATE_READ_MATRIX_A_GEMM_TRANS)
             channels_helper = {"channel_out_matrix": chan_in_A_name}
             helper_name_read_A = gd.HELPER_READ_MATRIX_A_BASE_NAME + str(id)
             self._write_file(output_path,
-                             template.render(helper_name=helper_name_read_A, helper=routine, channels=channels_helper),
+                             template.render(helper_name=helper_name_read_A,
+                                             helper=routine,
+                                             channels=channels_helper),
                              append=True)
 
             # Read B
             if routine.transposedB is fblas_types.FblasTranspose.FblasNoTrans:
                 if routine.systolic:
-                    template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_MATRIX_B_GEMM_NOTRANS_SYSTOLIC)
+                    template = self._read_template_file(
+                        "helpers/" +
+                        gd.TEMPLATE_READ_MATRIX_B_GEMM_NOTRANS_SYSTOLIC)
                 else:
-                    template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_MATRIX_B_GEMM_NOTRANS)
+                    template = self._read_template_file(
+                        "helpers/" + gd.TEMPLATE_READ_MATRIX_B_GEMM_NOTRANS)
             else:
                 if routine.systolic:
                     raise RuntimeError(
-                        "User routine {}: this combination is not currently supported in systolic. Contact us!".format(
-                            routine.user_name))
+                        "User routine {}: this combination is not currently supported in systolic. Contact us!"
+                        .format(routine.user_name))
                 else:
-                    template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_MATRIX_B_GEMM_TRANS)
+                    template = self._read_template_file(
+                        "helpers/" + gd.TEMPLATE_READ_MATRIX_B_GEMM_TRANS)
             channels_helper = {"channel_out_matrix": chan_in_B_name}
             helper_name_read_B = gd.HELPER_READ_MATRIX_B_BASE_NAME + str(id)
             self._write_file(output_path,
-                             template.render(helper_name=helper_name_read_B, helper=routine, channels=channels_helper),
+                             template.render(helper_name=helper_name_read_B,
+                                             helper=routine,
+                                             channels=channels_helper),
                              append=True)
 
             # Write gemm
             if routine.systolic:
-                template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_MATRIX_GEMM_SYSTOLIC)
+                template = self._read_template_file(
+                    "helpers/" + gd.TEMPLATE_WRITE_MATRIX_GEMM_SYSTOLIC)
             else:
-                template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_MATRIX_GEMM)
+                template = self._read_template_file(
+                    "helpers/" + gd.TEMPLATE_WRITE_MATRIX_GEMM)
             channels_helper = {"channel_in_matrix": chan_out_name}
             helper_name_write = gd.HELPER_WRITE_MATRIX_BASE_NAME + str(id)
             self._write_file(output_path,
-                             template.render(helper_name=helper_name_write, helper=routine, channels=channels_helper),
+                             template.render(helper_name=helper_name_write,
+                                             helper=routine,
+                                             channels=channels_helper),
                              append=True)
 
             # create the json entries
             json = {}
             jw.add_commons(json, routine)
             jw.add_tile_size(json, routine)
-            jw.add_transposed(json,routine)
-            jw.add_transposedB(json,routine)
+            jw.add_transposed(json, routine)
+            jw.add_transposedB(json, routine)
             jw.add_item(json, jd.GENERATED_READ_MATRIX_A, helper_name_read_A)
             jw.add_item(json, jd.GENERATED_READ_MATRIX_B, helper_name_read_B)
             jw.add_item(json, jd.GENERATED_WRITE_MATRIX, helper_name_write)
             json[jd.GENERATED_SYSTOLIC] = bool(routine.systolic)
             return json
-
-
 
     ##############################################################################################
     #
@@ -902,97 +1401,154 @@ class FBLASCodegen:
 
     def _codegen_helper_read_vector_x(self, helper: fblas_helper.FBLASHelper):
         output_path = self._output_path + "/" + helper.user_name + ".cl"
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_X)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_X)
         print("Generating read vector x with widht: " + str(helper.width))
         channels_helper = {"channel_out_vector": helper.channel_name}
-        self._write_file(output_path,
-                         template.render(helper_name=helper.user_name, helper=helper, channels=channels_helper, generate_channel_declaration=True))
+        self._write_file(
+            output_path,
+            template.render(helper_name=helper.user_name,
+                            helper=helper,
+                            channels=channels_helper,
+                            generate_channel_declaration=True))
 
     def _codegen_helper_read_vector_y(self, helper: fblas_helper.FBLASHelper):
         output_path = self._output_path + "/" + helper.user_name + ".cl"
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_VECTOR_Y)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_READ_VECTOR_Y)
         channels_helper = {"channel_out_vector": helper.channel_name}
-        self._write_file(output_path,
-                         template.render(helper_name=helper.user_name, helper=helper, channels=channels_helper, generate_channel_declaration=True))
+        self._write_file(
+            output_path,
+            template.render(helper_name=helper.user_name,
+                            helper=helper,
+                            channels=channels_helper,
+                            generate_channel_declaration=True))
 
     def _codegen_helper_write_scalar(self, helper: fblas_helper.FBLASHelper):
         output_path = self._output_path + "/" + helper.user_name + ".cl"
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_SCALAR)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_WRITE_SCALAR)
         channels_helper = {"channel_in_scalar": helper.channel_name}
-        self._write_file(output_path,
-                         template.render(helper_name=helper.user_name, helper=helper, channels=channels_helper, generate_channel_declaration=True))
+        self._write_file(
+            output_path,
+            template.render(helper_name=helper.user_name,
+                            helper=helper,
+                            channels=channels_helper,
+                            generate_channel_declaration=True))
 
     def _codegen_helper_write_vector(self, helper: fblas_helper.FBLASHelper):
         output_path = self._output_path + "/" + helper.user_name + ".cl"
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_VECTOR)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_WRITE_VECTOR)
         channels_helper = {"channel_in_vector": helper.channel_name}
-        self._write_file(output_path,
-                         template.render(helper_name=helper.user_name, helper=helper, channels=channels_helper, incw=helper.incy, generate_channel_declaration=True))
+        self._write_file(
+            output_path,
+            template.render(helper_name=helper.user_name,
+                            helper=helper,
+                            channels=channels_helper,
+                            incw=helper.incy,
+                            generate_channel_declaration=True))
 
-    def _codegen_helper_generate_dummy_vector(self, helper: fblas_helper.FBLASHelper):
+    def _codegen_helper_generate_dummy_vector(
+            self, helper: fblas_helper.FBLASHelper):
         output_path = self._output_path + "/" + helper.user_name + ".cl"
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_GENERATE_DUMMY_VECTOR)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_GENERATE_DUMMY_VECTOR)
         channels_helper = {"channel_out_vector": helper.channel_name}
-        self._write_file(output_path,
-                         template.render(helper_name=helper.user_name, helper=helper, channels=channels_helper, generate_channel_declaration=True))
+        self._write_file(
+            output_path,
+            template.render(helper_name=helper.user_name,
+                            helper=helper,
+                            channels=channels_helper,
+                            generate_channel_declaration=True))
 
     def _codegen_helper_vector_sink(self, helper: fblas_helper.FBLASHelper):
         output_path = self._output_path + "/" + helper.user_name + ".cl"
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_VECTOR_SINK)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_VECTOR_SINK)
         channels_helper = {"channel_in_vector": helper.channel_name}
-        self._write_file(output_path,
-                         template.render(helper_name=helper.user_name, helper=helper, channels=channels_helper, generate_channel_declaration=True))
+        self._write_file(
+            output_path,
+            template.render(helper_name=helper.user_name,
+                            helper=helper,
+                            channels=channels_helper,
+                            generate_channel_declaration=True))
 
     def _codegen_helper_read_matrix(self, helper: fblas_helper.FBLASHelper):
         output_path = self._output_path + "/" + helper.user_name + ".cl"
         if helper.elements_order is fblas_types.FblasOrder.FblasRowMajor:
             if helper.tiles_order is fblas_types.FblasOrder.FblasRowMajor:
-                template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_MATRIX_ROWSTREAMED_TILE_ROW)
+                template = self._read_template_file(
+                    "helpers/" + gd.TEMPLATE_READ_MATRIX_ROWSTREAMED_TILE_ROW)
             else:
-                template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_MATRIX_ROWSTREAMED_TILE_COL)
+                template = self._read_template_file(
+                    "helpers/" + gd.TEMPLATE_READ_MATRIX_ROWSTREAMED_TILE_COL)
         else:
-            raise RuntimeError("Requirements for user helper {} are currently not supported (currently only row streamed elements are supported)".format(helper.user_name))
+            raise RuntimeError(
+                "Requirements for user helper {} are currently not supported (currently only row streamed elements are supported)"
+                .format(helper.user_name))
 
         channels_helper = {"channel_out_matrix": helper.channel_name}
-        self._write_file(output_path,
-                         template.render(helper_name=helper.user_name, helper=helper, channels=channels_helper, generate_channel_declaration=True))
+        self._write_file(
+            output_path,
+            template.render(helper_name=helper.user_name,
+                            helper=helper,
+                            channels=channels_helper,
+                            generate_channel_declaration=True))
 
     def _codegen_helper_write_matrix(self, helper: fblas_helper.FBLASHelper):
         output_path = self._output_path + "/" + helper.user_name + ".cl"
         if helper.elements_order is fblas_types.FblasOrder.FblasRowMajor:
             if helper.tiles_order is fblas_types.FblasOrder.FblasRowMajor:
-                template = self._read_template_file("helpers/" + gd.TEMPLATE_WRITE_MATRIX_ROWSTREAMED_TILE_ROW)
+                template = self._read_template_file(
+                    "helpers/" + gd.TEMPLATE_WRITE_MATRIX_ROWSTREAMED_TILE_ROW)
             else:
                 #TODO
                 raise RuntimeError(
-                    "Requirements for user helper {} are currently not supported (currently only row streamed elements are supported)".format(
-                        helper.user_name))
+                    "Requirements for user helper {} are currently not supported (currently only row streamed elements are supported)"
+                    .format(helper.user_name))
         else:
             raise RuntimeError(
-                "Requirements for user helper {} are currently not supported (currently only row streamed elements are supported)".format(
-                    helper.user_name))
-
+                "Requirements for user helper {} are currently not supported (currently only row streamed elements are supported)"
+                .format(helper.user_name))
 
         channels_helper = {"channel_in_matrix": helper.channel_name}
-        self._write_file(output_path,
-                         template.render(helper_name=helper.user_name, helper=helper, channels=channels_helper,
-                                         generate_channel_declaration=True))
+        self._write_file(
+            output_path,
+            template.render(helper_name=helper.user_name,
+                            helper=helper,
+                            channels=channels_helper,
+                            generate_channel_declaration=True))
 
-    def _codegen_helper_generate_dummy_matrix(self, helper: fblas_helper.FBLASHelper):
+    def _codegen_helper_generate_dummy_matrix(
+            self, helper: fblas_helper.FBLASHelper):
         output_path = self._output_path + "/" + helper.user_name + ".cl"
-        template = self._read_template_file("helpers/" + gd.TEMPLATE_GENERATE_DUMMY_MATRIX)
+        template = self._read_template_file("helpers/" +
+                                            gd.TEMPLATE_GENERATE_DUMMY_MATRIX)
         channels_helper = {"channel_out_matrix": helper.channel_name}
-        self._write_file(output_path,
-                         template.render(helper_name=helper.user_name, helper=helper, channels=channels_helper, generate_channel_declaration=True))
+        self._write_file(
+            output_path,
+            template.render(helper_name=helper.user_name,
+                            helper=helper,
+                            channels=channels_helper,
+                            generate_channel_declaration=True))
 
-
-    def _codegen_helper_read_matrix_4_modules(self, helper: fblas_helper.FBLASHelper):
+    def _codegen_helper_read_matrix_4_modules(
+            self, helper: fblas_helper.FBLASHelper):
         output_path = self._output_path + "/" + helper.user_name + ".cl"
         if helper.elements_order is fblas_types.FblasOrder.FblasRowMajor and helper.tiles_order is fblas_types.FblasOrder.FblasRowMajor:
-                template = self._read_template_file("helpers/" + gd.TEMPLATE_READ_MATRIX_ROWSTREAMED_TILE_ROW_4_MODULES)
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_READ_MATRIX_ROWSTREAMED_TILE_ROW_4_MODULES)
         else:
-            raise RuntimeError("Requirements for user helper {} are currently not supported (currently only row streamed elements are supported)".format(helper.user_name))
+            raise RuntimeError(
+                "Requirements for user helper {} are currently not supported (currently only row streamed elements are supported)"
+                .format(helper.user_name))
 
         channels_helper = {"channel_out_matrix": helper.channel_name}
-        self._write_file(output_path,
-                         template.render(helper_name=helper.user_name, helper=helper, channels=channels_helper, generate_channel_declaration=True))
+        self._write_file(
+            output_path,
+            template.render(helper_name=helper.user_name,
+                            helper=helper,
+                            channels=channels_helper,
+                            generate_channel_declaration=True))

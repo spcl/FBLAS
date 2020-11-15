@@ -8,8 +8,6 @@
     At first iterations it generates block 0, then block 0 and 1, ....
     Block size is given by TILE_N.
 
-    The name of the kernel can be redefined by means of preprocessor macro READ_VECTOR_X_TRANS.
-
     {{ helper.width }} memory reads are performed simultaneously. In the same way W channel pushes are performed .
     Data is padded to TILE_N using zero elements.
 
@@ -22,7 +20,7 @@
 channel {{ helper.type_str }} {{ channels["channel_out_vector"] }} __attribute__((depth({{ helper.width }})));
 {% endif %}
 
-__kernel void {{ helper_name }}(__global {{ helper.type_str }} *restrict data, unsigned int N)
+__kernel void {{ helper_name }}(__global volatile {{ helper.type_str }} *restrict data, unsigned int N)
 {
     __constant uint WIDTH = {{ helper.width }};
     __constant int INCX = {{ helper.incx }};

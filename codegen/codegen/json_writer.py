@@ -94,3 +94,9 @@ def add_order(json: dict, routine: fblas_routine.FBLASRoutine):
         json[jd.ORDER_KEY] = "RowMajor"
     else:
         json[jd.ORDER_KEY] = "ColumnMajor"
+
+def add_uplo(json: dict, routine: fblas_routine.FBLASRoutine):
+    if routine.uplo == fblas_types.FblasUpLo.FblasUpper:
+        json[jd.UPLO_KEY] = "U"
+    else:
+        json[jd.UPLO_KEY] = "L"

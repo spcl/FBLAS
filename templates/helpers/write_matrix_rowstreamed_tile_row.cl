@@ -20,7 +20,7 @@ channel {{ helper.type_str }} {{ channels["channel_in_matrix"] }} __attribute__(
 
 __kernel void {{ helper_name }}(__global volatile {{ helper.type_str }} *restrict matrix, int N, int M, unsigned int lda)
 {
-     __constant uint WIDTH = {{ helper.width }};
+    __constant uint WIDTH = {{ helper.width }};
     __constant uint TILE_N = {{ helper.tile_n_size }};
     __constant uint TILE_M = {{ helper.tile_m_size }};
 

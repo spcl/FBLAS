@@ -1,19 +1,18 @@
 {
-    "tier" : 2,
     "routine": [
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_0",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
             "uplo": "L"
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_1",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -21,9 +20,9 @@
             "incx" : 2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_2",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -31,9 +30,9 @@
             "incx" : -2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_3",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -41,18 +40,18 @@
             "incx": -1
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_trans_0",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
             "uplo": "L"
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_trans_1",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -60,9 +59,9 @@
             "incx" : 2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_trans_2",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -70,9 +69,9 @@
             "incx" : -2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_trans_3",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -80,18 +79,18 @@
             "incx": -1
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_u_0",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
             "uplo": "U"
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_u_1",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -99,9 +98,9 @@
             "incx" : 2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_u_2",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -109,9 +108,9 @@
             "incx" : -2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_u_3",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -119,18 +118,18 @@
             "incx": -1
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_trans_u_0",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
             "uplo": "U"
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_trans_u_1",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -138,9 +137,9 @@
             "incx" : 2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_trans_u_2",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -148,9 +147,9 @@
             "incx" : -2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_strsv_trans_u_3",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -158,18 +157,18 @@
             "incx": -1
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_0",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
             "uplo": "L"
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_1",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -177,9 +176,9 @@
             "incx" : 2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_2",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -187,9 +186,9 @@
             "incx" : -2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_3",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -197,18 +196,18 @@
             "incx": -1
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_trans_0",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
             "uplo": "L"
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_trans_1",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -216,9 +215,9 @@
             "incx" : 2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_trans_2",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -226,9 +225,9 @@
             "incx" : -2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_trans_3",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -236,18 +235,18 @@
             "incx": -1
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_u_0",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
             "uplo": "U"
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_u_1",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -255,9 +254,9 @@
             "incx" : 2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_u_2",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -265,9 +264,9 @@
             "incx" : -2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_u_3",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "N",
@@ -275,18 +274,18 @@
             "incx": -1
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_trans_u_0",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
             "uplo": "U"
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_trans_u_1",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -294,9 +293,9 @@
             "incx" : 2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_trans_u_2",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",
@@ -304,9 +303,9 @@
             "incx" : -2
         },
         {
-            "blas" : "trsv",
+            "blas_name" : "trsv",
             "user_name" : "test_dtrsv_trans_u_3",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "trans": "T",

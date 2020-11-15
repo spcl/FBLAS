@@ -8,7 +8,6 @@
 #include <exception>
 #include <algorithm>
 #include <string.h>
-#include <cblas.h>
 #include "../../include/utils/ocl_utils.hpp"
 #include "../../include/fblas_environment.hpp"
 #include "test_tier2.hpp"
@@ -141,9 +140,9 @@ TEST(TestSTrsv,TestStrsv)
     cl::Buffer input_A(context, CL_MEM_READ_ONLY|CL_CHANNEL_1_INTELFPGA, N * N*sizeof(float));
     cl::Buffer input_x(context, CL_MEM_READ_WRITE|CL_CHANNEL_2_INTELFPGA, N * max_inc* sizeof(float));
 
-    std::string kernel_lower_names[2][ninc]={{"test_strsv_0","test_strsv_1","test_strsv_2","test_strsv_3"},
+    std::string kernel_lower_names[2][nincs]={{"test_strsv_0","test_strsv_1","test_strsv_2","test_strsv_3"},
                                        {"test_strsv_trans_0","test_strsv_trans_1","test_strsv_trans_2","test_strsv_trans_3"}};
-    std::string kernel_upper_names[2][ninc]={{"test_strsv_u_0","test_strsv_u_1","test_strsv_u_2","test_strsv_u_3"},
+    std::string kernel_upper_names[2][nincs]={{"test_strsv_u_0","test_strsv_u_1","test_strsv_u_2","test_strsv_u_3"},
                                        {"test_strsv_trans_u_0","test_strsv_trans_u_1","test_strsv_trans_u_2","test_strsv_trans_u_3"}};
     int test_case=1;
 
@@ -161,7 +160,7 @@ TEST(TestSTrsv,TestStrsv)
             {
                 bool transposed = (icht[ict]=='T');
                 FblasTranspose trans = (icht[ict]=='T')? FBLAS_TRANSPOSED : FBLAS_NO_TRANSPOSED;
-                for(int ix = 0; ix < ninc; ix ++) //incx and incy
+                for(int ix = 0; ix < nincs; ix ++) //incx and incy
                 {
                     incx=incxs[ix];
                     int lx = abs(incx) * n;
@@ -173,9 +172,7 @@ TEST(TestSTrsv,TestStrsv)
                     //copy everything to device
                     queue.enqueueWriteBuffer(input_x,CL_TRUE,0,lx*sizeof(float),x);
                     queue.enqueueWriteBuffer(input_A,CL_TRUE,0,n*n*sizeof(float),A);
-                    //
-                    //std::cout << "Executing with n: " << n << " incx: "<<incx<<" incy: "<<incy<<" alpha: "<<alpha<<std::endl;
-                   // std::cout << "Test lower: "<<lower<< " transposed: "<<icht[ict] <<" n: "<<n<<" incx: "<<incx << " lx: "<<lx <<std::endl;
+
                     if(lower)
                         fb.strsv(kernel_lower_names[ict][ix],uplo,trans, n,input_A,n,input_x,incx);
                     else
@@ -206,9 +203,9 @@ TEST(TestDTrsv,TestDtrsv)
     cl::Buffer input_A(context, CL_MEM_READ_ONLY|CL_CHANNEL_1_INTELFPGA, N * N*sizeof(double));
     cl::Buffer input_x(context, CL_MEM_READ_WRITE|CL_CHANNEL_2_INTELFPGA, N * max_inc* sizeof(double));
 
-    std::string kernel_lower_names[2][ninc]={{"test_dtrsv_0","test_dtrsv_1","test_dtrsv_2","test_dtrsv_3"},
+    std::string kernel_lower_names[2][nincs]={{"test_dtrsv_0","test_dtrsv_1","test_dtrsv_2","test_dtrsv_3"},
                                        {"test_dtrsv_trans_0","test_dtrsv_trans_1","test_dtrsv_trans_2","test_dtrsv_trans_3"}};
-    std::string kernel_upper_names[2][ninc]={{"test_dtrsv_u_0","test_dtrsv_u_1","test_dtrsv_u_2","test_dtrsv_u_3"},
+    std::string kernel_upper_names[2][nincs]={{"test_dtrsv_u_0","test_dtrsv_u_1","test_dtrsv_u_2","test_dtrsv_u_3"},
                                        {"test_dtrsv_trans_u_0","test_dtrsv_trans_u_1","test_dtrsv_trans_u_2","test_dtrsv_trans_u_3"}};
     int test_case=1;
 
@@ -226,7 +223,7 @@ TEST(TestDTrsv,TestDtrsv)
             {
                 bool transposed = (icht[ict]=='T');
                 FblasTranspose trans = (icht[ict]=='T')? FBLAS_TRANSPOSED : FBLAS_NO_TRANSPOSED;
-                for(int ix = 0; ix < ninc; ix ++) //incx and incy
+                for(int ix = 0; ix < nincs; ix ++) //incx and incy
                 {
                     incx=incxs[ix];
                     int lx = abs(incx) * n;

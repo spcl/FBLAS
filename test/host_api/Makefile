@@ -32,7 +32,7 @@ test_%: host_generator $(BIN_DIR)
 	$(GEN) $*.json -output_dir=/tmp/
 	$(AOCXX) $(AOCXXFLAGS) /tmp/test_*$**cl -I../../blas/include
 	$(CXX) $(CXXFLAGS) test_$*.cpp $(AOCL_LINK_CONFIG) $(AOCL_COMPILE_CONFIG) -I$(RAPIDJSON_DIR) -o $(BIN_DIR)/$@ -lgtest
-	$(eval binfile = $(shell find . -iname test_*"$*"*aocx))
+	$(eval binfile = $(shell find . -iname test_*$**aocx))
 	@echo "Executing tests..." $(binfile)
 	env CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 $(BIN_DIR)/$@ $(binfile) /tmp/generated_routines.json
 	$(unset binfile)

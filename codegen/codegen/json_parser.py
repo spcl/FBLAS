@@ -27,7 +27,8 @@ class JSONParser:
     _modules_codegen_optional_parameters = {}
     _modules_codegen_required_input_channels = {}
     _modules_codegen_required_output_channels = {}
-    _modules_codegen_optional_output_channels = {} # can be used for particular version of some routine
+    _modules_codegen_optional_output_channels = {
+    }  # can be used for particular version of some routine
     _modules_codegen_supported_routines = set()
     # for the modules codegen we have to take care of helpers
     _modules_codegen_supported_helpers = set()
@@ -45,7 +46,8 @@ class JSONParser:
             self._load_helper_definitions_modules_codegen()
         self._platform = fblas_types.Platform.Stratix10  # Default Platform
         self._codegen = codegen
-        self._is_host_codegen = (codegen == fblas_types.FblasCodegen.HostCodegen)
+        self._is_host_codegen = (
+            codegen == fblas_types.FblasCodegen.HostCodegen)
 
     def _load_routine_definitions_host_api(self):
         '''
@@ -128,8 +130,6 @@ class JSONParser:
                 self._modules_codegen_optional_output_channels[
                     name] = optional_out_chans
 
-
-
     def _load_helper_definitions_modules_codegen(self):
         '''
         Loads the helper definition for modules codegen. The json file contains, for each supported helper,
@@ -178,8 +178,8 @@ class JSONParser:
         width = json[jd.WIDTH_KEY]
         if not isinstance(width, int) or width < 0:
             logging.warning(
-                "Routine {}, defined width must be a number greater than zero",
-                routine.user_name)
+                "Routine {}, defined width must be a number greater than zero".
+                format(routine.user_name))
             return False
         else:
             routine.width = width
@@ -190,8 +190,8 @@ class JSONParser:
         width = json[jd.WIDTH_X_KEY]
         if not isinstance(width, int) or width < 0:
             logging.warning(
-                "Routine {}, defined width x must be a number greater than zero",
-                routine.user_name)
+                "Routine {}, defined width x must be a number greater than zero"
+                .format(routine.user_name))
             return False
         else:
             routine.width_x = width
@@ -202,8 +202,8 @@ class JSONParser:
         width = json[jd.WIDTH_Y_KEY]
         if not isinstance(width, int) or width < 0:
             logging.warning(
-                "Routine {}, defined width y must be a number greater than zero",
-                routine.user_name)
+                "Routine {}, defined width y must be a number greater than zero"
+                .format(routine.user_name))
             return False
         else:
             routine.width_y = width
@@ -212,8 +212,9 @@ class JSONParser:
     def _parse_incx(self, json: dict, routine: fblas_routine.FBLASRoutine):
         incx = json[jd.INCX_KEY]
         if not isinstance(incx, int):
-            logging.warning("Routine {}, defined incx is not a valid number",
-                            routine.user_name)
+            logging.warning(
+                "Routine {}, defined incx is not a valid number".format(
+                    routine.user_name))
             return False
         else:
             routine.incx = incx
@@ -222,8 +223,9 @@ class JSONParser:
     def _parse_incy(self, json: dict, routine: fblas_routine.FBLASRoutine):
         incy = json[jd.INCY_KEY]
         if not isinstance(incy, int):
-            logging.warning("Routine {}, defined incx is not a valid number",
-                            routine.user_name)
+            logging.warning(
+                "Routine {}, defined incx is not a valid number".format(
+                    routine.user_name))
             return False
         else:
             routine.incy = incy
@@ -233,8 +235,8 @@ class JSONParser:
         size = json[jd.TILE_N_SIZE_KEY]
         if not isinstance(size, int) and size < 0:
             logging.warning(
-                "Routine {}, defined tile N size is not a valid number",
-                routine.user_name)
+                "Routine {}, defined tile N size is not a valid number".format(
+                    routine.user_name))
             return False
         else:
             routine.tile_n_size = size
@@ -244,8 +246,8 @@ class JSONParser:
         size = json[jd.TILE_M_SIZE_KEY]
         if not isinstance(size, int) and size < 0:
             logging.warning(
-                "Routine {}, defined tile M size is not a valid number",
-                routine.user_name)
+                "Routine {}, defined tile M size is not a valid number".format(
+                    routine.user_name))
             return False
         else:
             routine.tile_m_size = size
@@ -255,8 +257,8 @@ class JSONParser:
         size = json[jd.TILE_SIZE_KEY]
         if not isinstance(size, int) and size < 0:
             logging.warning(
-                "Routine {}, defined tile size is not a valid number",
-                routine.user_name)
+                "Routine {}, defined tile size is not a valid number".format(
+                    routine.user_name))
             return False
         else:
             routine.tile_size = size
@@ -267,8 +269,8 @@ class JSONParser:
         systolic = json[jd.SYSTOLIC_KEY]
         if not isinstance(systolic, bool):
             logging.warning(
-                "Routine {}, defined systolic must be a boolean value",
-                routine.user_name)
+                "Routine {}, defined systolic must be a boolean value".format(
+                    routine.user_name))
             return False
         else:
             routine.systolic = systolic
@@ -284,8 +286,8 @@ class JSONParser:
             return True
         else:
             logging.warning(
-                "Routine {}, defined trans is not valid. It should be 'n' (NoTrans) or 't' (Trans)",
-                routine.user_name)
+                "Routine {}, defined trans is not valid. It should be 'n' (NoTrans) or 't' (Trans)"
+                .format(routine.user_name))
             return False
 
     def _parse_transa(self, json: dict, routine):
@@ -298,8 +300,8 @@ class JSONParser:
             return True
         else:
             logging.warning(
-                "Routine {}, defined transa is not valid. It should be 'n' (NoTrans) or 't' (Trans)",
-                routine.user_name)
+                "Routine {}, defined transa is not valid. It should be 'n' (NoTrans) or 't' (Trans)"
+                .format(routine.user_name))
             return False
 
     def _parse_transb(self, json: dict, routine):
@@ -312,8 +314,8 @@ class JSONParser:
             return True
         else:
             logging.warning(
-                "Routine {}, defined transb is not valid. It should be 'n' (NoTrans) or 't' (Trans)",
-                routine.user_name)
+                "Routine {}, defined transb is not valid. It should be 'n' (NoTrans) or 't' (Trans)"
+                .format(routine.user_name))
             return False
 
     def _parse_order(self, json: dict, routine):
@@ -323,13 +325,28 @@ class JSONParser:
             return True
         elif order.lower() == 'columnmajor':
             logging.warning(
-                "Routine {}, currently only RowMajor order is supported in host API",
-                routine.user_name)
+                "Routine {}, currently only RowMajor order is supported in host API"
+                .format(routine.user_name))
             return False
         else:
             logging.warning(
-                "Routine {}, defined order is not valid. It should be 'rowmajor' ('columnmajor' not supported in this release)",
-                routine.user_name)
+                "Routine {}, defined order is not valid. It should be 'rowmajor' ('columnmajor' not supported in this release)"
+                .format(routine.user_name))
+            return False
+
+    def _parse_uplo(self, json: dict, routine):
+        uplo = json[jd.UPLO_KEY]
+        if uplo.lower() == "l":
+            routine.uplo = fblas_types.FblasUpLo.FblasLower
+            return True
+        elif uplo.lower() == "u":
+            routine.uplo = fblas_types.FblasUpLo.FblasUpper
+            return True
+        else:
+            logging.warning(
+                "Routine {}, defined uplo is not valid. It should be 'l' or 'u' "
+                .format(routine.user_name))
+            return False
 
     def _parse_elements_order(self, json: dict, helper):
         # Used for helpers only
@@ -342,8 +359,8 @@ class JSONParser:
             return True
         else:
             logging.warning(
-                "Helper {}, defined elements order is not valid. It should be 'row'/'column'",
-                helper.user_name)
+                "Helper {}, defined elements order is not valid. It should be 'row'/'column'"
+                .format(helper.user_name))
 
     def _parse_tiles_order(self, json: dict, helper):
         # Used for helpers only
@@ -356,20 +373,22 @@ class JSONParser:
             return True
         else:
             logging.warning(
-                "Helper {}, defined tiles order is not valid. It should be 'row'/'column'",
-                helper.user_name)
+                "Helper {}, defined tiles order is not valid. It should be 'row'/'column'"
+                .format(helper.user_name))
 
     def _parse_stride(self, json: dict, helper):
         stride = json[jd.STRIDE_KEY]
         if not isinstance(stride, int):
-            logging.warning("Helper {}, defined incx is not a valid number",
-                            helper.user_name)
+            logging.warning(
+                "Helper {}, defined incx is not a valid number".format(
+                    helper.user_name))
             return False
         else:
             helper.stride = stride
             return True
 
-    def _parse_tiles_A_order(self, json: dict, routine: fblas_routine.FBLASRoutine):
+    def _parse_tiles_A_order(self, json: dict,
+                             routine: fblas_routine.FBLASRoutine):
         order = json[jd.TILES_A_ORDER_KEY]
         if order.lower() == 'row':
             routine.tiles_A_order = fblas_types.FblasOrder.FblasRowMajor
@@ -379,22 +398,23 @@ class JSONParser:
             return True
         else:
             logging.warning(
-                "Routine {}, defined tiles A elements order is not valid. It should be 'row'/'column'",
-                routine.user_name)
+                "Routine {}, defined tiles A elements order is not valid. It should be 'row'/'column'"
+                .format(routine.user_name))
 
-    def _parse_vect_size(self, json: dict, routine: fblas_routine.FBLASRoutine):
+    def _parse_vect_size(self, json: dict,
+                         routine: fblas_routine.FBLASRoutine):
         vect_size = json[jd.VECT_SIZE_KEY]
-        if not isinstance(vect_size, int) or vect_size not in {1,2,4,8,16}:
-            logging.warning("Routine {}, defined vect_size is not a valid number (must be a positive power of 2, less than 16)."
-                            "Will use default vector size.",
-                            routine.user_name)
+        if not isinstance(vect_size, int) or vect_size not in {1, 2, 4, 8, 16}:
+            logging.warning(
+                "Routine {}, defined vect_size is not a valid number (must be a positive power of 2, less than 16)."
+                "Will use default vector size.".format(routine.user_name))
             return False
         else:
             routine.vect_size = vect_size
             return True
 
-
-    def _parse_elements_A_order(self, json: dict, routine: fblas_routine.FBLASRoutine):
+    def _parse_elements_A_order(self, json: dict,
+                                routine: fblas_routine.FBLASRoutine):
         order = json[jd.ELEMENTS_A_ORDER_KEY]
         if order.lower() == 'row':
             routine.elements_A_order = fblas_types.FblasOrder.FblasRowMajor
@@ -404,41 +424,47 @@ class JSONParser:
             return True
         else:
             logging.warning(
-                "Routine {}, defined A elements order is not valid. It should be 'row'/'column'",
-                routine.user_name)
+                "Routine {}, defined A elements order is not valid. It should be 'row'/'column'"
+                .format(routine.user_name))
 
-
-    def _parse_input_channels(self, json: dict, routine: fblas_routine.FBLASRoutine):
+    def _parse_input_channels(self, json: dict,
+                              routine: fblas_routine.FBLASRoutine):
         """
         For all required input channels, take the user specified name and add it to the routine
         :return: True if all the required input channels have been successfully parsed, false otherwise
         """
-        for chan in self._modules_codegen_required_input_channels[routine.blas_name]:
+        for chan in self._modules_codegen_required_input_channels[
+                routine.blas_name]:
             if not self._is_json_key_present(json, chan):
-                logging.warning("Routine {}, has not required input channel {}".format(routine.user_name, chan))
+                logging.warning(
+                    "Routine {}, has not required input channel {}".format(
+                        routine.user_name, chan))
                 return False
             else:
                 routine.add_input_channel(chan, json[chan])
         return True
 
-    def _parse_output_channels(self, json: dict, routine: fblas_routine.FBLASRoutine):
+    def _parse_output_channels(self, json: dict,
+                               routine: fblas_routine.FBLASRoutine):
         """
         For all required output channels, take the user specified name and add it to the routine
         :return: True if all the required output channels have been successfully parsed, false otherwise
         """
-        for chan in self._modules_codegen_required_output_channels[routine.blas_name]:
+        for chan in self._modules_codegen_required_output_channels[
+                routine.blas_name]:
             if not self._is_json_key_present(json, chan):
-                logging.warning("Routine {}, has not required output channel {}",
-                               routine.user_name, chan)
+                logging.warning(
+                    "Routine {}, has not required output channel {}".format(
+                        routine.user_name, chan))
                 return False
             else:
                 routine.add_output_channel(chan, json[chan])
         if routine.blas_name in self._modules_codegen_optional_output_channels:
-            for chan in self._modules_codegen_optional_output_channels[routine.blas_name]:
+            for chan in self._modules_codegen_optional_output_channels[
+                    routine.blas_name]:
                 if self._is_json_key_present(json, chan):
                     routine.add_output_channel(chan, json[chan])
         return True
-
 
     def _parse_routine_attribute(self, json: dict, field: str,
                                  routine: fblas_routine.FBLASRoutine,
@@ -481,12 +507,15 @@ class JSONParser:
             method = getattr(self, method_name)
             ret = method(json, routine)
             if not ret and required:
-                logging.warning("Problem in parsing routine {}: required field {} missing".format(routine.user_name, field))
+                logging.warning(
+                    "Problem in parsing routine {}: required field {} missing".
+                    format(routine.user_name, field))
             return ret
         else:
             if required:
                 logging.warning(
-                    "Problem in parsing routine {}: required field {} missing".format(routine.user_name, field))
+                    "Problem in parsing routine {}: required field {} missing".
+                    format(routine.user_name, field))
             return required
 
     def _parse_helper_attribute(self, json: dict, field: str,
@@ -517,11 +546,15 @@ class JSONParser:
             method = getattr(self, method_name)
             ret = method(json, helper)
             if not ret and required:
-                logging.warning("Problem in parsing helper {}: required field {} missing".format(helper.user_name, field))
+                logging.warning(
+                    "Problem in parsing helper {}: required field {} missing".
+                    format(helper.user_name, field))
             return ret
         else:
             if required:
-                logging.warning("Problem in parsing helper {}: required field {} missing".format(helper.user_name, field))
+                logging.warning(
+                    "Problem in parsing helper {}: required field {} missing".
+                    format(helper.user_name, field))
             return required
 
     def _parse_routine(self, json: dict) -> fblas_routine.FBLASRoutine:
@@ -568,7 +601,6 @@ class JSONParser:
                 type, user_name))
             return None
 
-
         # Create the routine
         routine = fblas_routine.FBLASRoutine(
             blas_name, user_name, fblas_types.TYPE_STR_TO_ROUTINE_TYPE[type],
@@ -584,7 +616,8 @@ class JSONParser:
                         json, field, routine, True)
         else:
             if blas_name in self._modules_codegen_required_parameters:
-                for field in self._modules_codegen_required_parameters[blas_name]:
+                for field in self._modules_codegen_required_parameters[
+                        blas_name]:
                     has_req_fields = has_req_fields and self._parse_routine_attribute(
                         json, field, routine, True)
 
@@ -597,24 +630,29 @@ class JSONParser:
                     self._parse_routine_attribute(json, field, routine, False)
         else:
             if blas_name in self._modules_codegen_optional_parameters:
-                for field in self._modules_codegen_optional_parameters[blas_name]:
+                for field in self._modules_codegen_optional_parameters[
+                        blas_name]:
                     self._parse_routine_attribute(json, field, routine, False)
 
         # Double level of tiling: perform additional checks
         if routine.has_2D_computational_tile:
             if routine.tile_size % routine.width_x != 0 or routine.tile_size % routine.width_y != 0:
-                logging.warning("Tile size {} for routine {} must be a multiple of width x and width y".format(
-                    type, user_name))
+                logging.warning(
+                    "Tile size {} for routine {} must be a multiple of width x and width y"
+                    .format(type, user_name))
                 return None
-
 
         # if we are codegen modules, we have to read also the channels
         if not self._is_host_codegen:
             has_req_channels = True
-            if len(self._modules_codegen_required_input_channels[blas_name]) > 0:
-                has_req_channels = has_req_channels and self._parse_input_channels(json, routine)
-            if len(self._modules_codegen_required_output_channels[blas_name]) > 0:
-                has_req_channels = has_req_channels and self._parse_output_channels(json, routine)
+            if len(self._modules_codegen_required_input_channels[blas_name]
+                   ) > 0:
+                has_req_channels = has_req_channels and self._parse_input_channels(
+                    json, routine)
+            if len(self._modules_codegen_required_output_channels[blas_name]
+                   ) > 0:
+                has_req_channels = has_req_channels and self._parse_output_channels(
+                    json, routine)
             if not has_req_channels:
                 return None
 
@@ -673,7 +711,8 @@ class JSONParser:
 
         # Create the helper
         helper = fblas_helper.FBLASHelper(
-            helper_name, user_name, channel_name, fblas_types.TYPE_STR_TO_ROUTINE_TYPE[type])
+            helper_name, user_name, channel_name,
+            fblas_types.TYPE_STR_TO_ROUTINE_TYPE[type])
 
         # Parse required fields
 
@@ -690,7 +729,6 @@ class JSONParser:
             for field in self._modules_codegen_helpers_optional_parameters[
                     helper_name]:
                 self._parse_helper_attribute(json, field, helper, False)
-
 
         return helper
 

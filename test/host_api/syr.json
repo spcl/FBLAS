@@ -1,17 +1,17 @@
 {
     "routine": [
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_ssyr_0",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "uplo" : "L"
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_ssyr_1",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "incx" : 2,
@@ -20,9 +20,9 @@
             "tile N size" :16
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_ssyr_2",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "incx" : -2,
@@ -31,9 +31,9 @@
             "tile N size" : 32
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_ssyr_3",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "incx" : -1,
@@ -41,17 +41,17 @@
             "uplo" : "L"
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_ssyr_4",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "uplo" : "U"
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_ssyr_5",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "incx" : 2,
@@ -60,9 +60,9 @@
             "tile N size" :16
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_ssyr_6",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "incx" : -2,
@@ -71,9 +71,9 @@
             "tile N size" : 16
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_ssyr_7",
-            "precision" : "single",
+            "type" : "float",
             "width" : 16,
             "order" : "RowMajor",
             "incx" : -1,
@@ -81,17 +81,17 @@
             "uplo" : "U"
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_dsyr_0",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "uplo" : "L"
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_dsyr_1",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "incx" : 2,
@@ -100,9 +100,9 @@
             "tile N size" :16
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_dsyr_2",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "incx" : -2,
@@ -111,9 +111,9 @@
             "tile N size" : 32
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_dsyr_3",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "incx" : -1,
@@ -121,17 +121,17 @@
             "uplo" : "L"
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_dsyr_4",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "uplo" : "U"
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_dsyr_5",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "incx" : 2,
@@ -140,9 +140,9 @@
             "tile N size" :16
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_dsyr_6",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "incx" : -2,
@@ -151,9 +151,9 @@
             "tile N size" : 16
         },
         {
-            "blas" : "syr",
+            "blas_name" : "syr",
             "user_name" : "test_dsyr_7",
-            "precision" : "double",
+            "type" : "double",
             "width" : 16,
             "order" : "RowMajor",
             "incx" : -1,
