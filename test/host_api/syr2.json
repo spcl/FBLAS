@@ -1,0 +1,164 @@
+{
+    "routine": [
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_ssyr2_0",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "L"
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_ssyr2_1",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : 2,
+            "incy" : -2,
+            "uplo" : "L",
+            "tile N size" :16
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_ssyr2_2",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -2,
+            "incy" : 1,
+            "uplo" : "L",
+            "tile N size" : 32
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_ssyr2_3",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -1,
+            "incy" : -2,
+            "uplo" : "L"
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_ssyr2_4",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "U"
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_ssyr2_5",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : 2,
+            "incy" : -2,
+            "uplo" : "U",
+            "tile N size" :16
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_ssyr2_6",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -2,
+            "incy" : 1,
+            "uplo" : "U",
+            "tile N size" : 16
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_ssyr2_7",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -1,
+            "incy" : -2,
+            "uplo" : "U"
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_dsyr2_0",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "L"
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_dsyr2_1",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : 2,
+            "incy" : -2,
+            "uplo" : "L",
+            "tile N size" :16
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_dsyr2_2",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -2,
+            "incy" : 1,
+            "uplo" : "L",
+            "tile N size" : 32
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_dsyr2_3",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -1,
+            "incy" : -2,
+            "uplo" : "L"
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_dsyr2_4",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "uplo" : "U"
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_dsyr2_5",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : 2,
+            "incy" : -2,
+            "uplo" : "U",
+            "tile N size" :16
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_dsyr2_6",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -2,
+            "incy" : 1,
+            "uplo" : "U",
+            "tile N size" : 16
+        },
+        {
+            "blas_name" : "syr2",
+            "user_name" : "test_dsyr2_7",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -1,
+            "incy" : -2,
+            "uplo" : "U"
+        }
+    ]
+}
