@@ -1,7 +1,16 @@
 /**
+<<<<<<< HEAD
   Tests for TRSV routine.
   Tests ideas borrowed from BLAS testing
   TRSV check routine is a modified version of the one included in GSL (Gnu Scientific Library) v2.5
+=======
+    FBLAS: BLAS implementation for Intel FPGA
+    Copyright (c) 2020 ETH-Zurich. All rights reserved.
+    See LICENSE for license information.
+    Tests for TRSV routine.
+    Tests ideas borrowed from BLAS testing
+    TRSV check routine is a modified version of the one included in GSL (Gnu Scientific Library) v2.5
+>>>>>>> master
 */
 #include <gtest/gtest.h>
 #include <string>

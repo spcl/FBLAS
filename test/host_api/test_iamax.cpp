@@ -1,6 +1,10 @@
 /**
-  Tests for dot routine.
-  Tests ideas borrowed from Blas testing
+    FBLAS: BLAS implementation for Intel FPGA
+    Copyright (c) 2020 ETH-Zurich. All rights reserved.
+    See LICENSE for license information.
+
+    Tests for iamax routine.
+    Tests ideas borrowed from Blas testing
 */
 #include <gtest/gtest.h>
 #include <string>

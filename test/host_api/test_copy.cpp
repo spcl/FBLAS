@@ -1,5 +1,11 @@
 /**
-  Tests for rot routine.
+
+    FBLAS: BLAS implementation for Intel FPGA
+    Copyright (c) 2020 ETH-Zurich. All rights reserved.
+    See LICENSE for license information.
+
+
+  Tests for copy routine.
   Tests ideas borrowed from Blas testing
 */
 #include <gtest/gtest.h>

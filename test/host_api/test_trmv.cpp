@@ -1,6 +1,14 @@
 /**
+<<<<<<< HEAD
   Tests for TRMV routine.
   Tests ideas borrowed from Blas testing and GSL (Gnu Scientific Library) v2.5
+=======
+    FBLAS: BLAS implementation for Intel FPGA
+    Copyright (c) 2020 ETH-Zurich. All rights reserved.
+    See LICENSE for license information.
+    Tests for TRMV routine.
+    Tests ideas borrowed from Blas testing and GSL (Gnu Scientific Library) v2.5
+>>>>>>> master
 */
 #include <gtest/gtest.h>
 #include <string>
