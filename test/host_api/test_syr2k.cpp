@@ -12,7 +12,6 @@
 #include <exception>
 #include <algorithm>
 #include <string.h>
-#include <cblas.h>
 #include "../../include/utils/ocl_utils.hpp"
 #include "../../include/fblas_environment.hpp"
 #include "test_tier2.hpp"
@@ -85,7 +84,6 @@ TEST(TestSSyr2k,TestSsyr2k)
                             float beta=betas[ib];
                             bool lowerC = (ichu[icu]=='L');
                             FblasUpLo uploC=(ichu[icu]=='L')?FBLAS_LOWER:FBLAS_UPPER;
-
                             //generate C
                             generate_matrix<float>(C,n,n);
 

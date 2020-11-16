@@ -9,22 +9,11 @@ AOCL_LINK_CONFIG := $(shell aocl link-config)
 RAPIDJSON_DIR = ../../rapidjson/include 
 GEN = ../../codegen/host_codegen.py
 BIN_DIR=bin
-LEVEL_1 = test_iamax test_dot test_copy
+LEVEL_1 = test_iamax test_dot test_copy test_rot test_rotg test_swap
 .PHONY = clean host_generator 
 
-# Points to the root of Google Test, relative to where this file is.
-# Remember to tweak this if you move this file.
-#TODO fix this for code release
-#GTEST_DIR = ..
-#CPPFLAGS += -isystem $(GTEST_DIR)/include
-
-host_generator: 
-	@if [ ! -f $(GEN) ] ; \
-	then \
-	    make -C ../../ host_generator; \
-	fi;
 	
-test_%: host_generator $(BIN_DIR)
+test_%: $(BIN_DIR)
 	@echo "Executing test_$*"
 	@echo "Compiling for emulation ..."
 	rm -f /tmp/test_*$**cl || true
@@ -32,12 +21,12 @@ test_%: host_generator $(BIN_DIR)
 	$(GEN) $*.json -output_dir=/tmp/
 	$(AOCXX) $(AOCXXFLAGS) /tmp/test_*$**cl -I../../blas/include
 	$(CXX) $(CXXFLAGS) test_$*.cpp $(AOCL_LINK_CONFIG) $(AOCL_COMPILE_CONFIG) -I$(RAPIDJSON_DIR) -o $(BIN_DIR)/$@ -lgtest
-	$(eval binfile = $(shell find . -iname test_*$**aocx))
+	$(eval binfile=$(shell find . -iname test_*$**aocx))
 	@echo "Executing tests..." $(binfile)
 	env CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 $(BIN_DIR)/$@ $(binfile) /tmp/generated_routines.json
 	$(unset binfile)
 
-test_iamax: host_generator $(BIN_DIR)
+test_iamax: $(BIN_DIR)
 	@echo "Executing test_iamax"
 	@echo "Compiling for emulation ..."
 	rm -f /tmp/test_*i*amax*cl || true
@@ -45,10 +34,15 @@ test_iamax: host_generator $(BIN_DIR)
 	$(GEN) iamax.json -output_dir=/tmp/
 	$(AOCXX) $(AOCXXFLAGS) /tmp/test_i*max*cl -I../../blas/include
 	$(CXX) $(CXXFLAGS) test_iamax.cpp $(AOCL_LINK_CONFIG) $(AOCL_COMPILE_CONFIG) -I$(RAPIDJSON_DIR) -o $(BIN_DIR)/$@ -lgtest
-	$(eval binfile=$(shell find . -iname test_i*max*aocx))
+	$(eval binfile = $(shell find . -iname test_i*max*aocx))
 	@echo "Executing tests..." $(binfile)
 	env CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 $(BIN_DIR)/$@ $(binfile) /tmp/generated_routines.json
 	$(unset binfile)
+
+test_level1: $(BIN_DIR)
+	make ${LEVEL_1}
+	
+
 
 
 $(BIN_DIR):

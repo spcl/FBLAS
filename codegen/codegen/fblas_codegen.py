@@ -1395,7 +1395,7 @@ class FBLASCodegen:
 
     def _codegen_syrk(self, routine: fblas_routine.FBLASRoutine, id: int):
 
-        # Currently supported case: in Host API only Row Major, in modules every
+        # Currently supported case: in Host API only Row Major
         if self._is_host_codegen:
             template = self._read_template_file("3/syrk.cl")
         else:
@@ -1477,6 +1477,133 @@ class FBLASCodegen:
         jw.add_uplo(json, routine)
         jw.add_item(json, jd.GENERATED_READ_MATRIX_A, helper_name_read_A)
         jw.add_item(json, jd.GENERATED_READ_MATRIX_A2, helper_name_read_A2)
+        jw.add_item(json, jd.GENERATED_WRITE_MATRIX, helper_name_write)
+        return json
+
+    def _codegen_syr2k(self, routine: fblas_routine.FBLASRoutine, id: int):
+
+        # Currently supported case: in Host API only Row Major
+        if self._is_host_codegen:
+            template = self._read_template_file("3/syr2k.cl")
+        else:
+            raise RuntimeError(
+                "Requirements for user routine {} are currently not supported in Host API codegen"
+                .format(routine.user_name))
+
+        chan_in_A_name = gd.CHANNEL_IN_MATRIX_A_BASE_NAME + str(id)
+        chan_in_A2_name = gd.CHANNEL_IN_MATRIX_A2_BASE_NAME + str(id)
+        chan_in_B_name = gd.CHANNEL_IN_MATRIX_B_BASE_NAME + str(id)
+        chan_in_B2_name = gd.CHANNEL_IN_MATRIX_B2_BASE_NAME + str(id)
+        chan_out_name = gd.CHANNEL_OUT_MATRIX_BASE_NAME + str(id)
+
+        channels_routine = {
+            "channel_in_matrix_A": chan_in_A_name,
+            "channel_in_matrix_A2": chan_in_A2_name,
+            "channel_in_matrix_B": chan_in_B_name,
+            "channel_in_matrix_B2": chan_in_B2_name,
+            "channel_out_matrix": chan_out_name
+        }
+        output_path = self._output_path + "/" + routine.user_name + ".cl"
+
+
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
+
+        # Add helpers
+        # Read A 
+
+        if routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_READ_MATRIX_A_SYRK_NOTRANS)
+        else:
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_READ_MATRIX_A_SYRK_TRANS)
+        channels_helper = {"channel_out_matrix": chan_in_A_name}
+        helper_name_read_A = gd.HELPER_READ_MATRIX_A_BASE_NAME + str(id)
+        self._write_file(output_path,
+                            template.render(helper_name=helper_name_read_A,
+                                            helper=routine,
+                                            channels=channels_helper),
+                            append=True)
+
+        # Read A2
+        if routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_READ_MATRIX_A2_SYRK_TRANS)
+        else:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_READ_MATRIX_A2_SYRK_NOTRANS)
+
+        channels_helper = {"channel_out_matrix": chan_in_A2_name}
+        helper_name_read_A2 = gd.HELPER_READ_MATRIX_A2_BASE_NAME + str(id)
+        self._write_file(output_path,
+                            template.render(helper_name=helper_name_read_A2,
+                                            helper=routine,
+                                            channels=channels_helper),
+                            append=True)
+
+
+        # Read B 
+
+        if routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_READ_MATRIX_B_SYR2K_TRANS)
+        else:
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_READ_MATRIX_B_SYR2K_NOTRANS)
+        channels_helper = {"channel_out_matrix": chan_in_B_name}
+        helper_name_read_B = gd.HELPER_READ_MATRIX_B_BASE_NAME + str(id)
+        self._write_file(output_path,
+                            template.render(helper_name=helper_name_read_B,
+                                            helper=routine,
+                                            channels=channels_helper),
+                            append=True)
+
+        # Read B2
+        if routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_READ_MATRIX_B2_SYR2K_NOTRANS)
+        else:
+            template = self._read_template_file(
+                "helpers/" +
+                gd.TEMPLATE_READ_MATRIX_B2_SYR2K_TRANS)
+
+        channels_helper = {"channel_out_matrix": chan_in_B2_name}
+        helper_name_read_B2 = gd.HELPER_READ_MATRIX_B2_BASE_NAME + str(id)
+        self._write_file(output_path,
+                            template.render(helper_name=helper_name_read_B2,
+                                            helper=routine,
+                                            channels=channels_helper),
+                            append=True)
+
+        # Write matrix
+        if routine.uplo is fblas_types.FblasUpLo.FblasLower:
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_WRITE_MATRIX_SYRK_LOWER)
+        else:
+            template = self._read_template_file(
+                "helpers/" + gd.TEMPLATE_WRITE_MATRIX_SYRK_UPPER)
+        channels_helper = {"channel_in_matrix": chan_out_name}
+        helper_name_write = gd.HELPER_WRITE_MATRIX_BASE_NAME + str(id)
+        self._write_file(output_path,
+                            template.render(helper_name=helper_name_write,
+                                            helper=routine,
+                                            channels=channels_helper),
+                            append=True)
+
+        # create the json entries
+        json = {}
+        jw.add_commons(json, routine)
+        jw.add_tile_size(json, routine)
+        jw.add_transposed(json, routine)
+        jw.add_uplo(json, routine)
+        jw.add_item(json, jd.GENERATED_READ_MATRIX_A, helper_name_read_A)
+        jw.add_item(json, jd.GENERATED_READ_MATRIX_A2, helper_name_read_A2)
+        jw.add_item(json, jd.GENERATED_READ_MATRIX_B, helper_name_read_B)
+        jw.add_item(json, jd.GENERATED_READ_MATRIX_B2, helper_name_read_B2)
         jw.add_item(json, jd.GENERATED_WRITE_MATRIX, helper_name_write)
         return json
 

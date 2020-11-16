@@ -1,8 +1,8 @@
 {
     "routine": [
         {
-            "blas" : "syr2k",
-            "precision" : "single",
+            "blas_name" : "syr2k",
+            "type" : "float",
             "user_name" : "test_ssyr2k_notrans_lower",
             "order" : "RowMajor",
             "trans" : "N",
@@ -12,8 +12,8 @@
             "tile size": 32
         },
         {
-            "blas" : "syr2k",
-            "precision" : "single",
+            "blas_name" : "syr2k",
+            "type" : "float",
             "user_name" : "test_ssyr2k_notrans_upper",
             "order" : "RowMajor",
             "trans" : "N",
@@ -23,8 +23,8 @@
             "tile size": 32
         },
         {
-            "blas" : "syr2k",
-            "precision" : "single",
+            "blas_name" : "syr2k",
+            "type" : "float",
             "user_name" : "test_ssyr2k_trans_lower",
             "order" : "RowMajor",
             "trans" : "T",
@@ -34,8 +34,8 @@
             "tile size": 32
         },
         {
-            "blas" : "syr2k",
-            "precision" : "single",
+            "blas_name" : "syr2k",
+            "type" : "float",
             "user_name" : "test_ssyr2k_trans_upper",
             "order" : "RowMajor",
             "trans" : "T",
@@ -45,8 +45,8 @@
             "tile size": 32
         },
         {
-            "blas" : "syr2k",
-            "precision" : "double",
+            "blas_name" : "syr2k",
+            "type" : "double",
             "user_name" : "test_dsyr2k_notrans_lower",
             "order" : "RowMajor",
             "trans" : "N",
@@ -56,8 +56,8 @@
             "tile size": 32
         },
         {
-            "blas" : "syr2k",
-            "precision" : "double",
+            "blas_name" : "syr2k",
+            "type" : "double",
             "user_name" : "test_dsyr2k_notrans_upper",
             "order" : "RowMajor",
             "trans" : "N",
@@ -67,8 +67,8 @@
             "tile size": 32
         },
         {
-            "blas" : "syr2k",
-            "precision" : "double",
+            "blas_name" : "syr2k",
+            "type" : "double",
             "user_name" : "test_dsyr2k_trans_lower",
             "order" : "RowMajor",
             "trans" : "T",
@@ -78,8 +78,8 @@
             "tile size": 32
         },
         {
-            "blas" : "syr2k",
-            "precision" : "double",
+            "blas_name" : "syr2k",
+            "type" : "double",
             "user_name" : "test_dsyr2k_trans_upper",
             "order" : "RowMajor",
             "trans" : "T",
