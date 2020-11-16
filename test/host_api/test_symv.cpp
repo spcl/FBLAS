@@ -1,6 +1,6 @@
 /**
     FBLAS: BLAS implementation for Intel FPGA
-    Copyright (c) 2019 ETH-Zurich. All rights reserved.
+    Copyright (c) 2020 ETH-Zurich. All rights reserved.
     See LICENSE for license information.
 
     Tests for symv routine.
