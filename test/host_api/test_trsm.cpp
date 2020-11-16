@@ -1,9 +1,4 @@
 /**
-<<<<<<< HEAD
-  Tests for TRSM routine.
-  Tests ideas borrowed from BLAS testing
-  TRSM check routine is a modified version of the one included in GSL (Gnu Scientific Library) v2.5
-=======
     FBLAS: BLAS implementation for Intel FPGA
     Copyright (c) 2020 ETH-Zurich. All rights reserved.
     See LICENSE for license information.
@@ -11,14 +6,12 @@
     Tests for TRSM routine.
     Tests ideas borrowed from BLAS testing
     TRSM check routine is a modified version of the one included in GSL (Gnu Scientific Library) v2.5
->>>>>>> master
 */
 #include <gtest/gtest.h>
 #include <string>
 #include <exception>
 #include <algorithm>
 #include <string.h>
-#include <cblas.h>
 #include "../../include/utils/ocl_utils.hpp"
 #include "../../include/fblas_environment.hpp"
 #include "test_tier2.hpp"
@@ -27,13 +20,10 @@ template <typename T>
 void check_result (bool left_side, bool lower, bool transposed, unsigned int n, unsigned int m, T alpha,  T *A, unsigned int lda, T *B, unsigned int ldb, T *fpga_res);
 
 FBLASEnvironment fb;
-const int N=64;                 // max N size
-const int nd=3;
-const int ndim[3]={4,16,64};    //sizes
 
 
 
-TEST(TestSTrsv,TestStrsv)
+TEST(TestSTrsm,TestSTrsm)
 {
     cl::CommandQueue queue;
     cl::Context context=fb.get_context();
@@ -77,6 +67,8 @@ TEST(TestSTrsv,TestStrsv)
 
                         for(int ia = 0; ia < nalf ; ia++) //loop over alpha
                         {
+
+
                             float alpha=alphas[ia];
                             //generate the matrices
                             generate_matrix<float>(A,lda,lda);
@@ -85,11 +77,14 @@ TEST(TestSTrsv,TestStrsv)
                             //copy everything to device
                             queue.enqueueWriteBuffer(input_A,CL_TRUE,0,lda*lda*sizeof(float),A);
                             queue.enqueueWriteBuffer(input_output_B,CL_TRUE,0,n*m*sizeof(float),B);
+                            
 
-                            if(ics==0)
+                            if(ics==0){
                                 fb.strsm(left_side_kernels[icu*2+ict],side,trans,uplo,n,m,alpha,input_A,lda,input_output_B,m);
-                            else
+                            }
+                            else{
                                 fb.strsm(right_side_kernels[icu*2+ict],side,trans,uplo,n,m,alpha,input_A,lda,input_output_B,m);
+                            }
 
                             //copy back
                             queue.enqueueReadBuffer(input_output_B,CL_TRUE,0,n*m*sizeof(float),fpga_res);
@@ -107,7 +102,7 @@ TEST(TestSTrsv,TestStrsv)
     }
 }
 
-TEST(TestDTrsv,TestDtrsv)
+TEST(TestDTrsm,TestDTrsm)
 {
     cl::CommandQueue queue;
     cl::Context context=fb.get_context();

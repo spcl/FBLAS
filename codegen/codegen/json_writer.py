@@ -100,3 +100,9 @@ def add_uplo(json: dict, routine: fblas_routine.FBLASRoutine):
         json[jd.UPLO_KEY] = "U"
     else:
         json[jd.UPLO_KEY] = "L"
+
+def add_side(json: dict, routine: fblas_routine.FBLASRoutine):
+    if routine.side == fblas_types.FblasSide.FblasLeft:
+        json[jd.SIDE_KEY] = "L"
+    else:
+        json[jd.SIDE_KEY] = "R"

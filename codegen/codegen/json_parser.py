@@ -348,6 +348,20 @@ class JSONParser:
                 .format(routine.user_name))
             return False
 
+    def _parse_side(self, json: dict, routine):
+        uplo = json[jd.SIDE_KEY]
+        if uplo.lower() == "l":
+            routine.side = fblas_types.FblasSide.FblasLeft
+            return True
+        elif uplo.lower() == "r":
+            routine.side = fblas_types.FblasSide.FblasRight
+            return True
+        else:
+            logging.warning(
+                "Routine {}, defined side is not valid. It should be 'l' or 'r' "
+                .format(routine.user_name))
+            return False
+
     def _parse_elements_order(self, json: dict, helper):
         # Used for helpers only
         order = json[jd.ELEMENTS_ORDER_KEY]

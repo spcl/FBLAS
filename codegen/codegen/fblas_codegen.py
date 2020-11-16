@@ -832,7 +832,7 @@ class FBLASCodegen:
                 template = self._read_template_file("2/ger_v1.cl")
             else:
                 raise RuntimeError(
-                    "Requirements for user routine {} are currently not supported in Host API codegen"
+                    "Requirements for user routine {} are currently not supported in HLS API codegen"
                     .format(routine.user_name))
         else:
             if routine.are_tiles_A_rowstreamed():
@@ -1286,7 +1286,7 @@ class FBLASCodegen:
                 template = self._read_template_file("3/gemm.cl")
         else:
             raise RuntimeError(
-                "Requirements for user routine {} are currently not supported in Host API codegen"
+                "Requirements for user routine {} are currently not supported in HLS API codegen"
                 .format(routine.user_name))
 
         chan_in_A_name = gd.CHANNEL_IN_MATRIX_A_BASE_NAME + str(id)
@@ -1400,7 +1400,7 @@ class FBLASCodegen:
             template = self._read_template_file("3/syrk.cl")
         else:
             raise RuntimeError(
-                "Requirements for user routine {} are currently not supported in Host API codegen"
+                "Requirements for user routine {} are currently not supported in HLS API codegen"
                 .format(routine.user_name))
 
         chan_in_A_name = gd.CHANNEL_IN_MATRIX_A_BASE_NAME + str(id)
@@ -1414,13 +1414,12 @@ class FBLASCodegen:
         }
         output_path = self._output_path + "/" + routine.user_name + ".cl"
 
-
         self._write_file(
             output_path,
             template.render(routine=routine, channels=channels_routine))
 
         # Add helpers
-        # Read A 
+        # Read A
 
         if routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
             template = self._read_template_file(
@@ -1431,28 +1430,26 @@ class FBLASCodegen:
         channels_helper = {"channel_out_matrix": chan_in_A_name}
         helper_name_read_A = gd.HELPER_READ_MATRIX_A_BASE_NAME + str(id)
         self._write_file(output_path,
-                            template.render(helper_name=helper_name_read_A,
-                                            helper=routine,
-                                            channels=channels_helper),
-                            append=True)
+                         template.render(helper_name=helper_name_read_A,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
 
         # Read A2
         if routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
             template = self._read_template_file(
-                "helpers/" +
-                gd.TEMPLATE_READ_MATRIX_A2_SYRK_TRANS)
+                "helpers/" + gd.TEMPLATE_READ_MATRIX_A2_SYRK_TRANS)
         else:
             template = self._read_template_file(
-                "helpers/" +
-                gd.TEMPLATE_READ_MATRIX_A2_SYRK_NOTRANS)
+                "helpers/" + gd.TEMPLATE_READ_MATRIX_A2_SYRK_NOTRANS)
 
         channels_helper = {"channel_out_matrix": chan_in_A2_name}
         helper_name_read_A2 = gd.HELPER_READ_MATRIX_A2_BASE_NAME + str(id)
         self._write_file(output_path,
-                            template.render(helper_name=helper_name_read_A2,
-                                            helper=routine,
-                                            channels=channels_helper),
-                            append=True)
+                         template.render(helper_name=helper_name_read_A2,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
 
         # Write matrix
         if routine.uplo is fblas_types.FblasUpLo.FblasLower:
@@ -1464,10 +1461,10 @@ class FBLASCodegen:
         channels_helper = {"channel_in_matrix": chan_out_name}
         helper_name_write = gd.HELPER_WRITE_MATRIX_BASE_NAME + str(id)
         self._write_file(output_path,
-                            template.render(helper_name=helper_name_write,
-                                            helper=routine,
-                                            channels=channels_helper),
-                            append=True)
+                         template.render(helper_name=helper_name_write,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
 
         # create the json entries
         json = {}
@@ -1487,7 +1484,7 @@ class FBLASCodegen:
             template = self._read_template_file("3/syr2k.cl")
         else:
             raise RuntimeError(
-                "Requirements for user routine {} are currently not supported in Host API codegen"
+                "Requirements for user routine {} are currently not supported in HLS API codegen"
                 .format(routine.user_name))
 
         chan_in_A_name = gd.CHANNEL_IN_MATRIX_A_BASE_NAME + str(id)
@@ -1505,13 +1502,12 @@ class FBLASCodegen:
         }
         output_path = self._output_path + "/" + routine.user_name + ".cl"
 
-
         self._write_file(
             output_path,
             template.render(routine=routine, channels=channels_routine))
 
         # Add helpers
-        # Read A 
+        # Read A
 
         if routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
             template = self._read_template_file(
@@ -1522,10 +1518,10 @@ class FBLASCodegen:
         channels_helper = {"channel_out_matrix": chan_in_A_name}
         helper_name_read_A = gd.HELPER_READ_MATRIX_A_BASE_NAME + str(id)
         self._write_file(output_path,
-                            template.render(helper_name=helper_name_read_A,
-                                            helper=routine,
-                                            channels=channels_helper),
-                            append=True)
+                         template.render(helper_name=helper_name_read_A,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
 
         # Read A2
         if routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
@@ -1533,19 +1529,17 @@ class FBLASCodegen:
                 "helpers/" + gd.TEMPLATE_READ_MATRIX_A2_SYRK_TRANS)
         else:
             template = self._read_template_file(
-                "helpers/" +
-                gd.TEMPLATE_READ_MATRIX_A2_SYRK_NOTRANS)
+                "helpers/" + gd.TEMPLATE_READ_MATRIX_A2_SYRK_NOTRANS)
 
         channels_helper = {"channel_out_matrix": chan_in_A2_name}
         helper_name_read_A2 = gd.HELPER_READ_MATRIX_A2_BASE_NAME + str(id)
         self._write_file(output_path,
-                            template.render(helper_name=helper_name_read_A2,
-                                            helper=routine,
-                                            channels=channels_helper),
-                            append=True)
+                         template.render(helper_name=helper_name_read_A2,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
 
-
-        # Read B 
+        # Read B
 
         if routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
             template = self._read_template_file(
@@ -1556,28 +1550,26 @@ class FBLASCodegen:
         channels_helper = {"channel_out_matrix": chan_in_B_name}
         helper_name_read_B = gd.HELPER_READ_MATRIX_B_BASE_NAME + str(id)
         self._write_file(output_path,
-                            template.render(helper_name=helper_name_read_B,
-                                            helper=routine,
-                                            channels=channels_helper),
-                            append=True)
+                         template.render(helper_name=helper_name_read_B,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
 
         # Read B2
         if routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans:
             template = self._read_template_file(
-                "helpers/" +
-                gd.TEMPLATE_READ_MATRIX_B2_SYR2K_NOTRANS)
+                "helpers/" + gd.TEMPLATE_READ_MATRIX_B2_SYR2K_NOTRANS)
         else:
             template = self._read_template_file(
-                "helpers/" +
-                gd.TEMPLATE_READ_MATRIX_B2_SYR2K_TRANS)
+                "helpers/" + gd.TEMPLATE_READ_MATRIX_B2_SYR2K_TRANS)
 
         channels_helper = {"channel_out_matrix": chan_in_B2_name}
         helper_name_read_B2 = gd.HELPER_READ_MATRIX_B2_BASE_NAME + str(id)
         self._write_file(output_path,
-                            template.render(helper_name=helper_name_read_B2,
-                                            helper=routine,
-                                            channels=channels_helper),
-                            append=True)
+                         template.render(helper_name=helper_name_read_B2,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
 
         # Write matrix
         if routine.uplo is fblas_types.FblasUpLo.FblasLower:
@@ -1589,10 +1581,10 @@ class FBLASCodegen:
         channels_helper = {"channel_in_matrix": chan_out_name}
         helper_name_write = gd.HELPER_WRITE_MATRIX_BASE_NAME + str(id)
         self._write_file(output_path,
-                            template.render(helper_name=helper_name_write,
-                                            helper=routine,
-                                            channels=channels_helper),
-                            append=True)
+                         template.render(helper_name=helper_name_write,
+                                         helper=routine,
+                                         channels=channels_helper),
+                         append=True)
 
         # create the json entries
         json = {}
@@ -1605,6 +1597,51 @@ class FBLASCodegen:
         jw.add_item(json, jd.GENERATED_READ_MATRIX_B, helper_name_read_B)
         jw.add_item(json, jd.GENERATED_READ_MATRIX_B2, helper_name_read_B2)
         jw.add_item(json, jd.GENERATED_WRITE_MATRIX, helper_name_write)
+        return json
+
+    def _codegen_trsm(self, routine: fblas_routine.FBLASRoutine, id: int):
+
+        # Currently supported case: in Host API only Row Major
+        if not self._is_host_codegen:
+            raise RuntimeError(
+                "Requirements for user routine {} are currently not supported in HLS API codegen"
+                .format(routine.user_name))
+        if routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.side is fblas_types.FblasSide.FblasLeft and routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans and routine.uplo is fblas_types.FblasUpLo.FblasLower:
+            template = self._read_template_file("3/trsm_v1.cl")
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.side is fblas_types.FblasSide.FblasLeft and routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans and routine.uplo is fblas_types.FblasUpLo.FblasUpper:
+            template = self._read_template_file("3/trsm_v2.cl")
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.side is fblas_types.FblasSide.FblasLeft and routine.transposedA is fblas_types.FblasTranspose.FblasTrans and routine.uplo is fblas_types.FblasUpLo.FblasLower:
+            template = self._read_template_file("3/trsm_v3.cl")
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.side is fblas_types.FblasSide.FblasLeft and routine.transposedA is fblas_types.FblasTranspose.FblasTrans and routine.uplo is fblas_types.FblasUpLo.FblasUpper:
+            template = self._read_template_file("3/trsm_v4.cl")
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.side is fblas_types.FblasSide.FblasRight and routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans and routine.uplo is fblas_types.FblasUpLo.FblasLower:
+            template = self._read_template_file("3/trsm_v5.cl")
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.side is fblas_types.FblasSide.FblasRight and routine.transposedA is fblas_types.FblasTranspose.FblasNoTrans and routine.uplo is fblas_types.FblasUpLo.FblasUpper:
+            template = self._read_template_file("3/trsm_v6.cl")
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.side is fblas_types.FblasSide.FblasRight and routine.transposedA is fblas_types.FblasTranspose.FblasTrans and routine.uplo is fblas_types.FblasUpLo.FblasLower:
+            template = self._read_template_file("3/trsm_v7.cl")
+        elif routine.order is fblas_types.FblasOrder.FblasRowMajor and routine.side is fblas_types.FblasSide.FblasRight and routine.transposedA is fblas_types.FblasTranspose.FblasTrans and routine.uplo is fblas_types.FblasUpLo.FblasUpper:
+            template = self._read_template_file("3/trsm_v8.cl")
+        else:
+            raise RuntimeError(
+                "Requirements for user routine {} are currently not supported".
+                format(routine.user_name))
+
+        channels_routine = {}
+        output_path = self._output_path + "/" + routine.user_name + ".cl"
+
+        self._write_file(
+            output_path,
+            template.render(routine=routine, channels=channels_routine))
+
+        # create the json entries
+        json = {}
+        jw.add_commons(json, routine)
+        jw.add_tile_m_size(json, routine)
+        jw.add_transposed(json, routine)
+        jw.add_uplo(json, routine)
+        jw.add_side(json, routine)
+
         return json
 
     ##############################################################################################
