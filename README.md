@@ -28,7 +28,6 @@ After cloning this repository, make sure you clone the [rapidjson](http://rapidj
 git submodule update --init
 pip install -r codegen/requirements.txt
 ```
-For Artifact Evaluation, you will find detailed information in subfolder `evaluation`.
 
 
 ## The FBLAS library
@@ -44,7 +43,25 @@ the device, she can invoke the desired FBLAS routines working on the FPGA memory
 
 For further information on how to use the library, please refer to the [wiki](https://github.com/spcl/FBLAS/wiki).
 
+## Publication
+If you use FBLAS, please cite us:
+```
 
+@inproceedings{fblas,
+    author = {De Matteis, Tiziano and de Fine Licht, Johannes and Hoefler, Torsten},
+    title = {FBLAS: Streaming Linear Algebra on FPGA},
+    year = {2020},
+    isbn = {9781728199986},
+    publisher = {IEEE Press},
+    booktitle = {Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis},
+    articleno = {59},
+    numpages = {13},
+    keywords = {high level synthesis, spatial architectures, hardware library},
+    location = {Atlanta, Georgia},
+    series = {SC '20}
+}
+```
+Concerning the Artifact Evaluation of the paper, you will find detailed information in subfolder `evaluation`.
 
 
 ## Contact

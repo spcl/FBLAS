@@ -10,7 +10,7 @@ RAPIDJSON_DIR = ../../rapidjson/include
 GEN = ../../codegen/host_codegen.py
 BIN_DIR=bin
 LEVEL_1 = test_iamax test_dot test_copy test_rot test_rotg test_swap
-LEVEL_2 = test_gemv test_ger test_syrk test_syr2
+LEVEL_2 = test_gemv test_ger test_syr
 LEVEL_3 = test_gemm test_syrk test_syr2k test_trsm
 .PHONY = clean host_generator 
 
