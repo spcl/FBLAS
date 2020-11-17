@@ -10,6 +10,8 @@ RAPIDJSON_DIR = ../../rapidjson/include
 GEN = ../../codegen/host_codegen.py
 BIN_DIR=bin
 LEVEL_1 = test_iamax test_dot test_copy test_rot test_rotg test_swap
+LEVEL_2 = test_gemv test_ger test_syrk test_syr2
+LEVEL_3 = test_gemm test_syrk test_syr2k test_trsm
 .PHONY = clean host_generator 
 
 	
@@ -21,10 +23,7 @@ test_%: $(BIN_DIR)
 	$(GEN) $*.json -output_dir=/tmp/
 	$(AOCXX) $(AOCXXFLAGS) /tmp/test_*$**cl -I../../blas/include
 	$(CXX) $(CXXFLAGS) test_$*.cpp $(AOCL_LINK_CONFIG) $(AOCL_COMPILE_CONFIG) -I$(RAPIDJSON_DIR) -o $(BIN_DIR)/$@ -lgtest
-	$(eval binfile=$(shell find . -iname test_*$**aocx))
-	@echo "Executing tests..." $(binfile)
-	env CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 $(BIN_DIR)/$@ $(binfile) /tmp/generated_routines.json
-	$(unset binfile)
+	env CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 $(BIN_DIR)/$@ $$(ls test_*$**aocx) /tmp/generated_routines.json
 
 test_iamax: $(BIN_DIR)
 	@echo "Executing test_iamax"
@@ -34,16 +33,16 @@ test_iamax: $(BIN_DIR)
 	$(GEN) iamax.json -output_dir=/tmp/
 	$(AOCXX) $(AOCXXFLAGS) /tmp/test_i*max*cl -I../../blas/include
 	$(CXX) $(CXXFLAGS) test_iamax.cpp $(AOCL_LINK_CONFIG) $(AOCL_COMPILE_CONFIG) -I$(RAPIDJSON_DIR) -o $(BIN_DIR)/$@ -lgtest
-	$(eval binfile = $(shell find . -iname test_i*max*aocx))
-	@echo "Executing tests..." $(binfile)
-	env CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 $(BIN_DIR)/$@ $(binfile) /tmp/generated_routines.json
-	$(unset binfile)
+	env CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 $(BIN_DIR)/$@ $$(ls test_i*max*aocx) /tmp/generated_routines.json
 
 test_level1: $(BIN_DIR)
 	make ${LEVEL_1}
 	
+test_level2: $(BIN_DIR)
+	make ${LEVEL_2}
 
-
+test_level3: $(BIN_DIR)
+	make ${LEVEL_3}
 
 $(BIN_DIR):
 	mkdir $(BIN_DIR)
