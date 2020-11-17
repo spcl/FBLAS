@@ -1,0 +1,15 @@
+{
+  "routine": {
+      "blas_name" : "gemm",
+      "type" : "double",
+      "user_name" : "dgemm",
+      "order" : "RowMajor",
+      "transa" : "N",
+      "transb" : "N",
+      "systolic" : true,
+      "width x" : 16,
+      "width y" : 16,
+      "tile size": 384,
+      "vect size" : 8
+  }
+}

@@ -1,0 +1,57 @@
+{
+    "tier" : 2,
+    "routine": [
+        {
+            "blas_name" : "rot",
+            "user_name" : "test_srot_0",
+            "type" : "float"
+        },
+        {
+            "blas_name" : "rot",
+            "user_name" : "test_srot_1",
+            "type" : "float",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "rot",
+            "user_name" : "test_srot_2",
+            "type" : "float",
+            "incx" : -2,
+            "incy" : 1
+        },
+        {
+            "blas_name" : "rot",
+            "user_name" : "test_srot_3",
+            "type" : "float",
+            "incx" : -1,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "rot",
+            "user_name" : "test_drot_0",
+            "type" : "double"
+        },
+        {
+            "blas_name" : "rot",
+            "user_name" : "test_drot_1",
+            "type" : "double",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "rot",
+            "user_name" : "test_drot_2",
+            "type" : "double",
+            "incx" : -2,
+            "incy" : 1
+        },
+        {
+            "blas_name" : "rot",
+            "user_name" : "test_drot_3",
+            "type" : "double",
+            "incx" : -1,
+            "incy" : -2
+        }
+    ]
+}

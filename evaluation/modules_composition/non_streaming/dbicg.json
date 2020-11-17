@@ -1,0 +1,24 @@
+{
+    "routine": [
+        {
+            "blas_name" : "gemv",
+            "user_name" : "dbicg_gemv",
+            "type" : "double",
+            "order" : "RowMajor",
+            "trans" : "N",
+            "width" : 16,
+            "tile N size" : 2048,
+            "tile M size" : 2048
+        },
+        {
+            "blas_name" : "gemv",
+            "user_name" : "dbicg_gemvt",
+            "type" : "double",
+            "order" : "RowMajor",
+            "trans" : "T",
+            "width" : 16,
+            "tile N size" : 2048,
+            "tile M size" : 2048
+        }
+    ]
+}

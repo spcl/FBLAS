@@ -1,0 +1,316 @@
+{
+    "routine": [
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_0",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "L"
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_1",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "L",
+            "incx" : 2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_2",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "L",
+            "incx" : -2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_3",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "L",
+            "incx": -1
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_trans_0",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "L"
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_trans_1",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "L",
+            "incx" : 2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_trans_2",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "L",
+            "incx" : -2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_trans_3",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "L",
+            "incx": -1
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_u_0",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "U"
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_u_1",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "U",
+            "incx" : 2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_u_2",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "U",
+            "incx" : -2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_u_3",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "U",
+            "incx": -1
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_trans_u_0",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "U"
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_trans_u_1",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "U",
+            "incx" : 2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_trans_u_2",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "U",
+            "incx" : -2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_strsv_trans_u_3",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "U",
+            "incx": -1
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_0",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "L"
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_1",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "L",
+            "incx" : 2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_2",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "L",
+            "incx" : -2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_3",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "L",
+            "incx": -1
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_trans_0",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "L"
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_trans_1",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "L",
+            "incx" : 2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_trans_2",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "L",
+            "incx" : -2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_trans_3",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "L",
+            "incx": -1
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_u_0",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "U"
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_u_1",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "U",
+            "incx" : 2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_u_2",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "U",
+            "incx" : -2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_u_3",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "N",
+            "uplo": "U",
+            "incx": -1
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_trans_u_0",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "U"
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_trans_u_1",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "U",
+            "incx" : 2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_trans_u_2",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "U",
+            "incx" : -2
+        },
+        {
+            "blas_name" : "trsv",
+            "user_name" : "test_dtrsv_trans_u_3",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "trans": "T",
+            "uplo": "U",
+            "incx": -1
+        }
+    ]
+}

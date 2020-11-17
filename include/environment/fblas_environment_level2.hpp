@@ -94,7 +94,6 @@ void FBLASEnvironment::gemv(std::string routine_name, FblasTranspose transposed,
 
     //launch the last one
     r.queues[r.kernels.size()-1].enqueueTask(r.kernels[r.kernels.size()-1],events_wait_list,event);
-
     if(!event)
         for(int i=0;i<r.kernels.size();i++)
             r.queues[i].finish();

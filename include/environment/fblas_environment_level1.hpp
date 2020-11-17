@@ -17,6 +17,9 @@
 #include "../fblas_environment.hpp"
 #include "../utils/ocl_utils.hpp"
 
+//#include "../../utils/includes/utils.hpp"
+
+
 /*-----------
  * SWAP
  * ------------*/

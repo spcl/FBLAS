@@ -1,0 +1,59 @@
+{
+    "tier" : 2,
+    "routine": [
+        {
+            "blas_name" : "axpy",
+            "user_name" : "test_saxpy_0",
+            "type" : "float",
+            "width" : 16
+        },
+        {
+            "blas_name" : "axpy",
+            "user_name" : "test_saxpy_1",
+            "type" : "float",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "axpy",
+            "user_name" : "test_saxpy_2",
+            "type" : "float",
+            "incx" : -2,
+            "incy" : 1
+        },
+        {
+            "blas_name" : "axpy",
+            "user_name" : "test_saxpy_3",
+            "type" : "float",
+            "incx" : -1,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "axpy",
+            "user_name" : "test_daxpy_0",
+            "type" : "double",
+            "width" : 16
+        },
+        {
+            "blas_name" : "axpy",
+            "user_name" : "test_daxpy_1",
+            "type" : "double",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "axpy",
+            "user_name" : "test_daxpy_2",
+            "type" : "double",
+            "incx" : -2,
+            "incy" : 1
+        },
+        {
+            "blas_name" : "axpy",
+            "user_name" : "test_daxpy_3",
+            "type" : "double",
+            "incx" : -1,
+            "incy" : -2
+        }
+    ]
+}

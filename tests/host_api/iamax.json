@@ -1,0 +1,31 @@
+{
+    "tier" : 2,
+    "routine": [
+        {
+            "blas_name" : "iamax",
+            "user_name" : "test_isamax_0",
+            "type" : "float",
+            "width" : 4
+        },
+        {
+            "blas_name" : "iamax",
+            "user_name" : "test_isamax_1",
+            "type" : "float",
+            "width" : 4,
+            "incx" : 2
+        },
+        {
+            "blas_name" : "iamax",
+            "user_name" : "test_idamax_0",
+            "type" : "double",
+            "width" : 4
+        },
+        {
+            "blas_name" : "iamax",
+            "user_name" : "test_idamax_1",
+            "type" : "double",
+            "width" : 4,
+            "incx" : 2
+        }
+    ]
+}

@@ -1,0 +1,96 @@
+{
+    "routine": [
+        {
+            "blas_name" : "syrk",
+            "type" : "float",
+            "user_name" : "test_ssyrk_notrans_lower",
+            "order" : "RowMajor",
+            "trans" : "N",
+            "uplo" : "L",
+            "width x" : 8,
+            "width y" : 16,
+            "tile size": 32
+        },
+        {
+            "blas_name" : "syrk",
+            "type" : "float",
+            "user_name" : "test_ssyrk_notrans_upper",
+            "order" : "RowMajor",
+            "trans" : "N",
+            "uplo" : "U",
+            "width x" : 16,
+            "width y" : 8,
+            "tile size": 32
+        },
+        {
+            "blas_name" : "syrk",
+            "type" : "float",
+            "user_name" : "test_ssyrk_trans_lower",
+            "order" : "RowMajor",
+            "trans" : "T",
+            "uplo" : "L",
+            "width x" : 16,
+            "width y" : 8,
+            "tile size": 32
+        },
+        {
+            "blas_name" : "syrk",
+            "type" : "float",
+            "user_name" : "test_ssyrk_trans_upper",
+            "order" : "RowMajor",
+            "trans" : "T",
+            "uplo" : "U",
+            "width x" : 16,
+            "width y" : 8,
+            "tile size": 32
+        },
+        {
+            "blas_name" : "syrk",
+            "type" : "double",
+            "user_name" : "test_dsyrk_notrans_lower",
+            "order" : "RowMajor",
+            "trans" : "N",
+            "uplo" : "L",
+            "width x" : 16,
+            "width y" : 16,
+            "tile size": 32
+        },
+        {
+            "blas_name" : "syrk",
+            "type" : "double",
+            "user_name" : "test_dsyrk_notrans_upper",
+            "order" : "RowMajor",
+            "trans" : "N",
+            "uplo" : "U",
+            "width x" : 16,
+            "width y" : 16,
+            "tile size": 32
+        },
+        {
+            "blas_name" : "syrk",
+            "type" : "double",
+            "user_name" : "test_dsyrk_trans_lower",
+            "order" : "RowMajor",
+            "trans" : "T",
+            "uplo" : "L",
+            "width x" : 16,
+            "width y" : 16,
+            "tile size": 32
+        },
+        {
+            "blas_name" : "syrk",
+            "type" : "double",
+            "user_name" : "test_dsyrk_trans_upper",
+            "order" : "RowMajor",
+            "trans" : "T",
+            "uplo" : "U",
+            "width x" : 16,
+            "width y" : 16,
+            "tile size": 32
+        }
+
+
+
+    ]
+}
+

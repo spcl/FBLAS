@@ -1,0 +1,56 @@
+{
+    "routine": [
+        {
+            "blas_name" : "copy",
+            "user_name" : "test_scopy_0",
+            "type" : "float"
+        },
+        {
+            "blas_name" : "copy",
+            "user_name" : "test_scopy_1",
+            "type" : "float",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "copy",
+            "user_name" : "test_scopy_2",
+            "type" : "float",
+            "incx" : -2,
+            "incy" : 1
+        },
+        {
+            "blas_name" : "copy",
+            "user_name" : "test_scopy_3",
+            "type" : "float",
+            "incx" : -1,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "copy",
+            "user_name" : "test_dcopy_0",
+            "type" : "double"
+        },
+        {
+            "blas_name" : "copy",
+            "user_name" : "test_dcopy_1",
+            "type" : "double",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "copy",
+            "user_name" : "test_dcopy_2",
+            "type" : "double",
+            "incx" : -2,
+            "incy" : 1
+        },
+        {
+            "blas_name" : "copy",
+            "user_name" : "test_dcopy_3",
+            "type" : "double",
+            "incx" : -1,
+            "incy" : -2
+        }
+    ]
+}

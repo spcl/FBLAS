@@ -1,0 +1,36 @@
+{
+    "routine": [
+        {
+            "blas_name" : "dot",
+            "type" : "double",
+            "user_name" : "ddot",
+            "width" : 256,
+            "in_x" : "channel_x",
+            "in_y" : "channel_y",
+            "out_res":"channel_out"
+        }
+    ],
+    "helper":[
+        {
+            "helper_name" : "generate_dummy_vector",
+            "user_name" : "ddot_generate_x",
+            "channel_name" : "channel_x",
+            "type" : "double",
+            "width" : 256
+        },
+        {
+            "helper_name" : "generate_dummy_vector",
+            "user_name" : "ddot_generate_y",
+            "channel_name" : "channel_y",
+            "type" : "double",
+            "width" : 256
+        },
+        {
+            "helper_name" : "write_scalar",
+            "user_name" : "ddot_write_result",
+            "channel_name" : "channel_out",
+            "type" : "double"
+        }
+
+    ]
+}

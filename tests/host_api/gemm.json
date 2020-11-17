@@ -1,0 +1,92 @@
+{
+    "routine": [
+        {
+            "blas_name" : "gemm",
+            "type" : "float",
+			"user_name" : "test_sgemm_notrans_notrans",
+            "order" : "RowMajor",
+            "transa" : "N",
+            "transb" : "N",
+			"width x" : 8,
+			"width y" : 8,
+			"tile size": 32
+	},
+	{
+	    "blas_name" : "gemm",
+	    "type" : "float",
+	    "user_name" : "test_sgemm_notrans_trans",
+	    "order" : "RowMajor",
+	    "transa" : "N",
+	    "transb" : "T",
+	    "width x" : 8,
+	    "width y" : 8,
+	    "tile size": 32
+	},
+	{
+	    "blas_name" : "gemm",
+	    "type" : "float",
+	    "user_name" : "test_sgemm_trans_notrans",
+	    "order" : "RowMajor",
+	    "transa" : "T",
+	    "transb" : "N",
+	    "width x" : 8,
+	    "width y" : 4,
+	    "tile size": 32
+	},
+	{
+	    "blas_name" : "gemm",
+	    "type" : "float",
+	    "user_name" : "test_sgemm_trans_trans",
+	    "order" : "RowMajor",
+	    "transa" : "T",
+	    "transb" : "T",
+	    "width x" : 4,
+	    "width y" : 8,
+	    "tile size": 32
+	},
+	{
+	    "blas_name" : "gemm",
+	    "type" : "double",
+        "user_name" : "test_dgemm_notrans_notrans",
+	    "order" : "RowMajor",
+	    "transa" : "N",
+	    "transb" : "N",
+	    "width x" : 8,
+	    "width y" : 8,
+			"tile size": 32
+	},
+	{
+	    "blas_name" : "gemm",
+	    "type" : "double",
+	    "user_name" : "test_dgemm_notrans_trans",
+	    "order" : "RowMajor",
+	    "transa" : "N",
+	    "transb" : "T",
+	    "width x" : 4,
+	    "width y" : 8,
+	    "tile size": 32
+	},
+	{
+	    "blas_name" : "gemm",
+	    "type" : "double",
+	    "user_name" : "test_dgemm_trans_notrans",
+	    "order" : "RowMajor",
+	    "transa" : "T",
+	    "transb" : "N",
+	    "width x" : 4,
+	    "width y" : 4,
+	    "tile size": 32
+	},
+	{
+	    "blas_name" : "gemm",
+	    "type" : "double",
+	    "user_name" : "test_dgemm_trans_trans",
+	    "order" : "RowMajor",
+	    "transa" : "T",
+	    "transb" : "T",
+	    "width x" : 4,
+	    "width y" : 4,
+	    "tile size": 32
+	}
+    ]
+}

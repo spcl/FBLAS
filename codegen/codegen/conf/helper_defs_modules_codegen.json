@@ -1,0 +1,46 @@
+{
+    "helper": [{
+            "name": "read_vector_x",
+            "optional_parameters": ["width", "stride"]
+        },
+        {
+            "name": "read_vector_y",
+            "optional_parameters": ["width", "stride"]
+        },
+        {
+            "name": "generate_dummy_vector",
+            "optional_parameters": ["width"]
+        },
+        {
+            "name": "write_vector",
+            "optional_parameters": ["width", "stride"]
+        },
+        {
+            "name": "vector_sink",
+            "optional_parameters": ["width"]
+        },
+        {
+            "name": "write_scalar"
+        },
+        {
+            "name": "read_matrix",
+            "required_parameters": ["tiles order", "elements order"],
+            "optional_parameters": ["tile N size", "tile M size", "width"]
+        },
+        {
+            "name": "write_matrix",
+            "required_parameters": ["tiles order", "elements order"],
+            "optional_parameters": ["tile N size", "tile M size", "width"]
+        },
+        {
+            "name": "read_matrix_4_modules",
+            "required_parameters": ["tiles order", "elements order"],
+            "optional_parameters": ["tile N size", "tile M size", "width"]
+        },
+        {
+            "name": "generate_dummy_matrix",
+            "required_parameters": ["tiles order", "elements order"],
+            "optional_parameters": ["tile N size", "tile M size", "width"]
+        }
+    ]
+}

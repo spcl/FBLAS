@@ -1,0 +1,21 @@
+{
+    "routine": [
+        {
+            "blas_name" : "dot",
+            "type" : "float",
+            "user_name" : "sdot",
+            "width" : 64,
+            "in_x" : "channel_x",
+            "in_y" : "channel_y",
+            "out_res":"channel_out"
+        }
+    ],
+    "helper":[
+        {
+            "helper_name" : "write_scalar",
+            "user_name" : "sdot_write_result",
+            "channel_name" : "channel_out",
+            "type" : "float"
+        }
+    ]
+}

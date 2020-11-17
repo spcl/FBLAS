@@ -1,0 +1,42 @@
+{
+    "routine": [
+        {
+            "blas_name" : "copy",
+            "user_name" : "dgemver_copy",
+            "type" : "double",
+	        "width" : 16
+
+        },
+        {
+            "blas_name" : "ger",
+            "user_name" : "dgemver_ger",
+            "type" : "double",
+            "order" : "RowMajor",
+            "width" : 16,
+            "tile N size" : 2048,
+            "tile M size" : 2048
+        },
+        {
+            "blas_name" : "gemv",
+            "user_name" : "dgemver_gemv",
+            "type" : "double",
+            "order" : "RowMajor",
+            "trans" : "N",
+            "width" : 16,
+            "tile N size" : 2048,
+            "tile M size" : 2048
+
+        },
+        {
+            "blas_name" : "gemv",
+            "user_name" : "dgemver_gemv_trans",
+            "type" : "double",
+            "order" : "RowMajor",
+            "trans" : "T",
+            "width" : 16,
+            "tile N size" : 2048,
+            "tile M size" : 2048
+
+        }
+    ]
+}

@@ -14,10 +14,11 @@ For more details, see our [paper](https://arxiv.org/abs/1907.07929).
 
 The library depends on:
 
-* Intel FPGA SDK for OpenCL pro, version 18+ ([http://fpgasoftware.intel.com/opencl/](http://fpgasoftware.intel.com/opencl/))
+* Intel FPGA SDK for OpenCL pro, version 19+ ([http://fpgasoftware.intel.com/opencl/](http://fpgasoftware.intel.com/opencl/))
 * GCC (version 5+)
 * Rapidjson ([http://rapidjson.org/](http://rapidjson.org/))
 * Google Test (only for unit tests)
+* Python 3.6+
 
 ### Installation
 
@@ -25,14 +26,9 @@ After cloning this repository, make sure you clone the [rapidjson](http://rapidj
 
 ```
 git submodule update --init
+pip install -r codegen/requirements.txt
 ```
 
-After this, the included Makefile can be used to compile code and modules generator:
-
-
-```
-make all
-```
 
 ## The FBLAS library
 
@@ -47,19 +43,25 @@ the device, she can invoke the desired FBLAS routines working on the FPGA memory
 
 For further information on how to use the library, please refer to the [wiki](https://github.com/spcl/FBLAS/wiki).
 
-
 ## Publication
 If you use FBLAS, please cite us:
 ```
-@article{
-  author={Tiziano De Matteis and Johannes de Fine Licht and Torsten Hoefler},
-  title={{FBLAS: Streaming Linear Algebra on FPGA}},
-  journal={CoRR},
-  year={2019},
-  month={Jul.},
-  volume={abs/1907.07929},
+
+@inproceedings{fblas,
+    author = {De Matteis, Tiziano and de Fine Licht, Johannes and Hoefler, Torsten},
+    title = {FBLAS: Streaming Linear Algebra on FPGA},
+    year = {2020},
+    isbn = {9781728199986},
+    publisher = {IEEE Press},
+    booktitle = {Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis},
+    articleno = {59},
+    numpages = {13},
+    keywords = {high level synthesis, spatial architectures, hardware library},
+    location = {Atlanta, Georgia},
+    series = {SC '20}
 }
 ```
+Concerning the Artifact Evaluation of the paper, you will find detailed information in subfolder `evaluation`.
 
 
 ## Contact

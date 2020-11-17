@@ -1,0 +1,54 @@
+{
+    "routine": [
+        {
+            "blas_name" : "gemv",
+            "type" : "float",
+            "user_name" : "sgemv",
+            "width" : 256,
+            "in_x" : "channel_x",
+            "in_y" : "channel_y",
+            "out_res":"channel_vect_res",
+            "in_A" : "channel_matrix",
+            "trans" : "N",
+            "A tiles order" : "row",
+            "A elements order" : "row",
+            "tile N size" :1024,
+            "tile M size" :1024
+        }
+    ],
+    "helper":[
+        {
+            "helper_name" : "generate_dummy_vector",
+            "user_name" : "sgemv_generate_x",
+            "channel_name" : "channel_x",
+            "type" : "float",
+            "width" : 256
+
+        },
+        {
+            "helper_name" : "generate_dummy_vector",
+            "user_name" : "sgemv_generate_y",
+            "channel_name" : "channel_y",
+            "type" : "float",
+            "width" : 256
+        },
+        {
+            "helper_name" : "write_vector",
+            "user_name" : "sgemv_write_vector",
+            "channel_name" : "channel_vect_res",
+            "type" : "float"
+        },
+        {
+            "helper_name" : "generate_dummy_matrix",
+            "user_name" : "sgemv_generate_matrix",
+            "channel_name" : "channel_matrix",
+            "type" : "float",
+            "tiles order" :"row",
+            "elements order" : "row",
+            "tile N size" :1024,
+            "tile M size" :1024,
+            "width": 256
+        }
+
+    ]
+}

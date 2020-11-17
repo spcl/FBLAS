@@ -1,0 +1,72 @@
+{
+    "routine": [
+        {
+            "blas_name" : "ger",
+            "user_name" : "test_sger_0",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor"
+        },
+        {
+            "blas_name" : "ger",
+            "user_name" : "test_sger_1",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "ger",
+            "user_name" : "test_sger_2",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -2,
+            "incy" : 1
+        },
+        {
+            "blas_name" : "ger",
+            "user_name" : "test_sger_3",
+            "type" : "float",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -1,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "ger",
+            "user_name" : "test_dger_0",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor"
+        },
+        {
+            "blas_name" : "ger",
+            "user_name" : "test_dger_1",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "ger",
+            "user_name" : "test_dger_2",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -2,
+            "incy" : 1
+        },
+        {
+            "blas_name" : "ger",
+            "user_name" : "test_dger_3",
+            "type" : "double",
+            "width" : 16,
+            "order" : "RowMajor",
+            "incx" : -1,
+            "incy" : -2
+        }
+    ]
+}

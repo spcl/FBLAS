@@ -1,0 +1,56 @@
+{
+    "routine": [
+        {
+            "blas_name" : "swap",
+            "user_name" : "test_sswap_0",
+            "type" : "float"
+        },
+        {
+            "blas_name" : "swap",
+            "user_name" : "test_sswap_1",
+            "type" : "float",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "swap",
+            "user_name" : "test_sswap_2",
+            "type" : "float",
+            "incx" : -2,
+            "incy" : 1
+        },
+        {
+            "blas_name" : "swap",
+            "user_name" : "test_sswap_3",
+            "type" : "float",
+            "incx" : -1,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "swap",
+            "user_name" : "test_dswap_0",
+            "type" : "double"
+        },
+        {
+            "blas_name" : "swap",
+            "user_name" : "test_dswap_1",
+            "type" : "double",
+            "incx" : 2,
+            "incy" : -2
+        },
+        {
+            "blas_name" : "swap",
+            "user_name" : "test_dswap_2",
+            "type" : "double",
+            "incx" : -2,
+            "incy" : 1
+        },
+        {
+            "blas_name" : "swap",
+            "user_name" : "test_dswap_3",
+            "type" : "double",
+            "incx" : -1,
+            "incy" : -2
+        }
+    ]
+}
